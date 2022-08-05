@@ -33,6 +33,8 @@ session_start();
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
   
+  <!-- Data Table -->
+  <link rel ="stylesheet" href="vistas/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
   
   <!--- ====================================
   PLUGINS DE JAVASCRIPT
@@ -47,6 +49,10 @@ session_start();
   <!-- AdminLTE App -->
   <script src="vistas/dist/js/adminlte.min.js"></script>
   
+  <!-- DataTables -->
+  <script src="vistas/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+  <script src="vistas/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
   <!-- AdminLTE for demo purposes -->
   <!--<script src="vistas/dist/js/demo.js"></script> 
   -->
