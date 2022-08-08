@@ -11,7 +11,7 @@
 
     <ol class="breadcrumb">
       
-      <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+      <li><a href="inicio"><i class="fa fa-dashboard"></i> Inicio</a></li>
       
       <li class="active">Administrar usuarios</li>
     
@@ -26,14 +26,14 @@
       <div class="box">
         <div class="box-header with-border">
             
-          <button class="btn btn-primary" data-toggle ="modal" data-target = "#modalAgregarUsuario">
+          <button class="btn btn-primary" data-toggle="modal" data-target= "#modalAgregarUsuario">
             Agregar usuario
           </button>
 
 
         </div>
         <div class="box-body">
-          <table class="table table-bordered table-striped  table-responsive tablas">
+          <table class="table table-bordered table-striped table-responsive tablas">
             <thead>
               <tr>
                 <th>#</th>
@@ -46,6 +46,7 @@
                 <th>Acciones</th>
               </tr>
             </thead>
+            
             <tbody>
 
               <tr>
@@ -86,7 +87,7 @@
                 <td>admin</td>
                 <td><img src="vistas/img/usuarios/default/anonymous.png" class="img-thumbnail" width="40px"></td>
                 <td>Administrador</td>
-                <td><button class="btn btn-danget btn-xs">Desactivado</button></td>
+                <td><button class="btn btn-danger btn-xs">Desactivado</button></td>
                 <td>2007-12-11</td>
                 <td>
                   <div class="btn-group">
@@ -116,14 +117,13 @@
 
 
 <!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-
+<div id="modalAgregarUsuario" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
     <div class="modal-content">
     
-        <form role="form" method="POST" enctype="multipart/form-data">
+        <form role="form" method="post" enctype="multipart/form-data">
 
         <!-- Cabeza del Modal -->
 
@@ -132,8 +132,11 @@
 
             <h4 class="modal-title">Agergar Usuario</h4>
           </div>
+
           <div class="modal-body">
             <div class="box-body">
+              <!-- estrada para el nombre -->
+
               <div class="form-group">
 
                 <div class="input-group">
@@ -153,6 +156,7 @@
                   
                 </div>
               </div>
+
               <!-- Entrada para Contraseña -->
               <div class="form-group">
 
@@ -193,6 +197,8 @@
 
             </div>
           </div>
+
+          <!-- Pie del modal -->
           <div class="modal-footer">
             <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
 
