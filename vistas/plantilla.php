@@ -8,6 +8,7 @@ session_start();
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Es un punto de venta visto por Udemy" />
   <title>Invento Chongon Duvalin</title>
 
   <!-- Tell the browser to be responsive to screen width -->
@@ -59,7 +60,12 @@ session_start();
 
   <!-- AdminLTE for demo purposes -->
   <!--<script src="vistas/dist/js/demo.js"></script> 
+  
   -->
+  <!-- Sweet alert 2-->
+  
+  <script src="vistas/plugins/sweetalert/sweetalert2.all.js"></script>
+</head>
 </head>
 
  <!--- ====================================

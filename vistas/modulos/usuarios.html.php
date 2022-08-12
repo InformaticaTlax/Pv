@@ -33,10 +33,10 @@
 
         </div>
         <div class="box-body">
-          <table class="table table-bo rdered table-striped dt-responsive tablas">
+          <table class="table table-bordered table-striped dt-responsive tablas">
             <thead>
               <tr>
-                <th style="with:10px" > #</th>
+                <th>#</th>
                 <th>Nombre</th>
                 <th>Usuario</th>
                 <th>Foto</th>
@@ -204,14 +204,6 @@
 
             <button type="submit" class="btn btn-primary">Guardar Usuario</button>
           </div>
-
-          <?php
-
-            $crearUsuario = new ControladorUsuarios();
-            $crearUsuario -> ctrCrearUsuario();
-
-          ?>
-
         </form>
     </div>
 
