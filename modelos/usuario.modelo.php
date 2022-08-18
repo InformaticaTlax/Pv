@@ -18,14 +18,11 @@ class ModeloUsuarios{
 
 		return $stmt -> fetch();
 
+		//tengo falla
 		$stmt -> close();
 
 		$stmt = null;
-
 	
-
-
-
 	}
 
 

@@ -64,7 +64,7 @@ session_start();
   -->
   <!-- Sweet alert 2-->
   
-  <script src="vistas/plugins/sweetalert/sweetalert2.all.js"></script>
+  <script src="vistas/plugins/sweetalert2/sweetalert2.all.js"></script>
 </head>
 </head>
 
