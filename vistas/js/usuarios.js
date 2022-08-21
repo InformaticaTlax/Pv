@@ -2,9 +2,11 @@
 $(".nuevaFoto").change(function(){
 
     var imagen =this.files[0];
-    //valindado que el formato sea jpg o png
+    //console.log("imagen", imagen);
+    
+   // valindado que el formato sea jpg o png
 
-    if(imagen["type"] != "imagen/jpeg" && imagen["type"] != "imagen/png" ){
+    if(imagen["type"] != "image/jpeg" && imagen["type"] != "image/png" ){
 
         $(".nuevaFoto").val("");
 
@@ -15,7 +17,7 @@ $(".nuevaFoto").change(function(){
                 confirmButtonText:"Cerrar"
             });
 
-    }else if(imagen["size"] > 200000){
+    }else if(imagen["size"] > 2000000){
         $(".nuevaFoto").val("");
 
         swal({
@@ -39,4 +41,5 @@ $(".nuevaFoto").change(function(){
         
         })
     }
+
 })
