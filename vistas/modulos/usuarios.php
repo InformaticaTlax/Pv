@@ -186,11 +186,11 @@
 
                 <div class="panel">Subir foto</div>
 
-                <input type="file" id="nuevaFoto" name="nuevafoto">
+                <input type="file" class="nuevaFoto" name="nuevafoto">
 
-                <p class="help-block" >Peso Maximo de la foto de 20 MB</p>
+                <p class="help-block" >Peso Maximo de la foto de 2 MB</p>
 
-                <img src="vistas/img/usuarios/default/anonymous.png" class="img-thumbnail" width="100px">
+                <img src="vistas/img/usuarios/default/anonymous.png" class="img-thumbnail previsualizar" width="100px">
 
               </div>
               
