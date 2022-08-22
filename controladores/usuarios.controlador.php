@@ -47,7 +47,38 @@ class ControladorUsuarios{
 			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoNombre"]) &&
 				preg_match('/^[a-zA-Z0-9]+$/', $_POST["nuevoUsuario"]) &&
 				preg_match('/^[a-zA-Z0-9]+$/', $_POST["nuevoPassword"])){
-					
+
+					//validar imagen
+					if(isset($_FILES["nuevaFoto"]["tmp_name"])){
+						
+						list($ancho,$alto) =getimagesize($_FILES["nuevaFoto"]["tmp_name"]);
+
+						$nuevoAncho = 500;
+						$nuevoAlto = 500;
+
+						//crear directorio para guardar la foto del usuario
+
+						$directorio = "vistas/img/usuarios/".$_POST["nuevoUsuario"];
+						mkdir($directorio, 0755);
+						
+						//de acuerdo al tipo de imagen aplicamos funcions por defecto de php
+
+						if($_FILES["nuevaFoto"]["type"] == "imagen/jpeg"){
+							//Guardar imagen en el directorio
+
+							$aleatorio = mt_rand(100,999);
+
+							$ruta = "vistas/img/usuarios/".$_POST["nuevoUsuario"]."/".$aleatorio.".jpg";
+							$origen = imagecreatefromjpeg($_FILES["nuevaFoto"]["tmp_name"]);
+
+							$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+
+							imagecopyresized($destino,$origen,0,0,0,0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+
+							imagejpeg($destino,$ruta);
+						}
+					}
+					/*
 					$tabla = "usuarios";
 
 					$datos = array("nombre" => $_POST["nuevoNombre"],
@@ -79,6 +110,7 @@ class ControladorUsuarios{
 
 					</script>';
 					}
+					*/
 
 			}else{
 
