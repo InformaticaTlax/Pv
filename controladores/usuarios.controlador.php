@@ -97,13 +97,13 @@ class ControladorUsuarios{
 							imagepng($destino,$ruta);
 						}
 					}
-					/*
+					
 					$tabla = "usuarios";
 
 					$datos = array("nombre" => $_POST["nuevoNombre"],
 									"usuario" => $_POST["nuevoUsuario"],
 									"password" => $_POST["nuevoPassword"],
-									"perfil" => $_POST["nuevoPerfil"]
+									"perfil" => $_POST["nuevoPerfil"],
 									"foto" => $ruta);
 					$respuesta = ModeloUsuarios::mdlIngresarUsuario($tabla,$datos);
 
@@ -130,7 +130,7 @@ class ControladorUsuarios{
 
 					</script>';
 					}
-					*/
+					
 
 			}else{
 
