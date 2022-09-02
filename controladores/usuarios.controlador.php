@@ -49,8 +49,11 @@ class ControladorUsuarios{
 				preg_match('/^[a-zA-Z0-9]+$/', $_POST["nuevoPassword"])){
 
 					//validar imagen
+
+					$ruta = "";
 					if(isset($_FILES["nuevaFoto"]["tmp_name"])){
-						
+						//var_dump(getimagesize($_FILES["nuevaFoto"]["tmp_name"]));
+
 						list($ancho,$alto) =getimagesize($_FILES["nuevaFoto"]["tmp_name"]);
 
 						$nuevoAncho = 500;
@@ -63,7 +66,8 @@ class ControladorUsuarios{
 						
 						//de acuerdo al tipo de imagen aplicamos funcions por defecto de php
 
-						if($_FILES["nuevaFoto"]["type"] == "imagen/jpeg"){
+						
+						if($_FILES["nuevaFoto"]["type"] == "image/jpeg"){
 							//Guardar imagen en el directorio
 
 							$aleatorio = mt_rand(100,999);
@@ -73,9 +77,24 @@ class ControladorUsuarios{
 
 							$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
 
-							imagecopyresized($destino,$origen,0,0,0,0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+							imagecopyresized($destino,$origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
 
 							imagejpeg($destino,$ruta);
+						}
+						
+						if($_FILES["nuevaFoto"]["type"] == "image/png"){
+							//Guardar imagen en el directorio
+
+							$aleatorio = mt_rand(100,999);
+
+							$ruta = "vistas/img/usuarios/".$_POST["nuevoUsuario"]."/".$aleatorio.".png";
+							$origen = imagecreatefrompng($_FILES["nuevaFoto"]["tmp_name"]);
+
+							$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+
+							imagecopyresized($destino,$origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+
+							imagepng($destino,$ruta);
 						}
 					}
 					/*
@@ -84,7 +103,8 @@ class ControladorUsuarios{
 					$datos = array("nombre" => $_POST["nuevoNombre"],
 									"usuario" => $_POST["nuevoUsuario"],
 									"password" => $_POST["nuevoPassword"],
-									"perfil" => $_POST["nuevoPerfil"]);
+									"perfil" => $_POST["nuevoPerfil"]
+									"foto" => $ruta);
 					$respuesta = ModeloUsuarios::mdlIngresarUsuario($tabla,$datos);
 
 					if ($respuesta == "ok"){
