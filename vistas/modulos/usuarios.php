@@ -48,6 +48,13 @@
             </thead>
             
             <tbody>
+              <?php
+
+                $item;
+
+                $usuarios = ControladorUsuarios::ctrMostrarUsuarios();
+
+              ?>
 
               <tr>
                 <td>1</td>

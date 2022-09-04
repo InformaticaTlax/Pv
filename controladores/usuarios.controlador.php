@@ -25,6 +25,11 @@ class ControladorUsuarios{
 			   	 && $respuesta["password"] == $encriptar){
 					
 					$_SESSION["iniciarSesion"]= "ok";
+					$_SESSION["id"]= "id";
+					$_SESSION["nombre"]= "nombre";
+					$_SESSION["usuario"]= "usuario";
+					$_SESSION["foto"]= "foto";
+					$_SESSION["perfil"]= "perfil";
 					echo '<script>
 						window.location = "inicio";
 						</script>';
@@ -162,6 +167,19 @@ class ControladorUsuarios{
 
 			}
 		}
+
+	}
+
+	/*=============================================
+	MOSTRAR DE USUARIO
+	=============================================*/
+
+	static public function ctrMostrarUsuario(){
+		$tabla ="usuarios";
+
+		$respuesta = ModeloUsuarios::MdlMostrarUsuarios($tabla, $item, $valor);
+		
+		return $respuesta;
 
 	}
 
