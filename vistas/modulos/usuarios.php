@@ -50,9 +50,11 @@
             <tbody>
               <?php
 
-                $item;
+                $item= null;
+                $valor = null;
 
-                $usuarios = ControladorUsuarios::ctrMostrarUsuarios();
+                $usuarios = ControladorUsuarios::ctrMostrarUsuarios($item, $valor);
+                var_dump($usuarios);
 
               ?>
 
