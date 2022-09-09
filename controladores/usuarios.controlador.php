@@ -175,7 +175,7 @@ class ControladorUsuarios{
 	MOSTRAR DE USUARIO
 	=============================================*/
 
-	static public function ctrMostrarUsuario($item, $valor){
+	static public function ctrMostrarUsuarios($item, $valor){
 		$tabla ="usuarios";
 
 		$respuesta = ModeloUsuarios::MdlMostrarUsuarios($tabla, $item, $valor);
