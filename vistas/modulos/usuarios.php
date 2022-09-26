@@ -75,7 +75,11 @@
                         <td>'.$value["ultimo_login"].'</td>
                         <td>
                           <div class="btn-group">
-                            <button class="btn btn-warning btnEditarUsuario" idUsuario= "'.$value["id"].'" data-toggle="modal" data-target ="#modalEditarUsuario"><i class="fa fa-pencil"></i></button>
+                            
+                          <button class="btn btn-warning btnEditarUsuario" idUsuario="'.$value["id"].'" data-toggle="modal" 
+                          data-target="#modalEditarUsuario"> 
+                          <i class="fa fa-pencil"></i></button>
+                           
                             <button class="btn btn-danger"><i class="fa fa-times"></i></button>
                           </div>
                         </td>
@@ -257,8 +261,8 @@
 
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                  <input type="password" class="form-control input-lg" name="editarPassword" placeholder="Escriba una nueva contraseña" required>
-                  
+                  <input type="password" class="form-control input-lg" name="editarPassword" placeholder="Escriba la nueva contraseña" required>
+                  <input type="hidden" id="passwordActual" name="passwordActual">
                 </div>
               </div>
               <!-- Entrada para Perfil -->

@@ -5,6 +5,8 @@ require_once "../modelos/usuario.modelo.php";
 
 class AjaxUsuarios{
 
+    
+
     public $idUsuario;
 
     public function ajaxEditarUsuario(){
@@ -19,7 +21,7 @@ class AjaxUsuarios{
     }
 }    
 
-/* editar usuario */
+
 
 if(isset($_POST["idUsuario"])){
     
