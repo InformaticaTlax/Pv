@@ -251,7 +251,7 @@
 
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                  <input type="text" class="form-control input-lg" id="editarUsuario" name="editarUsuario" value="" required>
+                  <input type="text" class="form-control input-lg" id="editarUsuario" name="editarUsuario" value="" readonly>
                   
                 </div>
               </div>
@@ -290,6 +290,8 @@
                 <p class="help-block" >Peso Maximo de la foto de 2 MB</p>
 
                 <img src="vistas/img/usuarios/default/anonymous.png" class="img-thumbnail previsualizar" width="100px">
+                
+                <input type="hidden" name="fotoActual" id="fotoActual">
 
               </div>
               
@@ -305,12 +307,12 @@
           </div>
 
           
-          <!-- <?php
+           <?php
 
-            //$crearUsuario = new ControladorUsuarios();
-           // $crearUsuario -> ctrCrearUsuario();
+            $editarUsuario = new ControladorUsuarios();
+            $editarUsuario -> ctrEditarUsuario();
 
-          ?>  -->
+          ?>  
           
         </form>
     </div>
