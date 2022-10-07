@@ -208,8 +208,11 @@ class ControladorUsuarios{
 					//crear directorio para guardar la foto del usuario
 
 					$directorio = "vistas/img/usuarios/".$_POST["editarUsuario"];
+					//primero preguntamos si existe otra imagen
+
 					if(!empty($_POST["fotoActual"])){
 						
+						unlink($_POST["fotoActual"]);//problema
 						unlink($_POST["fotoActual"]);
 
 					}else{
