@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 4.8.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-08-2022 a las 05:32:29
--- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 8.1.6
+-- Tiempo de generación: 13-09-2022 a las 17:47:08
+-- Versión del servidor: 10.1.32-MariaDB
+-- Versión de PHP: 7.2.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -36,7 +37,7 @@ CREATE TABLE `usuarios` (
   `foto` text COLLATE utf8mb4_spanish_ci NOT NULL,
   `estado` int(11) NOT NULL,
   `ultimo_login` datetime NOT NULL,
-  `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
@@ -44,7 +45,10 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nombre`, `usuario`, `password`, `perfil`, `foto`, `estado`, `ultimo_login`, `fecha`) VALUES
-(1, 'Usuario Administrador', 'admin', 'admin123', 'Administrador', '', 1, '2022-07-21 21:10:50', '2022-07-21 19:12:17');
+(1, 'Usuario Administrador', 'admin', 'admin123', 'Administrador', '', 1, '2022-07-21 21:10:50', '2022-07-21 19:12:17'),
+(2, 'Emmanuel', 'Prueba', '123', 'Especial', '', 0, '0000-00-00 00:00:00', '2022-08-19 22:56:35'),
+(3, 'emma', 'prueba1', '12', 'Administrador', 'vistas/img/usuarios/prueba1/126.jpg', 0, '0000-00-00 00:00:00', '2022-09-02 22:16:01'),
+(4, 'ana', 'ana', '$2a$07$asxx54ahjppf45sd87a5auGZEtGHuyZwm.Ur.FJvWLCql3nmsMbXy', 'Administrador', 'vistas/img/usuarios/ana/436.png', 0, '0000-00-00 00:00:00', '2022-09-02 22:25:50');
 
 --
 -- Índices para tablas volcadas
@@ -64,7 +68,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
