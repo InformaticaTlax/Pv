@@ -64,6 +64,7 @@
                         if($value["foto"] != ''){
 
                           echo'<td><img src="'.$value["foto"].'" class="img-thumbnail" width="40px"></td>';
+                          
                         }else{
 
                           echo '<td><img src="vistas/img/usuarios/default/anonymous.png" class="img-thumbnail" width="40px"></td>';
