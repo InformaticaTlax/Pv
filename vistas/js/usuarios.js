@@ -49,7 +49,7 @@ $(".nuevaFoto").change(function(){
 $(".tablas").on("click", ".btnEditarUsuario", function(){
 
 	var idUsuario = $(this).attr("idUsuario");
-	
+    console.log("idUsuario", idUsuario);
 	var datos = new FormData();
 	datos.append("idUsuario", idUsuario);
 
