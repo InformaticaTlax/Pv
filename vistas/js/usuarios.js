@@ -2,7 +2,7 @@
 $(".nuevaFoto").change(function(){
 
     var imagen =this.files[0];
-    //console.log("imagen", imagen);
+    console.log("imagen", imagen);
     
    // valindado que el formato sea jpg o png
 
@@ -49,7 +49,7 @@ $(".nuevaFoto").change(function(){
 $(".tablas").on("click", ".btnEditarUsuario", function(){
 
 	var idUsuario = $(this).attr("idUsuario");
-    console.log("idUsuario", idUsuario);
+    //console.log("idUsuario", idUsuario);
 	var datos = new FormData();
 	datos.append("idUsuario", idUsuario);
 
@@ -63,6 +63,8 @@ $(".tablas").on("click", ".btnEditarUsuario", function(){
 		processData: false,
 		dataType: "json",
 		success: function(respuesta){
+
+            //Traer los datos de la base de datos
 			
 			$("#editarNombre").val(respuesta["nombre"]);
 			$("#editarUsuario").val(respuesta["usuario"]);

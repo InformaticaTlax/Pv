@@ -4,10 +4,8 @@ require_once "../controladores/usuarios.controlador.php";
 require_once "../modelos/usuario.modelo.php";
 
 class AjaxUsuarios{
-
-    
-
-    public $idUsuario;
+    // Editar usuario
+    public $idUsuario;//manda usuario de javascript
 
     public function ajaxEditarUsuario(){
 
@@ -22,7 +20,7 @@ class AjaxUsuarios{
 }    
 
 
-
+//Objeto de editar Usuario
 if(isset($_POST["idUsuario"])){
     
     $editar =new AjaxUsuarios();
