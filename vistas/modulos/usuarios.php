@@ -231,13 +231,13 @@
 
           <div class="modal-body">
             <div class="box-body">
-              <!-- estrada para el nombre -->
+              <!-- entrada para el nombre -->
 
               <div class="form-group">
 
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                  <input type="text" class="form-control input-lg" name="editarNombre" value="" required>
+                  <input type="text" class="form-control input-lg" id="editarNombre" name="editarNombre" value="" required>
 
                 </div>
               </div>
@@ -248,7 +248,7 @@
 
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                  <input type="text" class="form-control input-lg" name="editarUsuario" value="" required>
+                  <input type="text" class="form-control input-lg" id="editarUsuario" name="editarUsuario" value="" required>
                   
                 </div>
               </div>
@@ -260,25 +260,34 @@
                   <span class="input-group-addon"><i class="fa fa-lock"></i></span>
                   <input type="password" class="form-control input-lg" name="editarPassword" placeholder="Escriba la
                    Contraseña" required>
+
+                  <input type="hidden" id= "passwordActual" name="passwordActual">  
                   
                 </div>
               </div>
-              <!-- Entrada para Perfil -->
+              <!-- Entrada seleccionar para Perfil -->
               <div class="form-group">
 
                 <div class="input-group">
+                  
                   <span class="input-group-addon"><i class="fa fa-users"></i></span>
+                  
                   <select class="form-control input-lg" name="editarPerfil">
+                  
                     <option value="" id="editarPerfil"></option>
+                    
                     <option value="Administrador">administrador</option>
+                    
                     <option value="Especial">Especial</option>
+                    
                     <option value="Vendedor">Vendedor</option>
+                  
                   </select>
                   
                 </div>
               </div>
 
-              <!-- Entrada para Foto -->
+              <!-- Entrada para Subir Foto -->
               <div class="form-group">
 
                 <div class="panel">Subir foto</div>
@@ -288,6 +297,8 @@
                 <p class="help-block" >Peso Maximo de la foto de 2 MB</p>
 
                 <img src="vistas/img/usuarios/default/anonymous.png" class="img-thumbnail previsualizar" width="100px">
+
+                <input type="hidden" name="fotoActual" id="fotoActual">
 
               </div>
               
@@ -302,14 +313,14 @@
             <button type="submit" class="btn btn-primary">Modificar Usuario</button>
           </div>
 
-          <!--
+          
             <?php
 
-            $crearUsuario = new ControladorUsuarios();
-            $crearUsuario -> ctrCrearUsuario();
+            $editarUsuario = new ControladorUsuarios();
+            $editarUsuario -> ctrEditarUsuario();
 
           ?>
-           -->
+           
 
         </form>
     </div>

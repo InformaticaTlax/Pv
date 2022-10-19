@@ -183,6 +183,20 @@ class ControladorUsuarios{
 		return $respuesta;
 
 	}
+	
+	/*=============================================
+	Editar DE USUARIO
+	=============================================*/
+	public function ctrEditarUsuario(){
+
+		if(isset($_POST["editarUsuario"])){
+
+			
+
+		}
+
+
+	}
 
 }
 
