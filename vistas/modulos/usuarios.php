@@ -248,7 +248,7 @@
 
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                  <input type="text" class="form-control input-lg" id="editarUsuario" name="editarUsuario" value="" required>
+                  <input type="text" class="form-control input-lg" id="editarUsuario" name="editarUsuario" value="" readonly>
                   
                 </div>
               </div>
