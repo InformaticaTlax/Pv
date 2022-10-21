@@ -325,25 +325,26 @@ class ControladorUsuarios{
 
 
 				}
+				else{
+
+					echo '<script>
+		
+									swal({
+										type:"error",
+										title: "El nombre no puede ir vacio o llevar caracteres especiales",
+										showConfirmButton: true,
+										confirmButtonText: "Cerrar",
+										closeOnConfirm: false,
+										}).then((result) => {
+											if(result.value){
+												windows.location = "usuatios";
+											}
+										})
+								
+					</script>';			
+		
+				}	
 			
-
-		}else{
-
-			echo '<script>
-
-							swal({
-								type:"error",
-								title: "El nombre no puede ir vacio o llevar caracteres especiales",
-								showConfirmButton: true,
-								confirmButtonText: "Cerrar",
-								closeOnConfirm: false,
-								}).then((result) => {
-									if(result.value){
-										windows.location = "usuatios";
-									}
-								})
-						
-			</script>';			
 
 		}
 
