@@ -61,7 +61,7 @@
                         <td>'.$value["nombre"].'</td>
                         <td>'.$value["usuario"].'</td>';
 
-                        if($value["foto"]!= ''){
+                        if($value["foto"]!= ""){
 
                           echo'<td><img src="'.$value["foto"].'" class="img-thumbnail" width="40px"></td>';
                         }else{
@@ -70,9 +70,17 @@
                         }
                         
                         
-                        echo '<td>'.$value["perfil"].'</td>
-                        <td><button class="btn btn-success btn-xs">Activado</button></td>
-                        <td>2007-12-11</td>
+                        echo '<td>'.$value["perfil"].'</td>;
+                        
+                        if(.$value["estado"]!= 0){
+                          echo ' <td><button class="btn btn-success btn-xs">Activado</button></td>';
+
+                        }else{
+                          echo ´ <td><button class="btn btn-danger btn-xs">Desactivado</button></td>´;
+                        }
+                        
+                          
+                        echo <td>'.$value["ultimo_login"].'</td>
                         <td>
                           <div class="btn-group">
 
@@ -259,7 +267,7 @@
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-lock"></i></span>
                   <input type="password" class="form-control input-lg" name="editarPassword" placeholder="Escriba la
-                   Contraseña" required>
+                   Contraseña" >
 
                   <input type="hidden" id= "passwordActual" name="passwordActual">  
                   
