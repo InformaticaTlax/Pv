@@ -70,17 +70,17 @@
                         }
                         
                         
-                        echo '<td>'.$value["perfil"].'</td>;
+                        echo '<td>'.$value["perfil"].'</td>';
                         
-                        if(.$value["estado"]!= 0){
+                        if($value["estado"] != 0){
                           echo ' <td><button class="btn btn-success btn-xs">Activado</button></td>';
 
                         }else{
-                          echo ´ <td><button class="btn btn-danger btn-xs">Desactivado</button></td>´;
+                          echo  '<td><button class="btn btn-danger btn-xs">Desactivado</button></td>';
                         }
                         
                           
-                        echo <td>'.$value["ultimo_login"].'</td>
+                        echo '<td>'.$value["ultimo_login"].'</td>
                         <td>
                           <div class="btn-group">
 
