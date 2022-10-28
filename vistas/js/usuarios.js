@@ -85,3 +85,13 @@ $(".tablas").on("click", ".btnEditarUsuario", function(){
 	});
 
 })
+
+//activar usuario
+
+$(".btnActivar").click(function(){
+
+    var idUsuario = $(this).attr("idUsuario");
+    var estadoUsuario = $(this).attr("estado");
+
+
+})

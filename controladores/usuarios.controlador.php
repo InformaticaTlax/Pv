@@ -294,7 +294,7 @@ class ControladorUsuarios{
 
 				}else{
 
-					$encriptar = $passwordActual;//aquitengo duda
+					$encriptar =$_POST["passwordActual"];//aquitengo duda
 
 				}
 				$datos = array("nombre" => $_POST["editarNombre"],

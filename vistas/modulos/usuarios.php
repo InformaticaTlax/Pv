@@ -73,10 +73,10 @@
                         echo '<td>'.$value["perfil"].'</td>';
                         
                         if($value["estado"] != 0){
-                          echo ' <td><button class="btn btn-success btn-xs">Activado</button></td>';
+                          echo ' <td><button class="btn btn-success btn-xs btnActivar" idUsuario="'.$value["id"].'" >Activado</button></td>';
 
                         }else{
-                          echo  '<td><button class="btn btn-danger btn-xs">Desactivado</button></td>';
+                          echo  '<td><button class="btn btn-danger btn-xs btnActivar" idUsuario="'.$value["id"].'">Desactivado</button></td>';
                         }
                         
                           
