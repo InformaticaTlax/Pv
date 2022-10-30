@@ -91,7 +91,24 @@ $(".tablas").on("click", ".btnEditarUsuario", function(){
 $(".btnActivar").click(function(){
 
     var idUsuario = $(this).attr("idUsuario");
-    var estadoUsuario = $(this).attr("estado");
+    var estadoUsuario = $(this).attr("estadoUsuario");
 
+    var datos = new FormData();
+    datos.append("activarId", idUsuario);
+    datos.append("activarUsuario", estadoUsuario);
+
+    $.ajax({
+
+        url:"ajax/usuarios.ajax.php",
+        method:"POST",
+        data:datos,
+        cache: false,
+        contentType:false,
+        processData:false,
+        success:function(respuesta){
+            
+        }
+
+    })
 
 })
