@@ -93,6 +93,11 @@ class ModeloUsuarios{
 		$stmt = null;
 
 	}
+	//Actulizar Usuario
+
+	static public mdlActualizarUsuario($tabla, $item1,$valor1, $item2, $valor2){
+		
+	}
 
 
 }
