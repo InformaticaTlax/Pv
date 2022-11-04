@@ -111,4 +111,17 @@ $(".btnActivar").click(function(){
 
     })
 
+    if(estadoUsuario == 0){
+
+        $(this).removeClass('btn-seccess');
+        $(this).addClass('btn-danger');
+        $(this).html('Desactivado');
+        $(this).attr('estadoUsuario',1);
+    }else{
+        $(this).addClass('btn-seccess');
+        $(this).removeClass('btn-danger');
+        $(this).html('Activado');
+        $(this).attr('estadoUsuario',0);
+    }
+
 })
