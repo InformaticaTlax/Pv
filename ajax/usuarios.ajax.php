@@ -19,7 +19,7 @@ class AjaxUsuarios{
     }
 //Activar usuario
 public $activarUsuario;
-public  $actvarID;
+public  $actvarId;
 
 public function ajaxActivarUsuario(){
 
@@ -36,7 +36,7 @@ public function ajaxActivarUsuario(){
 
 
 
-//Objeto de editar Usuario
+// editar Usuario
 if(isset($_POST["idUsuario"])){
     
     $editar =new AjaxUsuarios();
@@ -52,6 +52,7 @@ if(isset($_POST["activarUsuario"])){
     $activarUsuario= new AjaxUsuarios();
     $activarUsuario -> activarUsuario = $_POST["activarUsuario"];
     $activarUsuario -> activarId = $_POST["activarId"];
+    $activarUsuario -> ajaxActivarUsuario();
 }
 
     
