@@ -32,7 +32,7 @@ class ModeloUsuarios{
 
 		
 
-		//tengo falla
+		
 		$stmt -> close();
 
 		$stmt = null;

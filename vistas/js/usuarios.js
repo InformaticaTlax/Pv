@@ -49,6 +49,7 @@ $(".nuevaFoto").change(function(){
 $(".tablas").on("click", ".btnEditarUsuario", function(){
 
 	var idUsuario = $(this).attr("idUsuario");
+    console.log("idUsuario", idUsuario);
 	
 	var datos = new FormData();
 	datos.append("idUsuario", idUsuario);
@@ -69,14 +70,14 @@ $(".tablas").on("click", ".btnEditarUsuario", function(){
 			$("#editarPerfil").html(respuesta["perfil"]);
             $("#editarPerfil").val(respuesta["perfil"]);
             $("#fotoActual").val(respuesta["foto"]);
-
-			$("#passwordActual").val(respuesta["password"]);
+            $("#passwordActual").val(respuesta["password"]);
 
 			if(respuesta["foto"] != ""){
 
 				$(".previsualizar").attr("src", respuesta["foto"]);
 
 			}
+            console.log("respuesta", respuesta);
 
 		}
 
