@@ -2,7 +2,7 @@
 $(".nuevaFoto").change(function(){
 
     var imagen =this.files[0];
-    //console.log("imagen", imagen);
+    console.log("imagen", imagen);
     
    // valindado que el formato sea jpg o png
 
@@ -49,7 +49,7 @@ $(".nuevaFoto").change(function(){
 $(".tablas").on("click", ".btnEditarUsuario", function(){
 
 	var idUsuario = $(this).attr("idUsuario");
-	
+    //console.log("idUsuario", idUsuario);
 	var datos = new FormData();
 	datos.append("idUsuario", idUsuario);
 
@@ -63,6 +63,8 @@ $(".tablas").on("click", ".btnEditarUsuario", function(){
 		processData: false,
 		dataType: "json",
 		success: function(respuesta){
+
+            //Traer los datos de la base de datos
 			
 			$("#editarNombre").val(respuesta["nombre"]);
 			$("#editarUsuario").val(respuesta["usuario"]);
@@ -81,5 +83,45 @@ $(".tablas").on("click", ".btnEditarUsuario", function(){
 		}
 
 	});
+
+})
+
+//activar usuario
+
+$(".btnActivar").click(function(){
+
+    var idUsuario = $(this).attr("idUsuario");
+    var estadoUsuario = $(this).attr("estadoUsuario");
+
+    var datos = new FormData();
+    datos.append("activarId", idUsuario);
+    datos.append("activarUsuario", estadoUsuario);
+
+    $.ajax({
+
+        url:"ajax/usuarios.ajax.php",
+        method:"POST",
+        data:datos,
+        cache: false,
+        contentType:false,
+        processData:false,
+        success:function(respuesta){
+            
+        }
+
+    })
+
+    if(estadoUsuario == 0){
+
+        $(this).removeClass('btn-seccess');
+        $(this).addClass('btn-danger');
+        $(this).html('Desactivado');
+        $(this).attr('estadoUsuario',1);
+    }else{
+        $(this).addClass('btn-seccess');
+        $(this).removeClass('btn-danger');
+        $(this).html('Activado');
+        $(this).attr('estadoUsuario',0);
+    }
 
 })
