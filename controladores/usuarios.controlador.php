@@ -20,23 +20,30 @@ class ControladorUsuarios{
 				$valor = $_POST["ingUsuario"];
 
 				$respuesta = ModeloUsuarios::MdlMostrarUsuarios($tabla, $item, $valor);
-                    
-               if($respuesta["usuario"] == $_POST["ingUsuario"]
+
+                
+				
+               	if($respuesta["usuario"] == $_POST["ingUsuario"]
 			   	 && $respuesta["password"] == $encriptar){
 					
-					$_SESSION["iniciarSesion"]= "ok";
-					$_SESSION["id"]= $respuesta["id"];
-					$_SESSION["nombre"]= $respuesta["nombre"];
-					$_SESSION["usuario"]= $respuesta["usuario"];
-					$_SESSION["foto"]= $respuesta["foto"];
-					$_SESSION["perfil"]= $respuesta["perfil"];
+					if($respuesta["estado"] == 1){
 
-					echo '<script>
-						window.location = "inicio";
-						</script>';
+						$_SESSION["iniciarSesion"]= "ok";
+						$_SESSION["id"]= $respuesta["id"];
+						$_SESSION["nombre"]= $respuesta["nombre"];
+						$_SESSION["usuario"]= $respuesta["usuario"];
+						$_SESSION["foto"]= $respuesta["foto"];
+						$_SESSION["perfil"]= $respuesta["perfil"];
+
+						echo '<script>
+							window.location = "inicio";
+							</script>';
+					}else{
+							echo '<br><div class= "alert alert-danger"> El usuario aun no esta activado </div>';
+						}	
 
 			   }else{
-				echo '<br><div class= "alert alert-danger"> E´rror al ingresar, vuelva a intentarlo </div>';
+				echo '<br><div class= "alert alert-danger"> Error al ingresar, vuelva a intentarlo </div>';
 			   }
 
                   
