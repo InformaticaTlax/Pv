@@ -184,5 +184,20 @@ class ControladorUsuarios{
 
 	}
 
+	/*=============================================
+	Editar DE USUARIO
+	=============================================*/
+
+	public function ctrEditarUsuario(){
+		if(isset($_POST["editarUsuario"])){
+
+			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarNombre"])){
+
+			}
+		}
+		
+
+	}
 }
+
 
