@@ -197,7 +197,7 @@ class ControladorUsuarios{
 
 				$ruta = $_POST["fotoActual"];
 
-				if(isset($_FILES["editarFoto"]["tmp_name"])){
+				if(isset($_FILES["editarFoto"]["tmp_name"]) && !empty($_FILES["editarFoto"]["tmp_name"]) ){
 					//var_dump(getimagesize($_FILES["editarFoto"]["tmp_name"]));
 
 					list($ancho,$alto) =getimagesize($_FILES["editarFoto"]["tmp_name"]);
