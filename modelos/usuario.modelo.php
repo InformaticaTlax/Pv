@@ -32,7 +32,7 @@ class ModeloUsuarios{
 
 		
 
-		//tengo falla
+		
 		$stmt -> close();
 
 		$stmt = null;
@@ -65,31 +65,38 @@ class ModeloUsuarios{
 	
 
 	}
-	//editar Usuario
-	static public function mdlEditarUsuario($tabla,$datos){
-	
+	/*=============================================
+	EDITAR USUARIO
+	=============================================*/
 
+<<<<<<< HEAD
 		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre = :nombre, password = :password, perfil = :perfil,
 				 foto = :foto WHERE usuario = :usuario");
 		
+=======
+	static public function mdlEditarUsuario($tabla, $datos){
+	
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre = :nombre, password = :password, perfil = :perfil, foto = :foto WHERE usuario = :usuario");
+>>>>>>> bdc2ae979d1c2981d4f9483f5dc3900ce52b18a7
 
-		$stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
-		$stmt->bindParam(":usuario", $datos["usuario"], PDO::PARAM_STR);
-		$stmt->bindParam(":password", $datos["password"], PDO::PARAM_STR);
-		$stmt->bindParam(":perfil", $datos["perfil"], PDO::PARAM_STR);
-		$stmt->bindParam(":foto", $datos["foto"], PDO::PARAM_STR);
+		$stmt -> bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
+		$stmt -> bindParam(":password", $datos["password"], PDO::PARAM_STR);
+		$stmt -> bindParam(":perfil", $datos["perfil"], PDO::PARAM_STR);
+		$stmt -> bindParam(":foto", $datos["foto"], PDO::PARAM_STR);
+		$stmt -> bindParam(":usuario", $datos["usuario"], PDO::PARAM_STR);
 
-		if($stmt -> execute()){//problema
+		if($stmt -> execute()){
 
 			return "ok";
-
+		
 		}else{
 
-			return "error";
+			return "error";	
 
 		}
-		
-		$stmt->close();
+
+		$stmt -> close();
+
 		$stmt = null;
 
 	}

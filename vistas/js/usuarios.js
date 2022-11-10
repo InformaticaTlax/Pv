@@ -50,6 +50,10 @@ $(".tablas").on("click", ".btnEditarUsuario", function(){
 
 	var idUsuario = $(this).attr("idUsuario");
     //console.log("idUsuario", idUsuario);
+<<<<<<< HEAD
+=======
+	
+>>>>>>> bdc2ae979d1c2981d4f9483f5dc3900ce52b18a7
 	var datos = new FormData();
 	datos.append("idUsuario", idUsuario);
 
@@ -72,13 +76,14 @@ $(".tablas").on("click", ".btnEditarUsuario", function(){
             $("#editarPerfil").val(respuesta["perfil"]);
             $("#fotoActual").val(respuesta["foto"]);
 
-			$("#passwordActual").val(respuesta["password"]);
+            $("#passwordActual").val(respuesta["password"]);
 
 			if(respuesta["foto"] != ""){
 
 				$(".previsualizar").attr("src", respuesta["foto"]);
 
 			}
+            //console.log("respuesta", respuesta);
 
 		}
 
@@ -94,6 +99,7 @@ $(".btnActivar").click(function(){
     var estadoUsuario = $(this).attr("estadoUsuario");
 
     var datos = new FormData();
+<<<<<<< HEAD
     datos.append("activarId", idUsuario);
     datos.append("activarUsuario", estadoUsuario);
 
@@ -124,4 +130,36 @@ $(".btnActivar").click(function(){
         $(this).attr('estadoUsuario',0);
     }
 
+=======
+        datos.append("activarId", idUsuario);
+        datos.append("activarUsuario", estadoUsuario);
+
+        $.ajax({
+
+            url:"ajax/usuarios.ajax.php",
+            method:"POST",
+            data:datos,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success:function(respuesta){
+
+            }
+
+        })
+        if(estadoUsuario == 0 ){
+
+            $(this).removeClass('btn-success');
+            $(this).addClass('btn-danger');
+            $(this).html('Desactivado');
+            $(this).attr('estadoUsuario',1);
+
+        }else{
+            $(this).addClass('btn-success');
+            $(this).removeClass('btn-danger');
+            $(this).html('Activado');
+            $(this).attr('estadoUsuario',0);
+        }
+
+>>>>>>> bdc2ae979d1c2981d4f9483f5dc3900ce52b18a7
 })
