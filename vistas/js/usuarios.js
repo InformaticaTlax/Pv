@@ -126,6 +126,31 @@ $(".btnActivar").click(function(){
 
 })
 
+//eliminar Usuario
+$(" btnEliminarUsuario").click(function(){
+
+    var idUsuario= $(this).attr("idUsuario");
+    var fotoUsuario= $(this).attr("fotoUsuario");
+
+    swal({
+        title: 'Estas Seguro de borar el usuario',
+        text: "Si no lo esat puede cancelar la accion",
+        type:'warning',
+        showCancelButton: true:
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#33',
+        cancelButtonText: 'Cancelar',
+        confirmButtonText: 'Si, Borrar usuario'
+    }).then((result)=>{
+
+        if(result.value){
+
+            window.location = "index.php?ruta=usuarios&idUsuario="+idUsuario+"&fotoUsuario="+fotoUsuario;
+        }
+
+    })
+})
+
 //Revisar si el usuario ya esta registrado
 
 $('#nuevoUsuario').change(function(){
