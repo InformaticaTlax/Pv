@@ -216,7 +216,7 @@ class ControladorUsuarios{
 	Editar DE USUARIO
 	=============================================*/
 
-	public function ctrEditarUsuario(){
+	static public function ctrEditarUsuario(){
 		if(isset($_POST["editarUsuario"])){
 
 			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarNombre"])){
@@ -367,8 +367,22 @@ class ControladorUsuarios{
 			}
 		}
 		
+	}
+	//borrar usuario
+	static public function ctrBorrarUsuario(){
+		if (isset($_GET["idUsuario"])){
+
+			$tabla = "usuarios";
+			$datos = $_GET["idUsuario"];
+
+			if($_GET["foto"] != ""){
+				unlink($_GET["foto"]);
+				rmdir('vistas/img/usuarios/'.$_GET["usuario"]);
+			}
+		}
 
 	}
+
 }
 
 

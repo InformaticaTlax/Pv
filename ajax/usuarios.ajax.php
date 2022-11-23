@@ -10,8 +10,8 @@ class AjaxUsuarios{
 	=============================================*/	
 
 	public $idUsuario;
-
-	public function ajaxEditarUsuario(){
+	//si lo pasas a estatico ya en editar no funciona
+	static public function ajaxEditarUsuario(){
 
 		$item = "id";
 		$valor = $this->idUsuario;
@@ -29,8 +29,8 @@ class AjaxUsuarios{
 	public $activarUsuario;
 	public $activarId;
 
-
-	public function ajaxActivarUsuario(){
+	//si lo pasas a estatico ya  no funciona el metodo
+	static public function ajaxActivarUsuario(){
 
 		$tabla = "usuarios";
 
