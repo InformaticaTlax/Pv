@@ -334,3 +334,9 @@
 
   </div>
 </div>
+<?php
+
+  $borrarUsuario = new ControladorUsuarios();
+  $borrarUsuario -> ctrBorrarUsuario();
+
+?>

@@ -375,10 +375,36 @@ class ControladorUsuarios{
 			$tabla = "usuarios";
 			$datos = $_GET["idUsuario"];
 
-			if($_GET["foto"] != ""){
-				unlink($_GET["foto"]);
+			if($_GET["fotoUsuario"] != ""){
+
+				unlink($_GET["fotoUsuario"]);
 				rmdir('vistas/img/usuarios/'.$_GET["usuario"]);
 			}
+			$respuesta = ModeloUsuarios::mdlBorrarUsuario($tabla,$datos);
+
+			if($respuesta == "ok"){
+
+				echo'<script>
+
+				swal({
+					  type: "success",
+					  title: "El usuario ha sido borradoo correctamente",
+					  showConfirmButton: true,
+					  confirmButtonText: "Cerrar"
+					  }).then((result) => {
+								
+								if (result.value) {
+
+								window.location = "usuarios";
+
+								}
+							})
+
+				</script>';
+
+			}
+
+		
 		}
 
 	}
