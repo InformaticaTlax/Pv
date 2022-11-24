@@ -88,7 +88,8 @@ $(".tablas").on("click", ".btnEditarUsuario", function(){
 
 //activar usuario
 
-$(".btnActivar").click(function(){
+
+$(document).on("click", ".btnActivar", function(){
 
     var idUsuario = $(this).attr("idUsuario");
     var estadoUsuario = $(this).attr("estadoUsuario");
@@ -106,7 +107,23 @@ $(".btnActivar").click(function(){
             contentType: false,
             processData: false,
             success:function(respuesta){
+                if(window.matchMedia("(max-width:767px)").matches){
 
+                    swal({
+                        type: "success",
+                        title: "El usuario ha sido Actualizado correctamente",
+                        confirmButtonText: "Cerrar"
+                        
+                    }).then(function(result) {
+                                  
+                            if (result.value) {
+  
+                                  window.location = "usuarios";
+  
+                            }
+                        });
+
+                }
             }
 
         })
@@ -182,6 +199,7 @@ $("btnEliminarUsuario").click(function(){
         if(result.value){
 
             window.location = "index.php?ruta=usuarios&idUsuario="+idUsuario+"&fotoUsuario="+fotoUsuario;
+            window.location = "index.php?ruta=usuarios&idUsuario="+idUsuario+"&usuario="+usuario+"&fotoUsuario="+fotoUsuario;
         }
 
     })
@@ -206,7 +224,7 @@ $(document).on("click", ".btnEliminarUsuario", function(){
       if(result.value){
   
         window.location = "index.php?ruta=usuarios&idUsuario="+idUsuario+"&usuario="+usuario+"&fotoUsuario="+fotoUsuario;
-  
+        
       }
   
     })
