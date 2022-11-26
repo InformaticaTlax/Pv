@@ -69,9 +69,15 @@ class ModeloUsuarios{
 	EDITAR USUARIO
 	=============================================*/
 
+<<<<<<< HEAD
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre = :nombre, password = :password, perfil = :perfil,
+				 foto = :foto WHERE usuario = :usuario");
+		
+=======
 	static public function mdlEditarUsuario($tabla, $datos){
 	
 		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre = :nombre, password = :password, perfil = :perfil, foto = :foto WHERE usuario = :usuario");
+>>>>>>> bdc2ae979d1c2981d4f9483f5dc3900ce52b18a7
 
 		$stmt -> bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
 		$stmt -> bindParam(":password", $datos["password"], PDO::PARAM_STR);
@@ -94,11 +100,17 @@ class ModeloUsuarios{
 		$stmt = null;
 
 	}
+<<<<<<< HEAD
 	/*=============================================
 	ACTUALIZAR USUARIO
 	=============================================*/
 
 	static public function mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2){
+=======
+	//Actulizar Usuario
+	
+	static public function mdlActualizarUsuario($tabla, $item1,$valor1, $item2, $valor2){
+>>>>>>> 90248bdbf41038383d585751ab59ae5711444152
 
 		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1 WHERE $item2 = :$item2");
 
@@ -106,6 +118,7 @@ class ModeloUsuarios{
 		$stmt -> bindParam(":".$item2, $valor2, PDO::PARAM_STR);
 
 		if($stmt -> execute()){
+<<<<<<< HEAD
 
 			return "ok";
 		
@@ -119,6 +132,15 @@ class ModeloUsuarios{
 
 		$stmt = null;
 
+=======
+			return "ok";
+		}else{
+			return "error";
+		}
+		
+		$stmt->close();
+		$stmt = null;
+>>>>>>> 90248bdbf41038383d585751ab59ae5711444152
 	}
 	//borar Usuario
 

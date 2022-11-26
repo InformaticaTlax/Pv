@@ -71,6 +71,20 @@
                         
                         
                         echo '<td>'.$value["perfil"].'</td>';
+<<<<<<< HEAD
+                        
+                        if($value["estado"] != 0){
+                          echo ' <td><button class="btn btn-success btn-xs btnActivar" idUsuario="'.$value["id"].'" 
+                            estadoUsuario= "0" > Activado</button></td>';
+
+                        }else{
+                          echo  '<td><button class="btn btn-danger btn-xs btnActivar" 
+                            idUsuario="'.$value["id"].'" estadoUsuario="1">Desactivado</button></td>';
+                        }
+                        
+                          
+                        echo '<td>'.$value["ultimo_login"].'</td>
+=======
 
                         if($value["estado"] != 0){
                           echo '<td><button class="btn btn-success btn-xs btnActivar" idUsuario="'.$value["id"].'" estadoUsuario="0">Activado</button></td>';
@@ -80,16 +94,30 @@
                         }
                         echo '<td>'.$value["ultimo_login"].'</td>
 
+>>>>>>> bdc2ae979d1c2981d4f9483f5dc3900ce52b18a7
                         <td>
 
 
                           <div class="btn-group">
+<<<<<<< HEAD
+
+                            <button class="btn btn-warning btnEditarUsuario" idUsuario="'.$value["id"].'" data-toggle = "modal" data-target="#modalEditarUsuario">
+
+                            <i class="fa fa-pencil"></i></button>
+
+=======
                             
                             <button class="btn btn-warning btnEditarUsuario" idUsuario="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarUsuario"><i class="fa fa-pencil"></i></button>
                             
+<<<<<<< HEAD
                             <button class="btn btn-danger btnEliminarUsuario" idUsuario="'.$value["id"].'" fotoUsuario="'.$value["foto"].'" usuario="'.$value["usuario"].'" ><i class="fa fa-times"></i></button>
                             
                             
+=======
+>>>>>>> bdc2ae979d1c2981d4f9483f5dc3900ce52b18a7
+                            <button class="btn btn-danger"><i class="fa fa-times"></i></button>
+                          
+>>>>>>> c5876e282565dbcab4baef9a9aa10bbeed580d60
                             </div>
                         </td>
                       </tr>';
@@ -118,7 +146,7 @@
  
 
 
-<!-- Modal -->
+<!-- Modal agregar Usuario -->
 <div id="modalAgregarUsuario" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
@@ -218,6 +246,12 @@
     </div>
 
   </div>
+<<<<<<< HEAD
+  
+</div>
+
+<!-- Modal Editar  Usuario -->
+=======
 </div>
 
 <!-- /modal Editar Usuaios-->
@@ -225,6 +259,7 @@
 
 
 
+>>>>>>> bdc2ae979d1c2981d4f9483f5dc3900ce52b18a7
 <div id="modalEditarUsuario" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
@@ -243,8 +278,12 @@
 
           <div class="modal-body">
             <div class="box-body">
+<<<<<<< HEAD
+              <!-- entrada para el nombre -->
+=======
               
             <!-- entrada para el nombre -->
+>>>>>>> bdc2ae979d1c2981d4f9483f5dc3900ce52b18a7
 
               <div class="form-group">
 
@@ -271,6 +310,32 @@
 
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+<<<<<<< HEAD
+                  <input type="password" class="form-control input-lg" name="editarPassword" placeholder="Escriba la
+                   Contraseña" >
+
+                  <input type="hidden" id= "passwordActual" name="passwordActual">  
+                  
+                </div>
+              </div>
+              <!-- Entrada seleccionar para Perfil -->
+              <div class="form-group">
+
+                <div class="input-group">
+                  
+                  <span class="input-group-addon"><i class="fa fa-users"></i></span>
+                  
+                  <select class="form-control input-lg" name="editarPerfil">
+                  
+                    <option value="" id="editarPerfil"></option>
+                    
+                    <option value="Administrador">administrador</option>
+                    
+                    <option value="Especial">Especial</option>
+                    
+                    <option value="Vendedor">Vendedor</option>
+                  
+=======
                   <input type="password" class="form-control input-lg" name="editarPassword" placeholder="Escriba una nueva contraseña" >
                   
                   <input type="hidden" id ="passwordActual" name="passwordActual">
@@ -291,12 +356,17 @@
                     <option value="Especial">Especial</option>
 
                     <option value="Vendedor">Vendedor</option>
+>>>>>>> bdc2ae979d1c2981d4f9483f5dc3900ce52b18a7
                   </select>
                   
                 </div>
               </div>
 
+<<<<<<< HEAD
+              <!-- Entrada para Subir Foto -->
+=======
               <!-- Entrada para Foto -->
+>>>>>>> bdc2ae979d1c2981d4f9483f5dc3900ce52b18a7
               <div class="form-group">
 
                 <div class="panel">Subir foto</div>
@@ -306,8 +376,13 @@
                 <p class="help-block" >Peso Maximo de la foto de 2 MB</p>
 
                 <img src="vistas/img/usuarios/default/anonymous.png" class="img-thumbnail previsualizar" width="100px">
+<<<<<<< HEAD
+
+                <input type="hidden" name="fotoActual" id="fotoActual">
+=======
                 
                 <input type="hidden" name="fotoActual" id= "fotoActual">
+>>>>>>> bdc2ae979d1c2981d4f9483f5dc3900ce52b18a7
 
               </div>
               
@@ -319,20 +394,33 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
 
+<<<<<<< HEAD
+            <button type="submit" class="btn btn-primary">Modificar Usuario</button>
+          </div>
+
+          
+            <?php
+=======
             <button type="submit" class="btn btn-primary">Modificar  Usuario</button>
           </div>
 
            <?php
+>>>>>>> bdc2ae979d1c2981d4f9483f5dc3900ce52b18a7
 
             $editarUsuario = new ControladorUsuarios();
             $editarUsuario -> ctrEditarUsuario();
 
           ?>
+<<<<<<< HEAD
+           
+=======
+>>>>>>> bdc2ae979d1c2981d4f9483f5dc3900ce52b18a7
 
         </form>
     </div>
 
   </div>
+<<<<<<< HEAD
 </div>
 <?php
 
@@ -340,3 +428,10 @@
   $borrarUsuario -> ctrBorrarUsuario();
 
 ?>
+=======
+<<<<<<< HEAD
+  
+=======
+>>>>>>> bdc2ae979d1c2981d4f9483f5dc3900ce52b18a7
+</div>
+>>>>>>> c5876e282565dbcab4baef9a9aa10bbeed580d60

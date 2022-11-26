@@ -12,6 +12,7 @@ require_once "modelos/usuario.modelo.php";
 require_once "modelos/productos.modelo.php";
 require_once "modelos/clientes.modelo.php";
 require_once "modelos/ventas.modelo.php";
+//11
 
 $plantilla = new ControladorPlantilla();
 
