@@ -101,7 +101,7 @@
   </div>
   <!-- /.content-wrapper -->
 
-  <!-- /Agregar Usuaios-->
+  <!-- /Agregar Agregar Categoria-->
  
 
 
@@ -146,6 +146,14 @@
 
             <button type="submit" class="btn btn-primary">Guardar Categoria</button>
           </div>
+          <?php
+
+            $crearCategoria = new ControladorCategorias();
+            $crearCategoria -> ctrCrearCatgoria();
+
+
+
+          ?>
         </form>
     </div>
 
