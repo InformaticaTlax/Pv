@@ -2,7 +2,7 @@
 $(".nuevaFoto").change(function(){
 
     var imagen =this.files[0];
-    console.log("imagen", imagen);
+    //console.log("imagen", imagen);
     
    // valindado que el formato sea jpg o png
 
@@ -50,10 +50,7 @@ $(".tablas").on("click", ".btnEditarUsuario", function(){
 
 	var idUsuario = $(this).attr("idUsuario");
     //console.log("idUsuario", idUsuario);
-<<<<<<< HEAD
-=======
 	
->>>>>>> bdc2ae979d1c2981d4f9483f5dc3900ce52b18a7
 	var datos = new FormData();
 	datos.append("idUsuario", idUsuario);
 
@@ -67,8 +64,6 @@ $(".tablas").on("click", ".btnEditarUsuario", function(){
 		processData: false,
 		dataType: "json",
 		success: function(respuesta){
-
-            //Traer los datos de la base de datos
 			
 			$("#editarNombre").val(respuesta["nombre"]);
 			$("#editarUsuario").val(respuesta["usuario"]);
@@ -100,38 +95,6 @@ $(document).on("click", ".btnActivar", function(){
     var estadoUsuario = $(this).attr("estadoUsuario");
 
     var datos = new FormData();
-<<<<<<< HEAD
-    datos.append("activarId", idUsuario);
-    datos.append("activarUsuario", estadoUsuario);
-
-    $.ajax({
-
-        url:"ajax/usuarios.ajax.php",
-        method:"POST",
-        data:datos,
-        cache: false,
-        contentType:false,
-        processData:false,
-        success:function(respuesta){
-            
-        }
-
-    })
-
-    if(estadoUsuario == 0){
-
-        $(this).removeClass('btn-seccess');
-        $(this).addClass('btn-danger');
-        $(this).html('Desactivado');
-        $(this).attr('estadoUsuario',1);
-    }else{
-        $(this).addClass('btn-seccess');
-        $(this).removeClass('btn-danger');
-        $(this).html('Activado');
-        $(this).attr('estadoUsuario',0);
-    }
-
-=======
         datos.append("activarId", idUsuario);
         datos.append("activarUsuario", estadoUsuario);
 
@@ -178,7 +141,6 @@ $(document).on("click", ".btnActivar", function(){
             $(this).attr('estadoUsuario',0);
         }
 
-<<<<<<< HEAD
 })
 
 //Revisar si el usuario ya esta registrado
@@ -271,7 +233,3 @@ $(document).on("click", ".btnEliminarUsuario", function(){
   
   
   
-=======
->>>>>>> bdc2ae979d1c2981d4f9483f5dc3900ce52b18a7
-})
->>>>>>> c5876e282565dbcab4baef9a9aa10bbeed580d60

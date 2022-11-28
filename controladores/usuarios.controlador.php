@@ -147,19 +147,25 @@ class ControladorUsuarios{
 
 					if ($respuesta == "ok"){
 							echo '<script>
+
 							swal({
+
 								type: "success",
 								title: "El usuario se ha agregado correctamente",
 								showConfirmButton: true,
 								confirmButtonText: "Cerrar",
 								closeOnConfirm: false
+
 							}).then((result)=>{
+
 								if(result.value){
 								
 									window.location = "usuarios";
 								}
+
 							});
 					
+
 					</script>';
 					}
 					
@@ -167,19 +173,25 @@ class ControladorUsuarios{
 			}else{
 
 				echo '<script>
+
 					swal({
+
 						type: "error",
 						title: "¡El usuario no puede ir vacío o llevar caracteres especiales!",
 						showConfirmButton: true,
 						confirmButtonText: "Cerrar",
 						closeOnConfirm: false
+
 					}).then((result)=>{
+
 						if(result.value){
 						
 							window.location = "usuarios";
 						}
+
 					});
 				
+
 				</script>';
 
 			}
@@ -282,6 +294,7 @@ class ControladorUsuarios{
 					}else{
 
 						echo'<script>
+
 								swal({
 									  type: "error",
 									  title: "¡La contraseña no puede ir vacía o llevar caracteres especiales!",
@@ -289,9 +302,12 @@ class ControladorUsuarios{
 									  confirmButtonText: "Cerrar"
 									  }).then(function(result){
 										if (result.value) {
+
 										window.location = "usuarios";
+
 										}
 									})
+
 						  	</script>';
 					}
 					
@@ -311,6 +327,7 @@ class ControladorUsuarios{
 				if($respuesta == "ok"){
 
 					echo'<script>
+
 					swal({
 						  type: "success",
 						  title: "El usuario ha sido editado correctamente",
@@ -318,9 +335,12 @@ class ControladorUsuarios{
 						  confirmButtonText: "Cerrar"
 						  }).then(function(result){
 									if (result.value) {
+
 									window.location = "usuarios";
+
 									}
 								})
+
 					</script>';
 
 				}
@@ -328,6 +348,7 @@ class ControladorUsuarios{
 			}else{
 
 				echo'<script>
+
 					swal({
 						  type: "error",
 						  title: "¡El nombre no puede ir vacío o llevar caracteres especiales!",
@@ -335,9 +356,12 @@ class ControladorUsuarios{
 						  confirmButtonText: "Cerrar"
 						  }).then(function(result){
 							if (result.value) {
+
 							window.location = "usuarios";
+
 							}
 						})
+
 			  	</script>';
 
 			}
@@ -361,6 +385,7 @@ class ControladorUsuarios{
 			if($respuesta == "ok"){
 
 				echo'<script>
+
 				swal({
 					  type: "success",
 					  title: "El usuario ha sido borradoo correctamente",
@@ -369,9 +394,12 @@ class ControladorUsuarios{
 					  }).then((result) => {
 								
 								if (result.value) {
+
 								window.location = "usuarios";
+
 								}
 							})
+
 				</script>';
 
 			}
@@ -382,4 +410,5 @@ class ControladorUsuarios{
 	}
 
 }
+
 
