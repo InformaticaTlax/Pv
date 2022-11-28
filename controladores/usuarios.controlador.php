@@ -20,15 +20,6 @@ class ControladorUsuarios{
 				$valor = $_POST["ingUsuario"];
 
 				$respuesta = ModeloUsuarios::MdlMostrarUsuarios($tabla, $item, $valor);
-<<<<<<< HEAD
-				
-                    
-               if($respuesta["usuario"] == $_POST["ingUsuario"]
-			   	 && $respuesta["password"] == $encriptar){
-					if($respuesta["estado"] == 1){//esta linea es para verificar si esta activado o no y si no no ingreda al sistema
-
-					
-=======
 
                 
 				
@@ -37,7 +28,6 @@ class ControladorUsuarios{
 					
 					if($respuesta["estado"] == 1){
 
->>>>>>> bdc2ae979d1c2981d4f9483f5dc3900ce52b18a7
 						$_SESSION["iniciarSesion"]= "ok";
 						$_SESSION["id"]= $respuesta["id"];
 						$_SESSION["nombre"]= $respuesta["nombre"];
@@ -70,13 +60,8 @@ class ControladorUsuarios{
 						}
 
 					}else{
-<<<<<<< HEAD
-						echo '<br><div class= "alert alert-danger"> El usuario aun no esta activado </div>';
-					}		
-=======
 							echo '<br><div class= "alert alert-danger"> El usuario aun no esta activado </div>';
 						}	
->>>>>>> bdc2ae979d1c2981d4f9483f5dc3900ce52b18a7
 
 			   }else{
 				echo '<br><div class= "alert alert-danger"> Error al ingresar, vuelva a intentarlo </div>';
@@ -162,25 +147,19 @@ class ControladorUsuarios{
 
 					if ($respuesta == "ok"){
 							echo '<script>
-
 							swal({
-
 								type: "success",
 								title: "El usuario se ha agregado correctamente",
 								showConfirmButton: true,
 								confirmButtonText: "Cerrar",
 								closeOnConfirm: false
-
 							}).then((result)=>{
-
 								if(result.value){
 								
 									window.location = "usuarios";
 								}
-
 							});
 					
-
 					</script>';
 					}
 					
@@ -188,25 +167,19 @@ class ControladorUsuarios{
 			}else{
 
 				echo '<script>
-
 					swal({
-
 						type: "error",
 						title: "¡El usuario no puede ir vacío o llevar caracteres especiales!",
 						showConfirmButton: true,
 						confirmButtonText: "Cerrar",
 						closeOnConfirm: false
-
 					}).then((result)=>{
-
 						if(result.value){
 						
 							window.location = "usuarios";
 						}
-
 					});
 				
-
 				</script>';
 
 			}
@@ -224,173 +197,6 @@ class ControladorUsuarios{
 		$respuesta = ModeloUsuarios::MdlMostrarUsuarios($tabla, $item, $valor);
 		
 		return $respuesta;
-
-	}
-	
-	/*=============================================
-	Editar DE USUARIO
-	=============================================*/
-	public function ctrEditarUsuario(){
-
-		if(isset($_POST["editarUsuario"])){
-
-			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarNombre"])){
-					
-				//validar imagen
-
-				$ruta = $_POST["fotoActual"];
-
-				if(isset($_FILES["editarFoto"]["tmp_name"]) && !empty($_FILES["editarFoto"]["tmp_name"])){
-					//var_dump(getimagesize($_FILES["editarFoto"]["tmp_name"]));
-
-					list($ancho,$alto) =getimagesize($_FILES["editarFoto"]["tmp_name"]);
-
-					$nuevoAncho = 500;
-					$nuevoAlto = 500;
-
-					//crear directorio para guardar la foto del usuario
-
-					$directorio = "vistas/img/usuarios/".$_POST["editarUsuario"];
-					//Primero se pregunta si existe en la base de 
-					
-					if(!empty($_POST["fotoActual"])){
-
-						unlink($_POST["fotoActual"]);
-
-					}else{
-
-						mkdir($directorio, 0755);
-
-					}
-					
-					
-					
-					//de acuerdo al tipo de imagen aplicamos funcions por defecto de php
-
-					
-					if($_FILES["editarFoto"]["type"] == "image/jpeg"){
-						//Guardar imagen en el directorio
-
-						$aleatorio = mt_rand(100,999);
-
-						$ruta = "vistas/img/usuarios/".$_POST["editarUsuario"]."/".$aleatorio.".jpg";
-						$origen = imagecreatefromjpeg($_FILES["editarFoto"]["tmp_name"]);
-
-						$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-
-						imagecopyresized($destino,$origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-
-						imagejpeg($destino,$ruta);
-					}
-					
-					if($_FILES["editarFoto"]["type"] == "image/png"){
-						//Guardar imagen en el directorio
-
-						$aleatorio = mt_rand(100,999);
-
-						$ruta = "vistas/img/usuarios/".$_POST["editarUsuario"]."/".$aleatorio.".png";
-						$origen = imagecreatefrompng($_FILES["editarFoto"]["tmp_name"]);
-
-						$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-
-						imagecopyresized($destino,$origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-
-						imagepng($destino,$ruta);
-					}
-				}
-
-				$tabla = "usuarios";
-
-				if($_POST["editarPassword"] != ""){
-
-					if(preg_match('/^[a-zA-Z0-9]+$/', $_POST["editarPassword"])){
-
-						$encriptar = crypt($_POST["ingPassword"],'$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
-
-					}else{
-
-						echo '<script>
-
-							swal({
-								type:"error",
-								title: "La contraseña no puede ir vacia o llevar caracteres especiales",
-								showConfirmButton: true,
-								confirmButtonText: "Cerrar",
-								closeOnConfirm: false,
-								}).then((result) => {
-									if(result.value){
-										windows.location = "usuatios";
-									}
-								})
-						
-						</script>';
-
-					}
-
-					
-
-				}else{
-
-					$encriptar =$_POST["passwordActual"];//aquitengo duda
-
-				}
-				$datos = array("nombre" => $_POST["editarNombre"],
-								"usuario" => $_POST["editarUsuario"],
-								"password" => $encriptar,
-								"perfil" => $_POST["editarPerfil"],
-								"foto" => $ruta);
-								
-				$respuesta = ModeloUsuarios::mdlEditarUsuario($tabla, $datos);
-
-				if ($respuesta == "ok"){
-					echo '<script>
-
-					swal({
-
-						type: "success",
-						title: "El usuario se ha editado correctamente",
-						showConfirmButton: true,
-						confirmButtonText: "Cerrar",
-						closeOnConfirm: false
-
-					}).then((result)=>{
-
-						if(result.value){
-						
-							window.location = "usuarios";
-						}
-
-					});
-			
-
-					</script>';
-				}
-
-
-				}
-				else{
-
-					echo '<script>
-		
-									swal({
-										type:"error",
-										title: "El nombre no puede ir vacio o llevar caracteres especiales",
-										showConfirmButton: true,
-										confirmButtonText: "Cerrar",
-										closeOnConfirm: false,
-										}).then((result) => {
-											if(result.value){
-												windows.location = "usuatios";
-											}
-										})
-								
-					</script>';			
-		
-				}	
-			
-
-		}
-
 
 	}
 
@@ -476,7 +282,6 @@ class ControladorUsuarios{
 					}else{
 
 						echo'<script>
-
 								swal({
 									  type: "error",
 									  title: "¡La contraseña no puede ir vacía o llevar caracteres especiales!",
@@ -484,12 +289,9 @@ class ControladorUsuarios{
 									  confirmButtonText: "Cerrar"
 									  }).then(function(result){
 										if (result.value) {
-
 										window.location = "usuarios";
-
 										}
 									})
-
 						  	</script>';
 					}
 					
@@ -509,7 +311,6 @@ class ControladorUsuarios{
 				if($respuesta == "ok"){
 
 					echo'<script>
-
 					swal({
 						  type: "success",
 						  title: "El usuario ha sido editado correctamente",
@@ -517,12 +318,9 @@ class ControladorUsuarios{
 						  confirmButtonText: "Cerrar"
 						  }).then(function(result){
 									if (result.value) {
-
 									window.location = "usuarios";
-
 									}
 								})
-
 					</script>';
 
 				}
@@ -530,7 +328,6 @@ class ControladorUsuarios{
 			}else{
 
 				echo'<script>
-
 					swal({
 						  type: "error",
 						  title: "¡El nombre no puede ir vacío o llevar caracteres especiales!",
@@ -538,12 +335,9 @@ class ControladorUsuarios{
 						  confirmButtonText: "Cerrar"
 						  }).then(function(result){
 							if (result.value) {
-
 							window.location = "usuarios";
-
 							}
 						})
-
 			  	</script>';
 
 			}
@@ -567,7 +361,6 @@ class ControladorUsuarios{
 			if($respuesta == "ok"){
 
 				echo'<script>
-
 				swal({
 					  type: "success",
 					  title: "El usuario ha sido borradoo correctamente",
@@ -576,12 +369,9 @@ class ControladorUsuarios{
 					  }).then((result) => {
 								
 								if (result.value) {
-
 								window.location = "usuarios";
-
 								}
 							})
-
 				</script>';
 
 			}
@@ -592,5 +382,4 @@ class ControladorUsuarios{
 	}
 
 }
-
 
