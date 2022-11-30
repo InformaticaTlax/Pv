@@ -2,71 +2,62 @@
 
 class ControladorCategorias{
 
-    //categorias
-    static public function ctrCrearCategoria(){
+    //Crear Categorias
 
+    static public function ctrCrearCategoria(){
+        
         if(isset($_POST["nuevaCategoria"])){
 
+            //para permitir los caracteres especiales
             if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevaCategoria"])){
 
-                $tabla = "categorias";
+               $tabla = "categorias";
+               
+               $datos = $_POST["nuevaCategoria"];
 
-                $datos = $_POST["nuevaCategorias"];
+               $respuesta = ModeloCategorias::mdlIngresarCategoria($tabla,$datos);
 
-                $respuesta = ModeloCategorias::mdlIngresarCategoria($tabla, $datos);
+               if($respuesta == "ok"){
 
-                if($respuesta == "ok"){
+               
 
-                    echo '<script>
+                echo'<script>
 
-							swal({
+					swal({
+						  type: "success",
+						  title: "La categoría ha sido guardada correctamente",
+						  showConfirmButton: true,
+						  confirmButtonText: "Cerrar"
+						  }).then(function(result){
+									if (result.value) {
 
-								type: "success",
-								title: "La categoria se ha agregado correctamente",
-								showConfirmButton: true,
-								confirmButtonText: "Cerrar",
-								closeOnConfirm: false
+									window.location = "categorias";
 
-							}).then((result)=>{
-
-								if(result.value){
-								
-									window.location = "usuarios";
-								}
-
-							});
-					
+									}
+								})
 
 					</script>';
 
-                }
-            
-
+               }
 
             }else{
 
-                echo '<script>
+                echo'<script>
 
 					swal({
+						  type: "error",
+						  title: "¡La categoría no puede ir vacía o llevar caracteres especiales!",
+						  showConfirmButton: true,
+						  confirmButtonText: "Cerrar"
+						  }).then(function(result){
+							if (result.value) {
 
-						type: "error",
-						title: "¡La categoria  no puede ir vacío o llevar caracteres especiales!",
-						showConfirmButton: true,
-						confirmButtonText: "Cerrar",
-						closeOnConfirm: false
-
-					}).then((result)=>{
-
-						if(result.value){
-						
 							window.location = "categorias";
-						}
 
-					});
-				
+							}
+						})
 
-				</script>';
-
+			  	</script>';
             }
         }
     }
