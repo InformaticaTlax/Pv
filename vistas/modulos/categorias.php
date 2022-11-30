@@ -105,7 +105,7 @@
  
 
 
-<!-- Modal -->
+<!-- Modal Agregar Categoria-->
 <div id="modalAgregarCategoria" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
@@ -122,14 +122,19 @@
             <h4 class="modal-title">Agergar Categoria</h4>
           </div>
 
+          <!-- Cuerpo del Modal -->
+
           <div class="modal-body">
             <div class="box-body">
-              <!-- estrada para el nombre -->
+              
+              <!-- entrada para del modal -->
 
               <div class="form-group">
 
                 <div class="input-group">
+
                   <span class="input-group-addon"><i class="fa fa-th"></i></span>
+
                   <input type="text" class="form-control input-lg" name="nuevaCategoria" placeholder="Ingresar Categoria" required>
 
                 </div>
@@ -146,6 +151,12 @@
 
             <button type="submit" class="btn btn-primary">Guardar Categoria</button>
           </div>
+          <?php
+
+            $crearCategoria = new ControladorCategorias();
+            $crearCategoria -> ctrCrearCategoria();
+          
+          ?>
         </form>
     </div>
 
