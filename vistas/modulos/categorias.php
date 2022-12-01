@@ -43,48 +43,36 @@
             </thead>
             
             <tbody>
+              <?php
+              
+              $item = null;
+              $valor = null;
 
-              <tr>
+              $categorias = ControladorCategorias::ctrMostrarCategorias($item, $valor);
 
-                <td>1</td>
+             
 
-                <td>EQUIPOS ELECTROMECÁNICOS</td>
+              foreach($categorias as $key => $value){
+
+                echo '<tr>
+
+                <td>'.($key+1).'</td>
+
+                <td class="text-uppercase">'.$value["categoria"].'</td>
                 
-                <td>
-                  <div class="btn-group">
-                    <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
-                    <button class="btn btn-danger"><i class="fa fa-times"></i></button>
-                  </div>
-                </td>
-              </tr>
+                    <td>
+                      <div class="btn-group">
+                        <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
+                        <button class="btn btn-danger"><i class="fa fa-times"></i></button>
+                      </div>
+                    </td>
+                  </tr>';
 
-              <tr>
 
-                <td>1</td>
-                
-                <td>EQUIPOS ELECTROMECÁNICOS</td>
-                
-                <td>
-                  <div class="btn-group">
-                    <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
-                    <button class="btn btn-danger"><i class="fa fa-times"></i></button>
-                  </div>
-                </td>
-              </tr>
+              }
 
-              <tr>
 
-                <td>1</td>
-                
-                <td>EQUIPOS ELECTROMECÁNICOS</td>
-                
-                <td>
-                  <div class="btn-group">
-                    <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
-                    <button class="btn btn-danger"><i class="fa fa-times"></i></button>
-                  </div>
-                </td>
-              </tr>
+              ?>
 
             </tbody>
 
