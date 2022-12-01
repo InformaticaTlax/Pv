@@ -28,3 +28,10 @@ $(".btnEditarCategoria").click(function(){
     })
 
 })
+
+//Eliminar categoria
+
+$(".btnEliminarCategoria.").click(function(){
+
+    
+})
