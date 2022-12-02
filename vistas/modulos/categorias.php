@@ -215,3 +215,10 @@
   </div>
 </div>
 
+<?php
+
+    $borrarCategoria = new ControladorCategorias();
+    $borrarCategoria -> ctrBorrarCategoria();
+
+?>
+
