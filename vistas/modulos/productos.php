@@ -50,6 +50,9 @@
             </thead>
             
             <tbody>
+              <?php
+
+              ?>
 
               <tr>
                 <td>1</td>
