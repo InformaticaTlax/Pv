@@ -2,26 +2,25 @@
 
 class ControladorCategorias{
 
-    //Crear Categorias
+	/*=============================================
+	CREAR CATEGORIAS
+	=============================================*/
 
-    static public function ctrCrearCategoria(){
-        
-        if(isset($_POST["nuevaCategoria"])){
+	static public function ctrCrearCategoria(){
 
-            //para permitir los caracteres especiales
-            if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevaCategoria"])){
+		if(isset($_POST["nuevaCategoria"])){
 
-               $tabla = "categorias";
-               
-               $datos = $_POST["nuevaCategoria"];
+			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevaCategoria"])){
 
-               $respuesta = ModeloCategorias::mdlIngresarCategoria($tabla,$datos);
+				$tabla = "categorias";
 
-               if($respuesta == "ok"){
+				$datos = $_POST["nuevaCategoria"];
 
-               
+				$respuesta = ModeloCategorias::mdlIngresarCategoria($tabla, $datos);
 
-                echo'<script>
+				if($respuesta == "ok"){
+
+					echo'<script>
 
 					swal({
 						  type: "success",
@@ -38,11 +37,12 @@ class ControladorCategorias{
 
 					</script>';
 
-               }
+				}
 
-            }else{
 
-                echo'<script>
+			}else{
+
+				echo'<script>
 
 					swal({
 						  type: "error",
@@ -58,10 +58,16 @@ class ControladorCategorias{
 						})
 
 			  	</script>';
-            }
-        }
-    }
-	//Mostrar Categorias
+
+			}
+
+		}
+
+	}
+
+	/*=============================================
+	MOSTRAR CATEGORIAS
+	=============================================*/
 
 	static public function ctrMostrarCategorias($item, $valor){
 
@@ -69,35 +75,34 @@ class ControladorCategorias{
 
 		$respuesta = ModeloCategorias::mdlMostrarCategorias($tabla, $item, $valor);
 
-		return $respuesta;
-
+		return $respuesta; 
+	
 	}
 
-	 //Editar Categorias
+	/*=============================================
+	EDITAR CATEGORIA
+	=============================================*/
 
-	 static public function ctrEditarCategoria(){
-        
-        if(isset($_POST["editarCategoria"])){
+	static public function ctrEditarCategoria(){
 
-            //para permitir los caracteres especiales
-            if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarCategoria"])){
+		if(isset($_POST["editarCategoria"])){
 
-               $tabla = "categorias";
-               
-               $datos = array("categoria" =>$_POST["editarCategoria"],
-							 "id"=>$_POST["idCategoria"]);
+			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarCategoria"])){
 
-               $respuesta = ModeloCategorias::mdlEditarCategoria($tabla, $datos);
+				$tabla = "categorias";
 
-               if($respuesta == "ok"){
+				$datos = array("categoria"=>$_POST["editarCategoria"],
+							   "id"=>$_POST["idCategoria"]);
 
-               
+				$respuesta = ModeloCategorias::mdlEditarCategoria($tabla, $datos);
 
-                echo'<script>
+				if($respuesta == "ok"){
+
+					echo'<script>
 
 					swal({
 						  type: "success",
-						  title: "La categoría ha sido CAmbiada correctamente",
+						  title: "La categoría ha sido cambiada correctamente",
 						  showConfirmButton: true,
 						  confirmButtonText: "Cerrar"
 						  }).then(function(result){
@@ -110,11 +115,12 @@ class ControladorCategorias{
 
 					</script>';
 
-               }
+				}
 
-            }else{
 
-                echo'<script>
+			}else{
+
+				echo'<script>
 
 					swal({
 						  type: "error",
@@ -130,10 +136,16 @@ class ControladorCategorias{
 						})
 
 			  	</script>';
-            }
-        }
-    }
-	//Borrar Categorias
+
+			}
+
+		}
+
+	}
+
+	/*=============================================
+	BORRAR CATEGORIA
+	=============================================*/
 
 	static public function ctrBorrarCategoria(){
 
