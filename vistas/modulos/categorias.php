@@ -33,49 +33,52 @@
 
         </div>
         <div class="box-body">
-          <table class="table table-bordered table-striped dt-responsive tablas">
+          <table class="table table-bordered table-striped dt-responsive tablas" width="100%">            
             <thead>
+
               <tr>
-                <th style="with:10px" > #</th>
+
+                <th style="width:10px">#</th>
                 <th>Categoria</th>
                 <th>Acciones</th>
+
               </tr>
+            
             </thead>
             
             <tbody>
-              <?php
               
-              $item = null;
-              $valor = null;
+            <?php
 
-              $categorias = ControladorCategorias::ctrMostrarCategorias($item, $valor);
+            $item = null;
+            $valor = null;
 
-             
+            $categorias = ControladorCategorias::ctrMostrarCategorias($item, $valor);
 
-              foreach($categorias as $key => $value){
+            foreach ($categorias as $key => $value) {
+           
+            echo ' <tr>
 
-                echo '<tr>
+                    <td>'.($key+1).'</td>
 
-                <td>'.($key+1).'</td>
+                    <td class="text-uppercase">'.$value["categoria"].'</td>
 
-                <td class="text-uppercase">'.$value["categoria"].'</td>
-                
                     <td>
+
                       <div class="btn-group">
+                          
                         <button class="btn btn-warning btnEditarCategoria" idCategoria="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarCategoria"><i class="fa fa-pencil"></i></button>
 
                         <button class="btn btn-danger btnEliminarCategoria" idCategoria="'.$value["id"].'"><i class="fa fa-times"></i></button>
-                      </div>
+
+                      </div>  
 
                     </td>
 
                   </tr>';
+            }
 
-
-              }
-
-
-              ?>
+            ?>
 
             </tbody>
 
