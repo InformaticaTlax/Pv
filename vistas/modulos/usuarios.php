@@ -33,10 +33,10 @@
 
         </div>
         <div class="box-body">
-          <table class="table table-bo rdered table-striped dt-responsive tablas">
+          <table class="table table-bo rdered table-striped dt-responsive tablas" width="100%">
             <thead>
               <tr>
-                <th style="with:10px" > #</th>
+                <th style="width:10px" >#</th>
                 <th>Nombre</th>
                 <th>Usuario</th>
                 <th>Foto</th>

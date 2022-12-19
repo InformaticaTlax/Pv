@@ -36,7 +36,7 @@
           <table class="table table-bordered table-striped dt-responsive tablas">
             <thead>
               <tr>
-                <th style="with:10px" > #</th>
+                <th style="width:10px" > #</th>
                 <th>Img</th>
                 <th>codigo</th>
                 <th>Descripcion</th>
