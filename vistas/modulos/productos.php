@@ -52,6 +52,13 @@
             <tbody>
               <?php
 
+                $item=null;
+                $valor=null;
+
+
+                $productos= ControladorProductos::ctrMostrarProductos($item, $valor);
+
+                var_dump($productos);
               ?>
 
               <tr>
