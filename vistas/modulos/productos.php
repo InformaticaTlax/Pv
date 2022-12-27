@@ -83,13 +83,40 @@
           <div class="modal-body">
             <div class="box-body">
 
-              
+              <!-- Entrada para Seleccionar Categoria -->
+              <div class="form-group">
 
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-th"></i></span>
+                  <select class="form-control input-lg" id="nuevaCategoria" name="nuevaCategoria" required>
+                    <option value="">Seleccionar Categoria</option>
+                    <?php
+
+                      $item = null;
+                      $valor = null;
+
+                      $categorias = ControladorCategorias::ctrMostrarCategorias($item, $valor);
+
+                      foreach($categorias as $key => $value) {
+
+                        
+                        echo '<option value="'.$value["id"].'">'.$value["categoria"].'</option>';
+
+                      }
+
+                    
+                    ?>
+                    
+                  </select>
+                  
+                </div>
+              </div>
+              <!-- Entrada para Codigo -->
               <div class="form-group">
 
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-code"></i></span>
-                  <input type="text" class="form-control input-lg" name="nuevoCodigo" placeholder="Ingresar Codigo" required>
+                  <input type="text" class="form-control input-lg" id="nuevoCodigo" name="nuevoCodigo" placeholder="Ingresar Codigo" readonly required>
 
                 </div>
               </div>
@@ -105,21 +132,7 @@
                 </div>
               </div>
 
-              <!-- Entrada para Seleccionar Categoria -->
-              <div class="form-group">
-
-                <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-th"></i></span>
-                  <select class="form-control input-lg" name="nuevaCategoria">
-                    <option value="">Seleccionar Categoria</option>
-                    <option value="Taladros">Taladros</option>
-                    <option value="Andamios">Andamios</option>
-                    <option value="Equipos">Equipos</option>
-                  </select>
-                  
-                </div>
-              </div>
-
+              
                <!-- entrada para Stock -->
 
                <div class="form-group">
