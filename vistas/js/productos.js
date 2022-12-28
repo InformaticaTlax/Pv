@@ -85,4 +85,52 @@ $("#nuevaCategoria").change(function(){
         })
   
   })
+
+  //agregando precio de venta
+  $("#nuevoPrecioCompra").change(function(){
+
+    if($(".porcentaje").prop("checked")){
+        
+        var valorPorcentaje = $(".nuevoPorcentaje").val();
+        
+        
+        var porcentaje = Number(($("#nuevoPrecioCompra").val()*valorPorcentaje/100))+Number($("#nuevoPrecioCompra").val());
+        
+        
+        $("#nuevoPrecioVenta").val(porcentaje);
+        $("#nuevoPrecioVenta").prop("readonly",true);
+
+    
+    }
+  })
+
+  //Cambio de porcentaje de la casilla
+
+  $(".nuevoPorcentaje").change(function(){
+
+    if($(".porcentaje").prop("checked")){
+        
+        var valorPorcentaje = $(".nuevoPorcentaje").val();
+        
+        
+        var porcentaje = Number(($("#nuevoPrecioCompra").val()*valorPorcentaje/100))+Number($("#nuevoPrecioCompra").val());
+        
+        
+        $("#nuevoPrecioVenta").val(porcentaje);
+        $("#nuevoPrecioVenta").prop("readonly",true);
+
+    }
+
+  })
+
+  $(".porcentaje").on("ifUnchecked",function(){
+
+    $("#nuevoPrecioVenta").prop("readonly",false);
   
+})
+
+$(".porcentaje").on("ifChecked",function(){
+
+    $("#nuevoPrecioVenta").prop("readonly",true);
+  
+})

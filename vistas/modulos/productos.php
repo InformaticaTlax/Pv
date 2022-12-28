@@ -152,7 +152,7 @@
 
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-arrow-up"></i></span>
-                  <input type="number" class="form-control input-lg" name="nuevoPrecioCompra" min="0" placeholder="Precio de Compra" required>
+                  <input type="number" class="form-control input-lg" id="nuevoPrecioCompra" name="nuevoPrecioCompra" min="0" placeholder="Precio de Compra" required>
                   
                 </div>
               </div>
@@ -166,7 +166,7 @@
 
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-arrow-down"></i></span>
-                  <input type="number" class="form-control input-lg" name="nuevoPrecioVenta" min="0" placeholder="Precio de Venta" required>
+                  <input type="number" class="form-control input-lg" id="nuevoPrecioVenta" name="nuevoPrecioVenta" min="0" placeholder="Precio de Venta" required>
                   
                 </div>
                 
@@ -230,6 +230,14 @@
             <button type="submit" class="btn btn-primary">Guardar Producto</button>
           </div>
         </form>
+            
+        <?php
+        
+          $crearProducto = new ControladorProductos();
+          $crearProducto -> ctrCrearProducto();
+
+        ?>
+
     </div>
 
   </div>
