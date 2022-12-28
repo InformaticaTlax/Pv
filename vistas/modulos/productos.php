@@ -211,11 +211,11 @@
 
                 <div class="panel">Subir Imagen</div>
 
-                <input type="file" id="nuevaImagen" name="nuevaImagen">
+                <input type="file" class="nuevaImagen" name="nuevaImagen">
 
                 <p class="help-block" >Peso Maximo de la foto de 2 MB</p>
 
-                <img src="vistas/img/productos/default/anonymous.png" class="img-thumbnail" width="100px">
+                <img src="vistas/img/productos/default/anonymous.png" class="img-thumbnail previsualizar" width="100px">
 
               </div>
               

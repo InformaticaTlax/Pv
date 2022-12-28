@@ -134,3 +134,51 @@ $(".porcentaje").on("ifChecked",function(){
     $("#nuevoPrecioVenta").prop("readonly",true);
   
 })
+
+
+//subiendo la foto del producto
+$(".nuevaImagen").change(function(){
+
+    var imagen =this.files[0];
+    //console.log("imagen", imagen);
+    
+   // valindado que el formato sea jpg o png
+
+    if(imagen["type"] != "image/jpeg" && imagen["type"] != "image/png" ){
+
+        $(".nuevaImagen").val("");
+
+            swal({
+                title: "Error al subir la imagen",
+                text:"La imagen debe estar en formato JPG o PNG",
+                type: "error",
+                confirmButtonText:"Cerrar"
+            });
+
+            //si pesa mas de 2mb no se podra subir
+    }else if(imagen["size"] > 2000000){
+        $(".nuevaImagen").val("");
+
+        swal({
+            title: "Error al subir la imagen",
+            text:"La imagen no debe de pesar mas de 2 MB",
+            type: "error",
+            confirmButtonText:"Cerrar"
+        });
+
+
+    }else{
+
+        var datosImagen = new FileReader;
+        datosImagen.readAsDataURL(imagen);
+
+        $(datosImagen).on("load", function(event){
+
+            var rutaImagen = event.target.result;
+            
+            $(".previsualizar").attr("src", rutaImagen);
+        
+        })
+    }
+
+})
