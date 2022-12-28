@@ -19,7 +19,7 @@ class ControladorProductos{
         static public function ctrCrearProducto(){
 
             if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevaDescripcion"]) &&
-                preg_match('/^[0-9]+$/', $_POST["nuevoStock"]) &&	
+                preg_match('/^[-200-9]+$/', $_POST["nuevoStock"]) &&	
                 preg_match('/^[0-9.]+$/', $_POST["nuevoPrecioCompra"]) &&
                 preg_match('/^[0-9.]+$/', $_POST["nuevoPrecioVenta"])){
 
