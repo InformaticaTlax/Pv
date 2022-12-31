@@ -196,12 +196,14 @@ $(".tablaProductos tbody").on("click", "button.btnEditarProducto", function(){
 
         url:"ajax/productos.ajax.php",
         method: "POST",
-        data:datos,
+        data: datos,
         cache: false,
         contentType: false,
         processData: false,
         dataType:"json",
-        success:function(respuesta){
+        success:function(respuesta)
+        
+        {
 
             console.log("respuesta", respuesta);
 
