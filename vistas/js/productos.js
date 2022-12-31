@@ -188,5 +188,23 @@ $(".nuevaImagen").change(function(){
 $(".tablaProductos tbody").on("click", "button.btnEditarProducto", function(){
 
     var idPoroducto= $(this).attr("idProducto");
-    console.log("idProducto", idPoroducto);
+    
+    var datos = new FormData();
+    datos.append("idProducto", idPoroducto);
+
+    $.ajax({
+
+        url:"ajax/productos.ajax.php",
+        method: "POST",
+        data:datos,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType:"json",
+        success:function(respuesta){
+
+            console.log("respuesta", respuesta);
+
+        }
+    })
 })
