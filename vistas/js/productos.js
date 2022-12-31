@@ -182,3 +182,11 @@ $(".nuevaImagen").change(function(){
     }
 
 })
+
+//editar producto
+
+$(".tablaProductos tbody").on("click", "button.btnEditarProducto", function(){
+
+    var idPoroducto= $(this).attr("idProducto");
+    console.log("idProducto", idPoroducto);
+})
