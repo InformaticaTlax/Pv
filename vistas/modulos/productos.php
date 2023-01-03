@@ -291,7 +291,7 @@
 
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-product-hunt"></i></span>
-                  <input type="text" class="form-control input-lg" name="editarDescripcion" id="Ingresar Descripcion" required>
+                  <input type="text" class="form-control input-lg" name="editarDescripcion" id=" editarDescripcion" required>
                   
                 </div>
               </div>
@@ -380,7 +380,7 @@
                 <p class="help-block" >Peso Maximo de la foto de 2 MB</p>
 
                 <img src="vistas/img/productos/default/anonymous.png" class="img-thumbnail previsualizar" width="100px">
-                <input type="hidden" name="imagenActual" id="imagenActual" >
+                <input type="hidden" name="imagenActual" id="imagenActual">
 
               </div>
               

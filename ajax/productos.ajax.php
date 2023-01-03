@@ -44,7 +44,7 @@ if(isset($_POST["idCategoria"])){
 }
 //editar producto
 
-if(isset($_POST["idCategoria"])){
+if(isset($_POST["idProducto"])){
     
     $editarProducto = new AjaxProductos();
     $editarProducto -> idProducto = $_POST["idProducto"];
