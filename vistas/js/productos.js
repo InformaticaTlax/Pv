@@ -87,7 +87,7 @@ $("#nuevaCategoria").change(function(){
   })
 
   //agregando precio de venta
-  $("#nuevoPrecioCompra").change(function(){
+  $("#nuevoPrecioCompra, #editarPrecioCompra").change(function(){
 
     if($(".porcentaje").prop("checked")){
         
@@ -96,9 +96,13 @@ $("#nuevaCategoria").change(function(){
         
         var porcentaje = Number(($("#nuevoPrecioCompra").val()*valorPorcentaje/100))+Number($("#nuevoPrecioCompra").val());
         
+        var editarPorcentaje = Number(($("#editarPrecioCompra").val()*valorPorcentaje/100))+Number($("#editarPrecioCompra").val());
         
         $("#nuevoPrecioVenta").val(porcentaje);
         $("#nuevoPrecioVenta").prop("readonly",true);
+
+        $("#editarPrecioVenta").val(editarPorcentaje);
+        $("#editarPrecioVenta").prop("readonly",true);
 
     
     }
@@ -110,14 +114,19 @@ $("#nuevaCategoria").change(function(){
 
     if($(".porcentaje").prop("checked")){
         
-        var valorPorcentaje = $(".nuevoPorcentaje").val();
+        var valorPorcentaje = $(this).val();
         
         
         var porcentaje = Number(($("#nuevoPrecioCompra").val()*valorPorcentaje/100))+Number($("#nuevoPrecioCompra").val());
+
+        var editarPorcentaje = Number(($("#editarPrecioCompra").val()*valorPorcentaje/100))+Number($("#editarPrecioCompra").val());
         
         
         $("#nuevoPrecioVenta").val(porcentaje);
         $("#nuevoPrecioVenta").prop("readonly",true);
+        
+        $("#editarPrecioVenta").val(editarPorcentaje);
+        $("#editarPrecioVenta").prop("readonly",true);
 
     }
 
@@ -126,12 +135,14 @@ $("#nuevaCategoria").change(function(){
   $(".porcentaje").on("ifUnchecked",function(){
 
     $("#nuevoPrecioVenta").prop("readonly",false);
+    $("#editarPrecioVenta").prop("readonly",false);
   
 })
 
 $(".porcentaje").on("ifChecked",function(){
 
     $("#nuevoPrecioVenta").prop("readonly",true);
+    $("#editarPrecioVenta").prop("readonly",true);
   
 })
 

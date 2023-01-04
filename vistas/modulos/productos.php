@@ -291,7 +291,7 @@
 
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-product-hunt"></i></span>
-                  <input type="text" class="form-control input-lg" name="editarDescripcion" id=" editarDescripcion" required>
+                  <input type="text" class="form-control input-lg" name="editarDescripcion" id="editarDescripcion" required>
                   
                 </div>
               </div>
@@ -330,7 +330,7 @@
 
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-arrow-down"></i></span>
-                  <input type="number" class="form-control input-lg" id="editarPrecioVenta" name="editarPrecioVenta" min="0" step="any"  required>
+                  <input type="number" class="form-control input-lg" id="editarPrecioVenta" name="editarPrecioVenta" min="0" step="any" readonly required>
                   
                 </div>
                 
