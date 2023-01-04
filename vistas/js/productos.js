@@ -115,7 +115,7 @@ $("#nuevaCategoria").change(function(){
     if($(".porcentaje").prop("checked")){
         
         var valorPorcentaje = $(this).val();
-        
+        //
         
         var porcentaje = Number(($("#nuevoPrecioCompra").val()*valorPorcentaje/100))+Number($("#nuevoPrecioCompra").val());
 
