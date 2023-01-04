@@ -395,7 +395,12 @@
             <button type="submit" class="btn btn-primary">Guardar Cambios</button>
           </div>
         </form>
-        
+        <?php
+
+            $editarProducto = new ControladorProductos();
+            $editarProducto -> ctrEditarProducto();
+
+        ?>
 
     </div>
 
