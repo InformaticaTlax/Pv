@@ -142,7 +142,7 @@ class ControladorProductos{
                     $ruta = $_POST["imagenActual"];
 
                     //Validar imagen
-                    if(isset($_FILES["editarImagen"]["tmp_name"])){
+                    if(isset($_FILES["editarImagen"]["tmp_name"]) && !empty($_FILES["editarImagen"]["tmp_name"])){
 						//var_dump(getimagesize($_FILES["nuevaImagen"]["tmp_name"]));
 
 						list($ancho,$alto) =getimagesize($_FILES["editarImagen"]["tmp_name"]);

@@ -250,3 +250,30 @@ $(".tablaProductos tbody").on("click", "button.btnEditarProducto", function(){
         }
     })
 })
+
+//eliminar producto
+$(".tablaProductos tbody").on("click", "button.btnEliminarProducto", function(){
+
+    var idPoroducto = $(this).attr("idProducto");
+    var codigo = $(this).attr("codigo");
+    var imagen = $(this).attr("imagen");
+
+    //console.log("idProducto", idPoroducto);
+    swal({
+        title: "Estas seguro de borrar producto",
+        text:"si no lo estas puedes cancelar la accion",
+        type: "warning",
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Cancelar',
+        confirmButtonText: 'Si, borrar producto!'
+        }).then(function(result){
+  
+        
+    
+          window.location = "index.php?ruta=productos&idProdcuto="+idPoroducto+"&imagen="+imagen+"&codigo"+codigo;
+          
+        
+    
+      })
+})
