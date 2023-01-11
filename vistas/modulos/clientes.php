@@ -106,7 +106,7 @@
 MODAL AGREGAR USUARIO
 ======================================-->
 
-<div id="modalAgregarCategoria" class="modal fade" role="dialog">
+<div id="modalAgregarCliente" class="modal fade" role="dialog">
   
   <div class="modal-dialog">
 
@@ -134,13 +134,13 @@ MODAL AGREGAR USUARIO
 
           <div class="box-body">
 
-            <!-- ENTRADA PARA EL NOMBRE -->
+            <!-- ENTRADA PARA EL NOMBRE del cliente -->
             
             <div class="form-group">
               
               <div class="input-group">
               
-                <span class="input-group-addon"><i class="fa fa-th"></i></span> 
+                <span class="input-group-addon"><i class="fa fa-user"></i></span> 
 
                 <input type="text" class="form-control input-lg" name="nuevaCliente" placeholder="Ingresar nombre" required>
 
@@ -153,7 +153,7 @@ MODAL AGREGAR USUARIO
               
               <div class="input-group">
               
-                <span class="input-group-addon"><i class="fa fa-th"></i></span> 
+                <span class="input-group-addon"><i class="fa fa-key"></i></span> 
 
                 <input type="number" min="0" class="form-control input-lg" name="nuevaDocumentoId" placeholder="Ingresar documento" required>
 
@@ -166,7 +166,7 @@ MODAL AGREGAR USUARIO
               
               <div class="input-group">
               
-                <span class="input-group-addon"><i class="fa fa-th"></i></span> 
+                <span class="input-group-addon"><i class="fa fa-envelope"></i></span> 
 
                 <input type="email"  class="form-control input-lg" name="nuevaEmail" placeholder="Ingresar Email" required>
 
@@ -179,7 +179,7 @@ MODAL AGREGAR USUARIO
               
               <div class="input-group">
               
-                <span class="input-group-addon"><i class="fa fa-th"></i></span> 
+                <span class="input-group-addon"><i class="fa fa-phone"></i></span> 
 
                 <input type="text" min="0" class="form-control input-lg" name="nuevaTelefono" placeholder="246-xxx-xx-xx" data-inputmask="'mask':'(999) 999-9999'" data-mask required>
 
@@ -193,7 +193,7 @@ MODAL AGREGAR USUARIO
               
               <div class="input-group">
               
-                <span class="input-group-addon"><i class="fa fa-th"></i></span> 
+                <span class="input-group-addon"><i class="fa fa-map-marker"></i></span> 
 
                 <input type="text" min="0" class="form-control input-lg" name="nuevaDireccion" placeholder="Ingresar direccion" required>
 
@@ -207,7 +207,7 @@ MODAL AGREGAR USUARIO
               
               <div class="input-group">
               
-                <span class="input-group-addon"><i class="fa fa-th"></i></span> 
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span> 
 
                 <input type="text" min="0" class="form-control input-lg" name="nuevaFechaNacimiento" placeholder="Fecha de nacimiento" data-inputmask="'alias':'yyyy/mm/dd'" data-mask required>
 
