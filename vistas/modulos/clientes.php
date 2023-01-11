@@ -142,12 +142,78 @@ MODAL AGREGAR USUARIO
               
                 <span class="input-group-addon"><i class="fa fa-th"></i></span> 
 
-                <input type="text" class="form-control input-lg" name="nuevaCategoria" placeholder="Ingresar categoría" required>
+                <input type="text" class="form-control input-lg" name="nuevaCliente" placeholder="Ingresar nombre" required>
+
+              </div>
+
+            </div>
+            <!-- ENTRADA PARA EL DOCUEMNTO ID -->
+            
+            <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-th"></i></span> 
+
+                <input type="number" min="0" class="form-control input-lg" name="nuevaDocumentoId" placeholder="Ingresar documento" required>
+
+              </div>
+
+            </div>
+          <!-- ENTRADA PARA EL email -->
+            
+            <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-th"></i></span> 
+
+                <input type="email"  class="form-control input-lg" name="nuevaEmail" placeholder="Ingresar Email" required>
+
+              </div>
+
+            </div>
+            <!-- ENTRADA PARA EL telefono -->
+            
+            <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-th"></i></span> 
+
+                <input type="text" min="0" class="form-control input-lg" name="nuevaTelefono" placeholder="246-xxx-xx-xx" data-inputmask="'mask':'(999) 999-9999'" data-mask required>
 
               </div>
 
             </div>
   
+           <!-- ENTRADA PARA la Direccion -->
+            
+           <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-th"></i></span> 
+
+                <input type="text" min="0" class="form-control input-lg" name="nuevaDireccion" placeholder="Ingresar direccion" required>
+
+              </div>
+
+            </div>
+
+             <!-- ENTRADA PARA La fecha de nacimiento -->
+            
+             <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-th"></i></span> 
+
+                <input type="text" min="0" class="form-control input-lg" name="nuevaFechaNacimiento" placeholder="Fecha de nacimiento" data-inputmask="'alias':'yyyy/mm/dd'" data-mask required>
+
+              </div>
+
+            </div>
           </div>
 
         </div>
@@ -160,7 +226,7 @@ MODAL AGREGAR USUARIO
 
           <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
 
-          <button type="submit" class="btn btn-primary">Guardar categoría</button>
+          <button type="submit" class="btn btn-primary">Guardar Cliente</button>
 
         </div>
 
