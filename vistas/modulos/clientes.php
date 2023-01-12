@@ -58,37 +58,50 @@
 
         <tbody>
           
-          <tr>
+        <?php
+        
+          $item = null;
+          $valor = null;
+          
+          $clientes = ControladorClientes::ctrMostarClientes($item, $valor);
+          //var_dump($clientes);
+          foreach($clientes as $key => $value){
+            echo '<tr>
 
-            <td>1</td>
+                  <td>'.($key+1).'</td>
 
-            <td>Juan</td>
+                  <td>'.$value["nombre"].'</td>
 
-            <td>1212545456</td>
-            <td>dbasdghj@dasjkdjk.com</td>
-            <td>245-152-525</td>
-            <td>Manuel saldaña 111</td>
-            <td>1982-15-20</td>
-            <td>2017-12-11 12:05:32</td>
-            <td>35</td>
-            <td>2017-12-11 12:05:32</td>
+                  <td>'.$value["documento"].'</td>
+                  <td>'.$value["email"].'</td>
+                  <td>'.$value["telefono"].'</td>
+                  <td>'.$value["direccion"].'</td>
+                  <td>'.$value["fecha_nacimiento"].'</td>
+                  <td>'.$value["compras"].'</td>
+                  <td>0000-00-00 00:00:00</td>
+                  <td>'.$value["fecha"].'</td>
 
-            <td>
+                  <td>
 
-              <div class="btn-group">
-                  
-                <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
+                    <div class="btn-group">
+                        
+                      <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
 
-                <button class="btn btn-danger"><i class="fa fa-times"></i></button>
+                      <button class="btn btn-danger"><i class="fa fa-times"></i></button>
 
-              </div>  
+                    </div>  
 
-            </td>
+                  </td>
 
-          </tr>
+                </tr>
+
+                
+                </tr>';
+          }
+
+        ?>
 
           
-          </tr>
 
         </tbody>
 

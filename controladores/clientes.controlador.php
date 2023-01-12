@@ -65,4 +65,13 @@ class ControladorClientes{
         }
 
     }
+	//mostrar Clientes
+	static public function ctrMostarClientes($item, $valor){
+		$tabla = "clientes";
+
+		$respuesta = ModeloClientes::mdlMostrarClientes($tabla, $item, $valor);
+
+		return $respuesta;
+		
+	}
 }
