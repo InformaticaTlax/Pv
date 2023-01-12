@@ -142,7 +142,7 @@ MODAL AGREGAR USUARIO
               
                 <span class="input-group-addon"><i class="fa fa-user"></i></span> 
 
-                <input type="text" class="form-control input-lg" name="nuevaCliente" placeholder="Ingresar nombre" required>
+                <input type="text" class="form-control input-lg" name="nuevoCliente" placeholder="Ingresar nombre" required>
 
               </div>
 
@@ -155,7 +155,7 @@ MODAL AGREGAR USUARIO
               
                 <span class="input-group-addon"><i class="fa fa-key"></i></span> 
 
-                <input type="number" min="0" class="form-control input-lg" name="nuevaDocumentoId" placeholder="Ingresar documento" required>
+                <input type="number" min="0" class="form-control input-lg" name="nuevoDocumentoId" placeholder="Ingresar documento" required>
 
               </div>
 
@@ -168,7 +168,7 @@ MODAL AGREGAR USUARIO
               
                 <span class="input-group-addon"><i class="fa fa-envelope"></i></span> 
 
-                <input type="email"  class="form-control input-lg" name="nuevaEmail" placeholder="Ingresar Email" required>
+                <input type="email"  class="form-control input-lg" name="nuevoEmail" placeholder="Ingresar Email" required>
 
               </div>
 
@@ -181,7 +181,7 @@ MODAL AGREGAR USUARIO
               
                 <span class="input-group-addon"><i class="fa fa-phone"></i></span> 
 
-                <input type="text" min="0" class="form-control input-lg" name="nuevaTelefono" placeholder="246-xxx-xx-xx" data-inputmask="'mask':'(999) 999-9999'" data-mask required>
+                <input type="text" min="0" class="form-control input-lg" name="nuevoTelefono" placeholder="246-xxx-xx-xx" data-inputmask="'mask':'(999) 999-9999'" data-mask required>
 
               </div>
 
