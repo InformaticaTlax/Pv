@@ -386,9 +386,13 @@ MODAL editar Cliente
         </div>
 
       </form>
+      <?php 
 
+        $editarCliente = new ControladorClientes();
+        $editarCliente -> ctrEditarCliente();
       
-
+      ?>
+      
     </div>
 
   </div>
