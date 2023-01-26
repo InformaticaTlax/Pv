@@ -31,3 +31,10 @@ $(".tablas").on("click", ".btnEditarCliente", function(){
 
     })
 })
+
+//eliminar cliente
+$(".tablas").on("click", ".btnEliminarCliente", function(){
+    var idCliente = $(this).attr("idCliente");
+    console.log("idCliente", idCliente);
+
+}
