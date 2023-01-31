@@ -121,8 +121,51 @@
                 <hr>
                 <div class="row">
 
+                  <div class="col-xs-8 pull-right">
 
-                
+                    <table class="table">
+                      <thead>
+                        <tr>
+
+                          <th>Impuestos</th>
+                          <th>Total</th>
+
+                        </tr>
+                      </thead>
+                      
+                      <tbody>
+
+                        <tr>
+                          <td style="width: 50%" >
+
+                          <div class="input-group">
+                            <input type="number" class="form-control" min="0" id="nuevoImpuesto de Venta" name="nuevoImpuesto de Venta" placeholder="0" required>
+
+                            <span class="input-group-addon"><i class="fa fa-percent"></i></span>
+                          
+                          </div>  
+
+                          </td>
+
+                          <td style="width: 50%">
+                          
+                            <div class="input-group">
+
+                            <input type="number" min="1" class="form-control" id="nuevoTotalVenta" name="nuevoTotalVenta" placeholder="00000" readonly required>
+                            <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>
+
+                            </div>
+
+                          </td>
+
+                        </tr>
+
+                      </tbody>
+
+                    </table>
+
+                  </div>
+
                 </div>
                 
               </div>
