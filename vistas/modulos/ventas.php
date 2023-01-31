@@ -148,7 +148,6 @@ MODAL AGREGAR USUARIO
               </div>
 
             </div>
-<<<<<<< HEAD
   
           </div>
 
@@ -175,19 +174,3 @@ MODAL AGREGAR USUARIO
 </div>
 
 
-=======
-
-          </div>
-
-          <!-- Pie del modal -->
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
-
-            <button type="submit" class="btn btn-primary">Guardar Categoria</button>
-          </div>
-        </form>
-    </div>
-
-  </div>
-</div>
->>>>>>> 1f5ae08c18c1afaec80f35609f4f5efa5895a9ef
