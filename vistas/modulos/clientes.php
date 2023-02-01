@@ -63,7 +63,7 @@
           $item = null;
           $valor = null;
           
-          $clientes = ControladorClientes::ctrMostarClientes($item, $valor);
+          $clientes = ControladorClientes::ctrMostrarClientes($item, $valor);
           //var_dump($clientes);
           foreach($clientes as $key => $value){
             echo '<tr>
