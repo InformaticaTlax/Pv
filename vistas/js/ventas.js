@@ -170,6 +170,21 @@ $(".formularioVenta").on("click", "button.quitarProducto", function(){
 
 	var idProducto = $(this).attr("idProducto");
 
+	//alamcenar en el localsrorage
+	
+	if(localStorage.getItem("quitarProducto") == null){
+
+		idQuitarProducto = [];
+
+	}else{
+
+		idQuitarProducto.concat(localStorage.getItem("quitarProducto"))
+	}
+
+	idQuitarProducto.push({"idProducto":idProducto});
+
+	localStorage.setItem("quitarProducto" JSON.stringify(idQuitarProducto));
+
 	$("button.recuperarBoton[idProducto='"+idProducto+"']").removeClass('btn-default');
 
 	$("button.recuperarBoton[idProducto='"+idProducto+"']").addClass('btn-primary agregarProducto');
