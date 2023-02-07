@@ -209,3 +209,117 @@ $(".formularioVenta").on("click", "button.quitarProducto", function(){
 	$("button.recuperarBoton[idProducto='"+idProducto+"']").addClass('btn-primary agregarProducto');
 
 })
+
+//agregando producto desde el boton para dispositivos
+var numProducto = 0;
+
+$(".btnAgregarProducto").click(function(){
+
+	numProducto ++;
+
+	var datos = new FormData();
+	datos.append("traerProductos", "ok");
+
+	$.ajax({
+
+		url:"ajax/productos.ajax.php",
+      	method: "POST",
+      	data: datos,
+      	cache: false,
+      	contentType: false,
+      	processData: false,
+      	dataType:"json",
+      	success:function(respuesta){
+      	    
+      	    	$(".nuevoProducto").append(
+
+          	'<div class="row" style="padding:5px 15px">'+
+
+			  '<!-- Descripción del producto -->'+
+	          
+	          '<div class="col-xs-6" style="padding-right:0px">'+
+	          
+	            '<div class="input-group">'+
+	              
+	              '<span class="input-group-addon"><button type="button" class="btn btn-danger btn-xs quitarProducto" idProducto><i class="fa fa-times"></i></button></span>'+
+
+	              '<select class="form-control nuevaDescripcionProducto" id="producto'+numProducto+'" idProducto name="nuevaDescripcionProducto" required>'+
+
+	              '<option>Seleccione el producto</option>'+
+
+	              '</select>'+  
+
+	            '</div>'+
+
+	          '</div>'+
+
+	          '<!-- Cantidad del producto -->'+
+
+	          '<div class="col-xs-3 ingresoCantidad">'+
+	            
+	             '<input type="number" class="form-control nuevaCantidadProducto" name="nuevaCantidadProducto" min="1" value="1" stock nuevoStock required>'+
+
+	          '</div>' +
+
+	          '<!-- Precio del producto -->'+
+
+	          '<div class="col-xs-3 ingresoPrecio" style="padding-left:0px">'+
+
+	            '<div class="input-group">'+
+
+	              '<span class="input-group-addon"><i class="ion ion-social-usd"></i></span>'+
+	                 
+	              '<input type="text" class="form-control nuevoPrecioProducto" precioReal="" name="nuevoPrecioProducto" readonly required>'+
+	 
+	            '</div>'+
+	             
+	          '</div>'+
+
+	        '</div>');
+
+
+	        // AGREGAR LOS PRODUCTOS AL SELECT 
+
+	         respuesta.forEach(funcionForEach);
+
+	         function funcionForEach(item, index){
+
+	         	if(item.stock != 0){
+
+					$("#producto"+numProducto).append(
+
+						'<option idProducto="'+item.id+'" value="'+item.descripcion+'">'+item.descripcion+'</option>'
+		         	)
+
+		         }
+
+	         }
+
+		}
+	})
+})
+//selcionar prodcuto
+
+
+$(".formularioVenta").on("change", "select.nuevaDescripcionProducto", function(){
+
+
+	var nombreProducto = $(this).val();
+
+    datos.append("nombreProducto", nombreProducto);
+
+	/*$.ajax({
+
+		url:"ajax/productos.ajax.php",
+		 method: "POST",
+		 data: datos,
+		 cache: false,
+		 contentType: false,
+		 processData: false,
+		 dataType:"json",
+		 success:function(respuesta){
+			console.log("respuesta", respuesta);
+		 
+		}
+	})*/
+})

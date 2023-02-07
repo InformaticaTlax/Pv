@@ -122,7 +122,7 @@
  
                 <!-- boton para agregar producto -->
 
-                <button type="button" class="btn btn-default hidden-lg"> Agregar producto</button>
+                <button type="button" class="btn btn-default hidden-lg btnAgregarProducto"> Agregar producto</button>
                 <hr>
                 <div class="row">
                   <!-- entrada impuestos y total-->
