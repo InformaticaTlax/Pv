@@ -161,8 +161,27 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function(){
 
 });
 
+//cuando cargue la tabla  cada vez que navege en ella
+
+$(".tablaVentas").on("draw.dt",function(){
+
+	if(localStorage.getItem("quitarProducto") != null){
+		
+		var listaIdProductos = JSON.parse(localStorage.getItem("quitarProducto"));
+
+		for(var i = 0; i < listaIdProductos.length; i++){
+
+			$("button.recuperarBoton[idProducto='"+listaIdProductos[i]["idProducto"]+"']").removeClass('btn-default');
+			$("button.recuperarBoton[idProducto='"+listaIdProductos[i]["idProducto"]+"']").addClass('btn-primary agregarProducto');
+
+		}
+	}
+})
+
 
 //quitar producto de la venta y recuperar boton
+var idQuitarProducto = [];
+localStorage.removeItem("quitarProducto");
 
 $(".formularioVenta").on("click", "button.quitarProducto", function(){
 		
@@ -183,7 +202,7 @@ $(".formularioVenta").on("click", "button.quitarProducto", function(){
 
 	idQuitarProducto.push({"idProducto":idProducto});
 
-	localStorage.setItem("quitarProducto" JSON.stringify(idQuitarProducto));
+	localStorage.setItem("quitarProducto", JSON.stringify(idQuitarProducto));
 
 	$("button.recuperarBoton[idProducto='"+idProducto+"']").removeClass('btn-default');
 
