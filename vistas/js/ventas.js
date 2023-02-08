@@ -290,11 +290,8 @@ $(".btnAgregarProducto").click(function(){
 
 						'<option idProducto="'+item.id+'" value="'+item.descripcion+'">'+item.descripcion+'</option>'
 		         	)
-
 		         }
-
 	         }
-
 		}
 	})
 })
@@ -303,12 +300,17 @@ $(".btnAgregarProducto").click(function(){
 
 $(".formularioVenta").on("change", "select.nuevaDescripcionProducto", function(){
 
-
 	var nombreProducto = $(this).val();
+	//console.log("nombreProducto", nombreProducto);
+	var nuevoPrecioProducto = $(this).parent().parent().parent().children(".ingresoPrecio").children().children(".nuevoPrecioProducto");
 
-    datos.append("nombreProducto", nombreProducto);
+	var nuevaCantidadProducto = $(this).parent().parent().parent().children(".ingresoCantidad").children(".nuevaCantidadProducto");
+	//console.log("nuevoPrecioProducto", nuevoPrecioProducto);
 
-	/*$.ajax({
+    var datos = new FormData();
+	datos.append("nombreProducto", nombreProducto);
+
+	$.ajax({
 
 		url:"ajax/productos.ajax.php",
 		 method: "POST",
@@ -318,8 +320,10 @@ $(".formularioVenta").on("change", "select.nuevaDescripcionProducto", function()
 		 processData: false,
 		 dataType:"json",
 		 success:function(respuesta){
-			console.log("respuesta", respuesta);
+			//console.log("respuesta", respuesta);
+			$(nuevaCantidadProducto).attr("stock", respuesta["stock"]);
+			$(nuevoPrecioProducto).val(respuesta["precio_venta"]);
 		 
 		}
-	})*/
+	})
 })
