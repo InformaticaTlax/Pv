@@ -55,7 +55,7 @@ AGREGANDO PRODUCTOS A LA VENTA DESDE LA TABLA
 $(".tablaVentas tbody").on("click", "button.agregarProducto", function(){
 
 	var idProducto = $(this).attr("idProducto");
-    console.log(idProducto);
+    //console.log(idProducto);
 
 	$(this).removeClass("btn-primary agregarProducto");
 
@@ -257,7 +257,7 @@ $(".btnAgregarProducto").click(function(){
 
 	          '<div class="col-xs-3 ingresoCantidad">'+
 	            
-	             '<input type="number" class="form-control nuevaCantidadProducto" name="nuevaCantidadProducto" min="1" value="1" stock nuevoStock required>'+
+	            '<input type="number" class="form-control nuevaCantidadProducto" name="nuevaCantidadProducto" min="1" value="1" stock nuevoStock required>'+
 
 	          '</div>' +
 
@@ -323,7 +323,34 @@ $(".formularioVenta").on("change", "select.nuevaDescripcionProducto", function()
 			//console.log("respuesta", respuesta);
 			$(nuevaCantidadProducto).attr("stock", respuesta["stock"]);
 			$(nuevoPrecioProducto).val(respuesta["precio_venta"]);
+			$(nuevoprecioProducto).attr("precioReal", respuesta["precio_venta"]);
 		 
 		}
 	})
+})
+
+//modificar Cantidad
+
+$(".formularioVenta").on("change", "input.nuevaCantidadProducto", function(){
+
+	var precio = $(this).parent().parent().children(".ingresoPrecio").children().children(".nuevoPrecioProducto");
+	
+	var precioFinal = $(this).val() * precio.attr("precioReal");
+	//console.log("$(this).val()", $(this).val());
+
+	precio.val(precioFinal);
+
+	//si esto es superior a lo que hay en estock salga una alerta suave
+	if(Number($(this).val()) > Number($(this).attr("stock"))){
+
+		$(this).val(1);
+		swal({
+			title: "La cantidad supera el Stock",
+			text: "¡Sólo hay "+$(this).attr("stock")+" unidades!",
+			type: "error",
+			confirmButtonText: "¡Cerrar!"
+		  });
+  
+
+	}
 })
