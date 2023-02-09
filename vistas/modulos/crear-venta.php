@@ -145,7 +145,7 @@
                           <td style="width: 50%" >
 
                           <div class="input-group">
-                            <input type="number" class="form-control" min="0" id="nuevoImpuesto de Venta" name="nuevoImpuesto de Venta" placeholder="0" required>
+                            <input type="number" class="form-control input-lg" min="0" id="nuevoImpuesto de Venta" name="nuevoImpuesto de Venta" placeholder="0" required>
 
                             <span class="input-group-addon"><i class="fa fa-percent"></i></span>
                           
@@ -159,7 +159,7 @@
 
                             <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>
 
-                            <input type="number" min="1" class="form-control" id="nuevoTotalVenta" name="nuevoTotalVenta" placeholder="00000" readonly required>
+                            <input type="number" min="1" class="form-control input-lg" id="nuevoTotalVenta" name="nuevoTotalVenta" placeholder="00000" readonly required>
                             
 
                             </div>

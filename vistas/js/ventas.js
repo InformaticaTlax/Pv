@@ -145,15 +145,15 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function(){
 
 	        // AGREGAR IMPUESTO
 
-	        agregarImpuesto()
+	        //agregarImpuesto()
 
 	        // AGRUPAR PRODUCTOS EN FORMATO JSON
 
-	        listarProductos()
+	        //listarProductos()
 
 	        // PONER FORMATO AL PRECIO DE LOS PRODUCTOS
 
-	        $(".nuevoPrecioProducto").number(true, 2);
+	        //$(".nuevoPrecioProducto").number(true, 2);
 
       	}
 
@@ -208,7 +208,17 @@ $(".formularioVenta").on("click", "button.quitarProducto", function(){
 
 	$("button.recuperarBoton[idProducto='"+idProducto+"']").addClass('btn-primary agregarProducto');
 
-	sumarTotalPrecios()
+	if($(".nuevoProducto").children().length == 0){
+		
+		$("#nuevoTotalVenta").val(0);
+		
+	}else{
+
+		// SUMAR TOTAL DE PRECIOS
+    	sumarTotalPrecios()
+
+
+	}
 
 })
 
@@ -363,13 +373,29 @@ $(".formularioVenta").on("change", "input.nuevaCantidadProducto", function(){
 
 //sumar todos los precionas
 function sumarTotalPrecios(){
-	var precioItem =  $(".nuevoPrecioProducto");
-	var arraySumaPrecio=[];
 
-	for(var i =0; i< precioItem.length; i++){
+	var precioItem = $(".nuevoPrecioProducto");
+	var arraySumaPrecio = [];  
 
-		arraySumaPrecio.push($(precioItem[i].val()));
+	for(var i = 0; i < precioItem.length; i++){
+
+		 arraySumaPrecio.push(Number($(precioItem[i]).val()));
+		 
+	}
+	//console.log("arraySumaPrecio", arraySumaPrecio);
+
+	//sumar total precios
+	function sumaArrayPrecios(total, numero){
+
+		return total + numero;
 
 	}
-	console.log("arraySumaPrecio", arraySumaPrecio);
+
+	var sumaTotalPrecio = arraySumaPrecio.reduce(sumaArrayPrecios);
+	
+	$("#nuevoTotalVenta").val(sumaTotalPrecio);
+	$("#totalVenta").val(sumaTotalPrecio);
+	$("#nuevoTotalVenta").attr("total",sumaTotalPrecio);
+
+
 }
