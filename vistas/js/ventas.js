@@ -375,7 +375,8 @@ $(".formularioVenta").on("change", "input.nuevaCantidadProducto", function(){
 function sumarTotalPrecios(){
 
 	var precioItem = $(".nuevoPrecioProducto");
-	var arraySumaPrecio = [];  
+	var arraySumaPrecio = []; 
+	 
 
 	for(var i = 0; i < precioItem.length; i++){
 
