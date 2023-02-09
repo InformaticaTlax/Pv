@@ -145,7 +145,11 @@
                           <td style="width: 50%" >
 
                           <div class="input-group">
-                            <input type="number" class="form-control input-lg" min="0" id="nuevoImpuesto de Venta" name="nuevoImpuesto de Venta" placeholder="0" required>
+                            <input type="number" class="form-control input-lg" min="0" id="nuevoImpuestoVenta" name="nuevoImpuestoVenta" total = "" placeholder="00000" required>
+
+                            <input type="hidden" name="nuevoPrecioImpuesto" id="nuevoPrecioImpuesto" required>
+
+                            <input type="hidden" name="nuevoPrecioNeto" id="nuevoPrecioNeto" required>
 
                             <span class="input-group-addon"><i class="fa fa-percent"></i></span>
                           
