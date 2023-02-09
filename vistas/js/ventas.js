@@ -349,6 +349,7 @@ $(".formularioVenta").on("change", "input.nuevaCantidadProducto", function(){
 
 	var precio = $(this).parent().parent().children(".ingresoPrecio").children().children(".nuevoPrecioProducto");
 	
+	
 	var precioFinal = $(this).val() * precio.attr("precioReal");
 	//console.log("$(this).val()", $(this).val());
 
@@ -358,17 +359,22 @@ $(".formularioVenta").on("change", "input.nuevaCantidadProducto", function(){
 	if(Number($(this).val()) > Number($(this).attr("stock"))){
 
 		$(this).val(1);
+		//regresar el precio inicial
+		var precioFinal = $(this).val() * precio.attr("precioReal");
+		
+		precio.val(precioFinal);
+		
+		sumarTotalPrecios();
+		
 		swal({
 			title: "La cantidad supera el Stock",
 			text: "¡Sólo hay "+$(this).attr("stock")+" unidades!",
 			type: "error",
 			confirmButtonText: "¡Cerrar!"
 		  });
-		  
-		  //sumar precios
-		  sumarTotalPrecios()
-
 	}
+	//suma total precios
+	sumarTotalPrecios()
 })
 
 //sumar todos los precionas
@@ -376,7 +382,7 @@ function sumarTotalPrecios(){
 
 	var precioItem = $(".nuevoPrecioProducto");
 	var arraySumaPrecio = []; 
-	 
+
 
 	for(var i = 0; i < precioItem.length; i++){
 
