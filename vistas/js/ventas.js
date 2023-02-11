@@ -447,3 +447,17 @@ $("#nuevoImpuestoVenta").change(function(){
 // PONER FORMATO AL PRECIO final
 
 $("#nuevoTotalVenta").number(true, 2);
+
+//SELECCIONAR metodo de pago
+$("#nuevoMetodoPago").change(function(){
+	var metodo = $(this).val();
+
+	if(metodo == "Efectivo"){
+
+		$(this).parent().parent().removeClass("col-xs-6");
+		$(this).parent().parent().addClass("col-xs-4");
+
+	}
+
+
+})
