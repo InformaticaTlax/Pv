@@ -149,7 +149,7 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function(){
 
 	        // AGRUPAR PRODUCTOS EN FORMATO JSON
 
-	        //listarProductos()
+	        listarProductos()
 
 	        // PONER FORMATO AL PRECIO DE LOS PRODUCTOS
 
@@ -221,6 +221,10 @@ $(".formularioVenta").on("click", "button.quitarProducto", function(){
 
 		// AGREGAR IMPUESTO
 		agregarImpuesto()
+
+		// AGRUPAR PRODUCTOS EN FORMATO JSON
+
+		listarProductos()
 
 	}
 
@@ -347,6 +351,7 @@ $(".formularioVenta").on("change", "select.nuevaDescripcionProducto", function()
 		 success:function(respuesta){
 			//console.log("respuesta", respuesta);
 			$(nuevaCantidadProducto).attr("stock", respuesta["stock"]);
+			$(nuevaCantidadProducto).attr("nuevoStock", respuesta["stock"]);
 			$(nuevoPrecioProducto).val(respuesta["precio_venta"]);
 			$(nuevoprecioProducto).attr("precioReal", respuesta["precio_venta"]);
 		 
@@ -365,6 +370,10 @@ $(".formularioVenta").on("change", "input.nuevaCantidadProducto", function(){
 	//console.log("$(this).val()", $(this).val());
 
 	precio.val(precioFinal);
+
+	var nuevoStock = Number($(this).attr("stock")) - $(this).val(); 
+	
+	$(this).attr("nuevoStocl", nuevoStock);
 
 	//si esto es superior a lo que hay en estock salga una alerta suave
 	if(Number($(this).val()) > Number($(this).attr("stock"))){
@@ -386,9 +395,14 @@ $(".formularioVenta").on("change", "input.nuevaCantidadProducto", function(){
 	}
 	//suma total precios
 	sumarTotalPrecios()
+
 	// AGREGAR IMPUESTO
 
 	agregarImpuesto()
+
+	// AGRUPAR PRODUCTOS EN FORMATO JSON
+
+	listarProductos()
 })
 
 //sumar todos los precionas
@@ -523,3 +537,28 @@ $(".formularioVenta").on("change", "input#nuevoValorEfectivo", function(){
 	nuevoCambioEfectivo.val(cambio);
 
 })
+
+function listarProductos(){
+
+	var listaProductos = [];
+
+	var descripcion = $(".nuevaDescripcionProducto");
+
+	var cantidad = $(".nuevaCantidadProducto");
+
+	var precio = $(".nuevoPrecioProducto");
+
+	for(var i = 0; i < descripcion.length; i++){
+
+		listaProductos.push({ "id" : $(descripcion[i]).attr("idProducto"), 
+							  "descripcion" : $(descripcion[i]).val(),
+							  "cantidad" : $(cantidad[i]).val(),
+							  "stock" : $(cantidad[i]).attr("nuevoStock"),
+							  "precio" : $(precio[i]).attr("precioReal"),
+							  "total" : $(precio[i]).val()})
+
+	}
+	console.log("listaProductos", listaProductos);
+	
+
+}
