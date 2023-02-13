@@ -4,7 +4,7 @@
     
     <h1>
       
-      Administrar ventas
+      Administrar categorías
     
     </h1>
 
@@ -12,7 +12,7 @@
       
       <li><a href="inicio"><i class="fa fa-dashboard"></i> Inicio</a></li>
       
-      <li class="active">Administrar ventas</li>
+      <li class="active">Administrar categorías</li>
     
     </ol>
 
@@ -24,14 +24,12 @@
 
       <div class="box-header with-border">
   
-        <a href="crear-venta">
+        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarCategoria">
+          
+          Agregar categoría
 
-          <button class="btn btn-primary" >
-            
-            Agregar venta
+        </button>
 
-          </button>
-        </a>
       </div>
 
       <div class="box-body">
@@ -43,13 +41,7 @@
          <tr>
            
            <th style="width:10px">#</th>
-           <th>Codigo factura</th>
-           <th>Cliente</th>
-           <th>Vendedor</th>
-           <th>Forma de Pago</th>
-           <th>neto</th>
-           <th>Total</th>
-           <th>Fecha de Transaccion</th>
+           <th>Categoria</th>
            <th>Acciones</th>
 
          </tr> 
@@ -62,25 +54,13 @@
 
             <td>1</td>
 
-            <td>10000</td>
-            
-            <td>Benito</td>
-
-            <td>pedro</td>
-
-            <td>TC-12124545</td>
-
-            <td>$1,000.00</td>
-
-            <td>$ 1,0019.00</td>
-
-            <td>2017-12-11 12:05:32</td>
+            <td>EQUIPOS ELECTROMECÁNICOS</td>
 
             <td>
 
               <div class="btn-group">
                   
-                <button class="btn btn-info"><i class="fa fa-print"></i></button>
+                <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
 
                 <button class="btn btn-danger"><i class="fa fa-times"></i></button>
 
@@ -90,6 +70,45 @@
 
           </tr>
 
+          <tr>
+
+            <td>1</td>
+
+            <td>EQUIPOS ELECTROMECÁNICOS</td>
+            
+            <td>
+
+              <div class="btn-group">
+                  
+                <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
+
+                <button class="btn btn-danger"><i class="fa fa-times"></i></button>
+
+              </div>  
+
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td>1</td>
+
+            <td>EQUIPOS ELECTROMECÁNICOS</td>
+            
+            <td>
+
+              <div class="btn-group">
+                  
+                <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
+
+                <button class="btn btn-danger"><i class="fa fa-times"></i></button>
+
+              </div>  
+
+            </td>
+
+          </tr>
 
         </tbody>
 
@@ -148,6 +167,7 @@ MODAL AGREGAR USUARIO
               </div>
 
             </div>
+<<<<<<< HEAD
   
           </div>
 
@@ -174,3 +194,19 @@ MODAL AGREGAR USUARIO
 </div>
 
 
+=======
+
+          </div>
+
+          <!-- Pie del modal -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
+
+            <button type="submit" class="btn btn-primary">Guardar Categoria</button>
+          </div>
+        </form>
+    </div>
+
+  </div>
+</div>
+>>>>>>> 1f5ae08c18c1afaec80f35609f4f5efa5895a9ef

@@ -23,7 +23,7 @@
             <li >
                 <a href="productos">
                     <i class="fa fa-product-hunt"></i>
-                <span>Categorias</span>
+                <span>Productos</span>
                 </a>
             </li>
 
