@@ -212,6 +212,7 @@ $(".formularioVenta").on("click", "button.quitarProducto", function(){
 		
 		$("#nuevoImpuestoVenta").val(0);
 		$("#nuevoTotalVenta").val(0);
+		$("#totalVenta").val(0);
 		$("#nuevoTotalVenta").attr("total",0);
 		
 	}else{
@@ -351,9 +352,12 @@ $(".formularioVenta").on("change", "select.nuevaDescripcionProducto", function()
 		 success:function(respuesta){
 			//console.log("respuesta", respuesta);
 			$(nuevaCantidadProducto).attr("stock", respuesta["stock"]);
-			$(nuevaCantidadProducto).attr("nuevoStock", respuesta["stock"]);
-			$(nuevoPrecioProducto).val(respuesta["precio_venta"]);
-			$(nuevoprecioProducto).attr("precioReal", respuesta["precio_venta"]);
+      	    $(nuevaCantidadProducto).attr("nuevoStock", Number(respuesta["stock"])-1);
+      	    $(nuevoPrecioProducto).val(respuesta["precio_venta"]);
+      	    $(nuevoPrecioProducto).attr("precioReal", respuesta["precio_venta"]);
+
+			//agrupat productos
+			listarProductos();
 		 
 		}
 	})
@@ -373,7 +377,7 @@ $(".formularioVenta").on("change", "input.nuevaCantidadProducto", function(){
 
 	var nuevoStock = Number($(this).attr("stock")) - $(this).val(); 
 	
-	$(this).attr("nuevoStocl", nuevoStock);
+	$(this).attr("nuevoStock", nuevoStock);
 
 	//si esto es superior a lo que hay en estock salga una alerta suave
 	if(Number($(this).val()) > Number($(this).attr("stock"))){
@@ -538,6 +542,10 @@ $(".formularioVenta").on("change", "input#nuevoValorEfectivo", function(){
 
 })
 
+/*=============================================
+LISTAR TODOS LOS PRODUCTOS
+=============================================*/
+
 function listarProductos(){
 
 	var listaProductos = [];
@@ -558,7 +566,7 @@ function listarProductos(){
 							  "total" : $(precio[i]).val()})
 
 	}
-	console.log("listaProductos", listaProductos);
-	
+		$("#listaMetodoPago").val.(JSON.stringify(listaMetodos));	
 
 }
+

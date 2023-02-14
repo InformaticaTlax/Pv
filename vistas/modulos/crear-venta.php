@@ -119,7 +119,7 @@
 
                 
                 </div>
- 
+                <input type="hidden" id="listaProductos" name="listaProductos">
                 <!-- boton para agregar producto -->
 
                 <button type="button" class="btn btn-default hidden-lg btnAgregarProducto"> Agregar producto</button>
