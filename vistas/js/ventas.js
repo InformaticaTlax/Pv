@@ -450,6 +450,8 @@ function agregarImpuesto(){
 
 	$("#nuevoTotalVenta").val(totalConImpuesto);
 
+	$("#totalVenta").val(totalConImpuesto);
+
 	$("#nuevoPrecioImpuesto").val(precioImpuesto);
 
 	$("#nuevoPrecioNeto").val(precioTotal);
@@ -580,7 +582,7 @@ function listarProductos(){
 							  "total" : $(precio[i]).val()})
 
 	}
-	//console.log("listaProductos", listaProductos);
+	//console.log("listaProductos", JSON.stringify(listaProductos));	
 	$("#listaProductos").val(JSON.stringify(listaProductos));	
 
 }
