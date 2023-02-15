@@ -580,7 +580,8 @@ function listarProductos(){
 							  "total" : $(precio[i]).val()})
 
 	}
-		$("#listaProductos").val(JSON.stringify(listaMetodos));	
+	//console.log("listaProductos", listaProductos);
+	$("#listaProductos").val(JSON.stringify(listaProductos));	
 
 }
 
