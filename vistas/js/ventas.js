@@ -504,6 +504,9 @@ $("#nuevoMetodoPago").change(function(){
 		//agregar formato al precio
 		$('#nuevoValorEfectivo').number( true, 2);
       	$('#nuevoCambioEfectivo').number( true, 2);
+
+		//listar metodo en la entrada
+		listarMetodos()
 	}else{
 
 		$(this).parent().parent().removeClass("col-xs-4");
@@ -543,6 +546,17 @@ $(".formularioVenta").on("change", "input#nuevoValorEfectivo", function(){
 })
 
 /*=============================================
+CAMBIO TRANSACCIÓN
+=============================================*/
+$(".formularioVenta").on("change", "input#nuevoCodigoTransaccion", function(){
+
+	// Listar método en la entrada
+     listarMetodos()
+
+
+})
+
+/*=============================================
 LISTAR TODOS LOS PRODUCTOS
 =============================================*/
 
@@ -566,7 +580,23 @@ function listarProductos(){
 							  "total" : $(precio[i]).val()})
 
 	}
-		$("#listaMetodoPago").val.(JSON.stringify(listaMetodos));	
+		$("#listaProductos").val(JSON.stringify(listaMetodos));	
 
 }
 
+//listar el metodod e pago
+
+function listarMetodos(){
+	var listaMetodos ="";
+
+	if($("#nuevoMetodoPago").val() == "Efectivo"){
+		
+		$("#listaMetodoPago").val("Efectivo");
+
+	}else{
+
+		$("#listaMetodoPago").val($("#nuevoMetodoPago").val()+"-"+$("#nuevoCodigoTransaccion").val());
+
+	}
+
+}
