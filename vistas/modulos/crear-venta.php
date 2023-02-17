@@ -60,14 +60,16 @@
                       $ventas = ControladorVentas::ctrMostrarVentas($item, $valor);
 
                       if(!$ventas){
-                        echo '<input type="text" class="form-control" id="nuevoVenta" name="nuevoVenta" value="10001" readonly>';
+                        echo '<input type="text" class="form-control" id="nuevaVenta" name="nuevaVenta" value="10001" readonly>';
+                        
                       }else{
 
                         foreach($ventas as $key => $value)  {
 
                         }
                         $codigo = $value["codigo"] +1;
-                        echo '<input type="text" class="form-control" id="nuevoVenta" name="nuevoVenta" value="'.$codigo.'" readonly>';
+                        echo '<input type="text" class="form-control" id="nuevaVenta" name="nuevaVenta" value="'.$codigo.'" readonly>';
+                        
 
                       }
                     
