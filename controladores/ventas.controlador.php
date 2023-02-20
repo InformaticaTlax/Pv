@@ -54,10 +54,19 @@ class ControladorVentas{
             
             var_dump($traerCliente["compras"]);
 
-            $item1= "compras";
-            $valor1= array_sum($totalProductosComprados) + $traerCliente["compras"];
+            $item1a= "compras";
+            $valor1a= array_sum($totalProductosComprados) + $traerCliente["compras"];
 
-            $comprasCliente = ModeloClientes::mdlActualizarCliente($tablaClientes, $item1, $valor1, $valor);
+            $comprasCliente = ModeloClientes::mdlActualizarCliente($tablaClientes, $item1a, $valor1a, $valor);
+
+			$item1b= "ultima_compra";
+
+			$fecha = date('Y-m-d');
+			$hora = date('H:i:s');
+
+			$valor1b = $fecha.' '.$hora; 
+
+            $comprasCliente = ModeloClientes::mdlActualizarCliente($tablaClientes, $item1b, $valor1b, $valor);
 
 
             /*=============================================
