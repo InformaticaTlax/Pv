@@ -32,8 +32,8 @@
               <div class="box">
               
                 <?php
-                    $valor= "id";
-                    $item= $_GET["idVenta"];
+                    $item= "id";
+                   $valor= $_GET["idVenta"];
                     $venta = ControladorVentas::ctrMostrarVentas($item, $valor);
 
                     var_dump($venta);
@@ -63,8 +63,8 @@
 
                     <span class="input-group-addon"><i class="fa fa-key"></i></span>
                     
-
-                      $ventas = ControladorVentas::ctrMostrarVentas($item, $valor);
+                    <?php
+                      
 
                       if(!$ventas){
                         echo '<input type="text" class="form-control" id="nuevaVenta" name="nuevaVenta" value="10001" readonly>';
