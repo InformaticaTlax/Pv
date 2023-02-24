@@ -36,7 +36,11 @@
                    $valor= $_GET["idVenta"];
                     $venta = ControladorVentas::ctrMostrarVentas($item, $valor);
 
-                    var_dump($venta);
+                    //var_dump($venta);
+                    $itemUsuario = "id";
+                    $valorUsuario = $venta["id_vendedor"];
+
+                    $vendedor = ControladorUsuarios::ctrMostrarUsuarios($item, $valor);
 
                 ?>
                
@@ -47,7 +51,8 @@
                   <div class="input-group">
 
                     <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                    <input type="text" class="form-control" id="nuevoVendedor" value="<?php echo $_SESSION["nombre"];?>" readonly>
+
+                    <input type="text" class="form-control" id="nuevoVendedor" value="<?php echo $venta[""];?>" readonly>
 
                     <input type="hidden"  name="idVendedor" value="<?php echo $_SESSION["id"];?>">
                     
