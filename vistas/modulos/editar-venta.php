@@ -40,7 +40,13 @@
                     $itemUsuario = "id";
                     $valorUsuario = $venta["id_vendedor"];
 
-                    $vendedor = ControladorUsuarios::ctrMostrarUsuarios($item, $valor);
+                    $vendedor = ControladorUsuarios::ctrMostrarUsuarios($itemUsuario, $valorUsuario);
+
+                    $itemCliente = "id";
+                    $valorCliente = $venta["id_cliente"];
+
+                    $cliente = ControladorClientes::ctrMostrarClientes($itemCliente, $valorCliente);
+                    
 
                 ?>
                
@@ -52,9 +58,9 @@
 
                     <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
-                    <input type="text" class="form-control" id="nuevoVendedor" value="<?php echo $venta[""];?>" readonly>
+                    <input type="text" class="form-control" id="nuevoVendedor" value="<?php echo $vendedor["nombre"]; ?>" readonly>
 
-                    <input type="hidden"  name="idVendedor" value="<?php echo $_SESSION["id"];?>">
+                    <input type="hidden"  name="idVendedor" value="<?php echo $vendedor["id"];?>">
                     
 
                   </div>
@@ -68,27 +74,9 @@
 
                     <span class="input-group-addon"><i class="fa fa-key"></i></span>
                     
-                    <?php
-                      
-
-                      if(!$ventas){
-                        echo '<input type="text" class="form-control" id="nuevaVenta" name="nuevaVenta" value="10001" readonly>';
+                    <input type="text" class="form-control" id="nuevaVenta" name="editarVenta" value="<?php echo $venta["codigo"]; ?>" readonly>
                         
-                      }else{
-
-                        foreach($ventas as $key => $value)  {
-
-                        }
-                        $codigo = $value["codigo"] +1;
-                        echo '<input type="text" class="form-control" id="nuevaVenta" name="nuevaVenta" value="'.$codigo.'" readonly>';
-                        
-
-                      }
-                    
-                    ?>
-
-                                          
-
+                     
                   </div>
 
                 </div>
@@ -103,13 +91,12 @@
 
                     <select class="form-control" id="seleccionarCliente" name="seleccionarCliente" required>
 
-                    <option value="">Seleccionar Cliente</option>
+                    <option value="<?php echo $cliente["id"]; ?>"><?php echo $cliente["nombre"]; ?></option>
                     <?php
 
                       $item = null;
                       $valor = null;
 
-                      
                       $categorias = ControladorClientes::ctrMostrarClientes($item, $valor);
 
                        foreach ($categorias as $key => $value) {
@@ -130,6 +117,51 @@
                 <!-- Entrada Agregar producto -->
                 
                 <div class="form-group row nuevoProducto">
+
+                <?php
+                  $listaProducto = json_decode($venta["productos"], true);
+
+                  //var_dump($listaProducto);
+                  foreach ($listaProducto as $key => $value){
+                    echo '<div class="row" style="padding:5px 15px">'
+
+                      <div class="col-xs-6" style="padding-right:0px">
+                      <div class="input-group">
+                          
+                          <span class="input-group-addon"><button type="button" class="btn btn-danger btn-xs quitarProducto" idProducto="'+idProducto+'"><i class="fa fa-times"></i></button></span>
+          
+                          '<input type="text" class="form-control nuevaDescripcionProducto" idProducto="'+idProducto+'" name="agregarProducto" value="'+descripcion+'" readonly required>'+
+          
+                        '</div>'+
+          
+                      '</div>'+
+          
+                      '<!-- Cantidad del producto -->'+
+          
+                      '<div class="col-xs-3">'+
+                        
+                         '<input type="number" class="form-control nuevaCantidadProducto" name="nuevaCantidadProducto" min="1" value="1" stock="'+stock+'" nuevoStock="'+Number(stock-1)+'" required>'+
+          
+                      '</div>' +
+          
+                      '<!-- Precio del producto -->'+
+          
+                      '<div class="col-xs-3 ingresoPrecio" style="padding-left:0px">'+
+          
+                        '<div class="input-group">'+
+          
+                          '<span class="input-group-addon"><i class="ion ion-social-usd"></i></span>'+
+                             
+                          '<input type="text" class="form-control nuevoPrecioProducto" precioReal="'+precio+'" name="nuevoPrecioProducto" value="'+precio+'" readonly required>'+
+             
+                        '</div>'+
+                         
+                      '</div>'+
+          
+                    '</div>''
+                  }
+                
+                ?>
 
                 
                 </div>
