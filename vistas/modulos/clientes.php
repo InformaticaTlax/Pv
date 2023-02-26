@@ -63,7 +63,7 @@
           $item = null;
           $valor = null;
           
-          $clientes = ControladorClientes::ctrMostarClientes($item, $valor);
+          $clientes = ControladorClientes::ctrMostrarClientes($item, $valor);
           //var_dump($clientes);
           foreach($clientes as $key => $value){
             echo '<tr>
@@ -78,7 +78,7 @@
                   <td>'.$value["direccion"].'</td>
                   <td>'.$value["fecha_nacimiento"].'</td>
                   <td>'.$value["compras"].'</td>
-                  <td>0000-00-00 00:00:00</td>
+                  <td>'.$value["ultima_compra"].'</td>
                   <td>'.$value["fecha"].'</td>
 
                   <td>

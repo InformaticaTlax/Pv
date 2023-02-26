@@ -13,7 +13,7 @@ class AjaxClientes{
         $item = "id";
         $valor = $this->idCliente;
 
-        $respuesta = ControladorClientes::ctrMostarClientes($item, $valor);
+        $respuesta = ControladorClientes::ctrMostrarClientes($item, $valor);
 
         echo json_encode($respuesta);
 
