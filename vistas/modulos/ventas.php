@@ -4,7 +4,7 @@
     
     <h1>
       
-      Administrar ventas
+      Administrar Ventas
     
     </h1>
 
