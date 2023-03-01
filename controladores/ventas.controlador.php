@@ -112,4 +112,157 @@ class ControladorVentas{
 		}
 
 	}
+	
+	static public function ctrEditarVenta(){
+
+		if(isset($_POST["editarVenta"])){
+
+			
+
+				/*=============================================
+				FORMATEAR TABLA DE PRODUCTOS Y LA DE CLIENTES
+				=============================================*/
+				$tabla = "ventas";
+	
+				$item = "codigo";
+				$valor = $_POST["editarVenta"];
+	
+				$traerVenta = ModeloVentas::mdlMostrarVentas($tabla, $item, $valor);
+				
+				$productos = json_decode($traerVenta["productos"], true);
+				$totalProductosComprados = array();
+				//var_dump($productos);
+
+				foreach($productos as $key => $value){
+
+					array_push($totalProductosComprados, $value["cantidad"]);
+					
+					$tablaProductos = "productos";
+					$item = "id";
+                	$valor = $value["id"];
+					$traerProducto = ModeloProductos::mdlMostrarProductos($tablaProductos, $item, $valor);
+
+					$item1a = "ventas";
+					$valor1a = $traerProducto["ventas"] - $value["cantidad"];
+
+					$nuevasVentas = ModeloProductos::mdlActualizarProducto($tablaProductos, $item1a, $valor1a, $valor);
+					
+					$item1b = "stock";
+                	$valor1b = $value["stock"] + $traerProducto["stock"];
+
+                	$nuevasStock = ModeloProductos::mdlActualizarProducto($tablaProductos, $item1b, $valor1b, $valor);
+
+				}
+
+				$tablaClientes = "clientes";
+            	$itemCliente = "id";
+            	$valorCliente = $_POST["seleccionarCliente"];
+
+            	$traerCliente = ModeloClientes::mdlMostrarClientes($tablaClientes, $itemCliente, $valorCliente);
+
+				$item1a= "compras";
+            	$valor1a=  $traerCliente["compras"] - array_sum($totalProductosComprados);
+
+            	$comprasCliente = ModeloClientes::mdlActualizarCliente($tablaClientes, $item1a, $valor1a, $valor);
+
+			/*=============================================
+			ACTUALIZAR LAS COMPRAS DEL CLIENTE Y REDUCIR EL STOCK Y AUMENTAR LAS VENTAS DE LOS PRODUCTOS
+			=============================================*/
+
+			$listaProductos2 = json_decode($_POST["listaProductos"], true);
+            //var_dump($listaProductos2 );
+            $totalProductosComprados = array();
+            foreach($listaProductos2 as $key => $value){
+
+                array_push($totalProductosComprados, $value["cantidad"]);
+
+                $tablaProductos = "productos";
+
+                $item = "id";
+                $valor = $value["id"];
+
+                $traerProducto = ModeloProductos::mdlMostrarProductos($tablaProductos, $item, $valor);
+
+                //var_dump($traerProducto["ventas"]);
+
+                $item1a = "ventas";
+                $valor1a = $value["cantidad"] + $traerProducto["ventas"];
+
+                $nuevasVentas = ModeloProductos::mdlActualizarProducto($tablaProductos, $item1a, $valor1a, $valor);
+
+                $item1b = "stock";
+                $valor1b = $value["stock"];
+
+                $nuevasStock = ModeloProductos::mdlActualizarProducto($tablaProductos, $item1b, $valor1b, $valor);
+
+            }
+
+            $tablaClientes_2 = "clientes";
+
+			$item_2 = "id";
+			$valor_2 = $_POST["seleccionarCliente"];
+
+			$traerCliente_2 = ModeloClientes::mdlMostrarClientes($tablaClientes_2, $item_2, $valor_2);
+
+            
+            //var_dump($traerCliente["compras"]);
+
+            $item1a_2= "compras";
+            $valor1a_2= array_sum($totalProductosComprados) + $traerCliente["compras"];
+
+            $comprasCliente_2 = ModeloClientes::mdlActualizarCliente($tablaClientes, $item1a, $valor1a, $valor);
+
+			$item1b_2= "ultima_compra";
+
+			$fecha_2 = date('Y-m-d');
+			$hora_2 = date('H:i:s');
+
+			$valor1b_2 = $fecha_2.' '.$hora_2; 
+
+            $comprasCliente_2 = ModeloClientes::mdlActualizarCliente($tablaClientes, $item1b, $valor1b, $valor);
+
+
+            /*=============================================
+			GUARDAR cabios de LA COMPRA
+			=============================================*/	
+
+			$tabla = "ventas";
+
+			$datos = array("id_vendedor"=>$_POST["idVendedor"],
+						   "id_cliente"=>$_POST["seleccionarCliente"],
+						   "codigo"=>$_POST["editarVenta"],
+						   "productos"=>$_POST["listaProductos"],
+						   "impuesto"=>$_POST["nuevoPrecioImpuesto"],
+						   "neto"=>$_POST["nuevoPrecioNeto"],
+						   "total"=>$_POST["totalVenta"],
+						   "metodo_pago"=>$_POST["listaMetodoPago"]);
+
+			$respuesta = ModeloVentas::mdlEditarVenta($tabla, $datos);
+
+			if($respuesta == "ok"){
+
+				echo'<script>
+
+				localStorage.removeItem("rango");
+
+				swal({
+					  type: "success",
+					  title: "La venta ha sido editada correctamente",
+					  showConfirmButton: true,
+					  confirmButtonText: "Cerrar"
+					  }).then((result) => {
+								if (result.value) {
+
+								window.location = "ventas";
+
+								}
+							})
+
+				</script>';
+
+			}
+
+		}
+
+	}
 }
