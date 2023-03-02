@@ -297,6 +297,42 @@ class ControladorVentas{
 			$valor = $_GET["idVenta"];
 
 			$traerVenta = ModeloVentas::mdlMostrarVentas($tabla, $item, $valor);
+			//actualizar fecha ultima compra
 
+			$tablaClientes = "clientes";
+
+			$itemVentas = null;
+			$valorVentas = null;
+
+			$traerVentas = ModeloVentas::mdlMostrarVentas($tabla, $itemVentas, $valorVentas);
+
+			$guardarFechas = array();
+
+			foreach($traerVentas as $key => $value){
+
+				if($value["id_cliente"] == $traerVenta["id_cliente"]);{
+
+					//var_dump($value["fecha"]);
+					array_push($guardarFechas, $value["fecha"]);
+				}
+
+			}
+
+			//var_dump($guardarFechas);
+			if(count($guardarFechas) > 1){
+
+
+
+			}else{
+
+				$item = "ultima_compra";
+				$valor = "0000-00-00 00:00:00";
+				$valorIdCliente = $traerVenta["id_cliente"];
+
+				$comprasCliente = ModeloClientes::mdlActualizarCliente($tablaClientes, $item, $valor, $valorIdCliente);				
+
+			}
+
+		}
 	}
 }
