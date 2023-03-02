@@ -60,6 +60,7 @@ class ControladorVentas{
             $comprasCliente = ModeloClientes::mdlActualizarCliente($tablaClientes, $item1a, $valor1a, $valor);
 
 			$item1b= "ultima_compra";
+			date_default_timezone_set('America/Mexico_City');
 
 			$fecha = date('Y-m-d');
 			$hora = date('H:i:s');
@@ -228,6 +229,8 @@ class ControladorVentas{
 
 					$item1b_2= "ultima_compra";
 
+					date_default_timezone_set('America/Mexico_City');
+
 					$fecha_2 = date('Y-m-d');
 					$hora_2 = date('H:i:s');
 
@@ -280,6 +283,20 @@ class ControladorVentas{
 			}
 
 		}
+
+	}
+
+	//eliminar venta
+	static public function ctrEliminarVenta(){
+		
+		if(isset($_GET["idVenta"])){
+
+			$tabla = "ventas";
+
+			$item = "id";
+			$valor = $_GET["idVenta"];
+
+			$traerVenta = ModeloVentas::mdlMostrarVentas($tabla, $item, $valor);
 
 	}
 }
