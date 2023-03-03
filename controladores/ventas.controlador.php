@@ -321,7 +321,24 @@ class ControladorVentas{
 			//var_dump($guardarFechas);
 			if(count($guardarFechas) > 1){
 
+				if($traerVenta["fecha"] > $guardarFechas[count($guardarFechas)-2] ){
 
+					$item = "ultima_compra";
+					$valor = $guardarFechas[count($guardarFechas)-2];
+					$valorIdCliente = $traerVenta["id_cliente"];
+
+					$comprasCliente = ModeloClientes::mdlActualizarCliente($tablaClientes, $item, $valor, $valorIdCliente);				
+
+
+				}else{
+
+					$item = "ultima_compra";
+					$valor = $guardarFechas[count($guardarFechas)-1];
+					$valorIdCliente = $traerVenta["id_cliente"];
+
+					$comprasCliente = ModeloClientes::mdlActualizarCliente($tablaClientes, $item, $valor, $valorIdCliente);	
+
+				}
 
 			}else{
 
