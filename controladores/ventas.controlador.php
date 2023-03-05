@@ -317,7 +317,7 @@ class ControladorVentas{
 				}
 
 			}
-
+ 
 			//var_dump($guardarFechas);
 			if(count($guardarFechas) > 1){
 				if($traerVenta["fecha"] > $guardarFechas[count($guardarFechas)-2]){
