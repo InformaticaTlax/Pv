@@ -646,6 +646,6 @@ $(".tablas").on("click", ".btnEliminarVenta", function(){
 
 	var codigoVenta = $(this).attr("codigoVenta");
 
-	window.open("extensiones/tcpdf/pdf/factura.php", "_blank");
+	window.open("extensiones/tcpdf/pdf/factura.php?codigo="+codigoVenta, "_blank");
 
   })
