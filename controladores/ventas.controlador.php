@@ -317,6 +317,7 @@ class ControladorVentas{
 				}
 
 			}
+			
  
 			//var_dump($guardarFechas);
 			if(count($guardarFechas) > 1){
