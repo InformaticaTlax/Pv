@@ -128,8 +128,9 @@
 
                     $item = "id";
                     $valor = $value["id"];
+                    $orden = "id";
 
-                    $respuesta = ControladorProductos::ctrMostrarProductos($item, $valor);
+                    $respuesta = ControladorProductos::ctrMostrarProductos($item, $valor, $orden);
 
                     $stockAntiguo = $respuesta["stock"] + $value["cantidad"];
                     echo '<div class="row" style="padding:5px 15px">

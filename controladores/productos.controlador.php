@@ -4,11 +4,11 @@ class ControladorProductos{
 
     //mostrar productos
 
-    static public function ctrMostrarProductos($item, $valor){
+    static public function ctrMostrarProductos($item, $valor, $orden){
 
         $tabla = "productos";
 
-        $respuesta = ModeloProductos::mdlMostrarProductos($tabla, $item, $valor);
+        $respuesta = ModeloProductos::mdlMostrarProductos($tabla, $item, $valor, $orden);
         
         return $respuesta;
 

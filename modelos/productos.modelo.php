@@ -5,7 +5,7 @@ require_once "conexion.php";
 class ModeloProductos{
     //mostrar Productos
 
-    static public function mdlMostrarProductos($tabla, $item, $valor){
+    static public function mdlMostrarProductos($tabla, $item, $valor, $orden){
 
         if($item != null){
          
@@ -20,7 +20,7 @@ class ModeloProductos{
             
         }else{
 
-            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ");
+            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY $orden DESC");
 
 			$stmt -> execute();
 
