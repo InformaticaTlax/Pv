@@ -31,7 +31,7 @@ error_reporting(0);
 
         #capturamos solo el año, mes y dia
         $fecha = substr($value["fecha"],0,7);
-        var_dump($fecha);
+        //var_dump($fecha);
 
         #introducimos las fechas en el arrayfechas
         array_push($arrayFechas, $fecha);
