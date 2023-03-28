@@ -1,3 +1,19 @@
+<?php
+//para bloquear los usuarios acceecn a perfiles donde no deberia accesar
+if($_SESSION["perfil"] == "Vendedor"){
+
+  echo '<script>
+
+    window.location = "inicio";
+
+  </script>';
+
+  return;
+
+}
+
+?>
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -49,19 +65,18 @@
               </tr>
             </thead>
             
-            
           </table>
-        </div>
-        <!-- /.box-body -->
         
-        <!-- /.box-footer-->
-      </div>
-      <!-- /.box -->
+          <input type="hidden" value="<?php echo $_SESSION['perfil']; ?>" id="perfilOculto">
 
+        </div>
+        
+      </div>
+      
     </section>
-    <!-- /.content -->
+    
   </div>
-  <!-- /.content-wrapper -->
+  
 
 <!-- Modal agregar producto -->
 <div id="modalAgregarProducto" class="modal fade" role="dialog">
