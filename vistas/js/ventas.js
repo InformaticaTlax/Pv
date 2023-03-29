@@ -747,6 +747,15 @@ $(".daterangepicker.opensleft .ranges li").on("click", function(){
 	}
 
 })
+//abrir xml en una nueva pestalla
+
+$(".abrirXML").click(function(){
+
+	var archivo = $(this).attr("archivo");
+	window.open(archivo, "_blank");
+
+
+})
 
 
 

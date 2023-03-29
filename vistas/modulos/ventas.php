@@ -12,6 +12,16 @@ if($_SESSION["perfil"] == "Especial"){
 
 }
 
+$xml = ControladorVentas::ctrDescargarXML();
+if ($xml){
+
+  rename($_GET["xml"].".xml", "xml/".$_GET["xml"].".xml"); 
+
+  echo '<a class="btn btn-block btn-success abrirXML" archivo="xml/'.$_GET["xml"].'.xml" href="ventas">Se ha creado correctamente el archivo xml <span class="fa fa-times pull-right"></span></a>';
+  
+  
+}
+
 ?>
 <div class="content-wrapper">
 
@@ -135,6 +145,9 @@ if($_SESSION["perfil"] == "Especial"){
                   <td>
 
                     <div class="btn-group">
+
+                      <a class="btn btn-success" href="index.php?ruta=ventas&xml='.$value["codigo"].'">xml</a>
+                      
                         
                       <button class="btn btn-info btnImprimirFactura" codigoVenta = "'.$value["codigo"].'">
                         
