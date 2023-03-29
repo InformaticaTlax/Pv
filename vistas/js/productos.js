@@ -52,6 +52,7 @@ $('.tablaProductos').DataTable({
 });
 
 //Capturando categoria para asignar codigo
+/*
 $("#nuevaCategoria").change(function(){
 
     var idCategoria = $(this).val();
@@ -88,7 +89,7 @@ $("#nuevaCategoria").change(function(){
         })
   
   })
-
+*/
   //agregando precio de venta
   $("#nuevoPrecioCompra, #editarPrecioCompra").change(function(){
 

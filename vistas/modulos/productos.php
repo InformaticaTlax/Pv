@@ -131,7 +131,7 @@ if($_SESSION["perfil"] == "Vendedor"){
 
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-code"></i></span>
-                  <input type="text" class="form-control input-lg" id="nuevoCodigo" name="nuevoCodigo" placeholder="Ingresar Codigo" readonly required>
+                  <input type="text" class="form-control input-lg" id="nuevoCodigo" name="nuevoCodigo" placeholder="Ingresar Codigo"  required>
 
                 </div>
               </div>
