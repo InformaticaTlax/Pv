@@ -75,7 +75,7 @@ class ControladorCategorias{
 
 		$respuesta = ModeloCategorias::mdlMostrarCategorias($tabla, $item, $valor);
 
-		return $respuesta; 
+		return $respuesta;
 	
 	}
 

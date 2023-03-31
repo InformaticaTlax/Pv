@@ -1,282 +1,299 @@
-//cargar la tabla dinamica de productos
-/*
+/*=============================================
+CARGAR LA TABLA DINÁMICA DE PRODUCTOS
+=============================================*/
+
 $.ajax({
-    url: "ajax/datatable-productos.ajax.php",
-    success:function(respuesta){
 
-        console.log("respuesta",respuesta);
-    }
-})*/
+	url: "ajax/datatable-productos.ajax.php",
+	success:function(respuesta){
+		
+		console.log("respuesta", respuesta);
 
+	}
 
-/*
-$(document).ready(function () {
-    $('.tablaProductos').DataTable({
-        ajax: 'ajax/datatable-productos.ajax.php',
-    });
-});*/
+})
 
 var perfilOculto = $("#perfilOculto").val();
-console.log("perfilOculto", perfilOculto);
 
-$('.tablaProductos').DataTable({
+$('.tablaProductos').DataTable( {
     "ajax": "ajax/datatable-productos.ajax.php?perfilOculto="+perfilOculto,
     "deferRender": true,
-    "retrieve": true,
-    "processing": true,
-    "language": {
+	"retrieve": true,
+	"processing": true,
+	 "language": {
 
-        "sProcessing":     "Procesando...",
-        "sLengthMenu":     "Mostrar _MENU_ registros",
-        "sZeroRecords":    "No se encontraron resultados",
-        "sEmptyTable":     "Ningún dato disponible en esta tabla",
-        "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_",
-        "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0",
-        "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-        "sInfoPostFix":    "",
-        "sSearch":         "Buscar:",
-        "sUrl":            "",
-        "sInfoThousands":  ",",
-        "sLoadingRecords": "Cargando...",
-        "oPaginate": {
-        "sFirst":    "Primero",
-        "sLast":     "Último",
-        "sNext":     "Siguiente",
-        "sPrevious": "Anterior"
-        },
-        "oAria": {
-            "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-        }
-    }
-});
+			"sProcessing":     "Procesando...",
+			"sLengthMenu":     "Mostrar _MENU_ registros",
+			"sZeroRecords":    "No se encontraron resultados",
+			"sEmptyTable":     "Ningún dato disponible en esta tabla",
+			"sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_",
+			"sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0",
+			"sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+			"sInfoPostFix":    "",
+			"sSearch":         "Buscar:",
+			"sUrl":            "",
+			"sInfoThousands":  ",",
+			"sLoadingRecords": "Cargando...",
+			"oPaginate": {
+			"sFirst":    "Primero",
+			"sLast":     "Último",
+			"sNext":     "Siguiente",
+			"sPrevious": "Anterior"
+			},
+			"oAria": {
+				"sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+				"sSortDescending": ": Activar para ordenar la columna de manera descendente"
+			}
 
-//Capturando categoria para asignar codigo
-/*
-$("#nuevaCategoria").change(function(){
+	}
 
-    var idCategoria = $(this).val();
+} );
 
-    var datos = new FormData();
-    datos.append("idCategoria", idCategoria);
+/*=============================================
+CAPTURANDO LA CATEGORIA PARA ASIGNAR CÓDIGO
+=============================================*/
+// $("#nuevaCategoria").change(function(){
 
-    $.ajax({
+// 	var idCategoria = $(this).val();
 
-        url:"ajax/productos.ajax.php",
-        method: "POST",
-        data: datos,
-        cache: false,
-        contentType: false,
-        processData: false,
-        dataType:"json",
-        success:function(respuesta){
+// 	var datos = new FormData();
+//   	datos.append("idCategoria", idCategoria);
 
-            //esta funcion es para agregar codigo
-            if(!respuesta){
-                var nuevoCodigo = idCategoria+"01";
-                $("#nuevoCodigo").val(nuevoCodigo);
+//   	$.ajax({
 
-            }else{
-                var nuevoCodigo = Number(respuesta["codigo"]) + 1;
-                $("#nuevoCodigo").val(nuevoCodigo);
+//       url:"ajax/productos.ajax.php",
+//       method: "POST",
+//       data: datos,
+//       cache: false,
+//       contentType: false,
+//       processData: false,
+//       dataType:"json",
+//       success:function(respuesta){
 
-            }
-  
-            
-                  
-        }
-  
-        })
-  
-  })
-*/
-  //agregando precio de venta
-  $("#nuevoPrecioCompra, #editarPrecioCompra").change(function(){
+//       	if(!respuesta){
 
-    if($(".porcentaje").prop("checked")){
-        
-        var valorPorcentaje = $(".nuevoPorcentaje").val();
-        
-        
-        var porcentaje = Number(($("#nuevoPrecioCompra").val()*valorPorcentaje/100))+Number($("#nuevoPrecioCompra").val());
-        
-        var editarPorcentaje = Number(($("#editarPrecioCompra").val()*valorPorcentaje/100))+Number($("#editarPrecioCompra").val());
-        
-        $("#nuevoPrecioVenta").val(porcentaje);
-        $("#nuevoPrecioVenta").prop("readonly",true);
+//       		var nuevoCodigo = idCategoria+"01";
+//       		$("#nuevoCodigo").val(nuevoCodigo);
 
-        $("#editarPrecioVenta").val(editarPorcentaje);
-        $("#editarPrecioVenta").prop("readonly",true);
+//       	}else{
 
-    
-    }
-  })
+//       		var nuevoCodigo = Number(respuesta["codigo"]) + 1;
+//           	$("#nuevoCodigo").val(nuevoCodigo);
 
-  //Cambio de porcentaje de la casilla
+//       	}
+                
+//       }
 
-  $(".nuevoPorcentaje").change(function(){
+//   	})
 
-    if($(".porcentaje").prop("checked")){
-        
-        var valorPorcentaje = $(this).val();
-        //
-        
-        var porcentaje = Number(($("#nuevoPrecioCompra").val()*valorPorcentaje/100))+Number($("#nuevoPrecioCompra").val());
+// })
 
-        var editarPorcentaje = Number(($("#editarPrecioCompra").val()*valorPorcentaje/100))+Number($("#editarPrecioCompra").val());
-        
-        
-        $("#nuevoPrecioVenta").val(porcentaje);
-        $("#nuevoPrecioVenta").prop("readonly",true);
-        
-        $("#editarPrecioVenta").val(editarPorcentaje);
-        $("#editarPrecioVenta").prop("readonly",true);
+/*=============================================
+AGREGANDO PRECIO DE VENTA
+=============================================*/
+$("#nuevoPrecioCompra, #editarPrecioCompra").change(function(){
 
-    }
+	if($(".porcentaje").prop("checked")){
 
-  })
+		var valorPorcentaje = $(".nuevoPorcentaje").val();
+		
+		var porcentaje = Number(($("#nuevoPrecioCompra").val()*valorPorcentaje/100))+Number($("#nuevoPrecioCompra").val());
 
-  $(".porcentaje").on("ifUnchecked",function(){
+		var editarPorcentaje = Number(($("#editarPrecioCompra").val()*valorPorcentaje/100))+Number($("#editarPrecioCompra").val());
 
-    $("#nuevoPrecioVenta").prop("readonly",false);
-    $("#editarPrecioVenta").prop("readonly",false);
-  
+		$("#nuevoPrecioVenta").val(porcentaje);
+		$("#nuevoPrecioVenta").prop("readonly",true);
+
+		$("#editarPrecioVenta").val(editarPorcentaje);
+		$("#editarPrecioVenta").prop("readonly",true);
+
+	}
+
+})
+
+/*=============================================
+CAMBIO DE PORCENTAJE
+=============================================*/
+$(".nuevoPorcentaje").change(function(){
+
+	if($(".porcentaje").prop("checked")){
+
+		var valorPorcentaje = $(this).val();
+		
+		var porcentaje = Number(($("#nuevoPrecioCompra").val()*valorPorcentaje/100))+Number($("#nuevoPrecioCompra").val());
+
+		var editarPorcentaje = Number(($("#editarPrecioCompra").val()*valorPorcentaje/100))+Number($("#editarPrecioCompra").val());
+
+		$("#nuevoPrecioVenta").val(porcentaje);
+		$("#nuevoPrecioVenta").prop("readonly",true);
+
+		$("#editarPrecioVenta").val(editarPorcentaje);
+		$("#editarPrecioVenta").prop("readonly",true);
+
+	}
+
+})
+
+$(".porcentaje").on("ifUnchecked",function(){
+
+	$("#nuevoPrecioVenta").prop("readonly",false);
+	$("#editarPrecioVenta").prop("readonly",false);
+
 })
 
 $(".porcentaje").on("ifChecked",function(){
 
-    $("#nuevoPrecioVenta").prop("readonly",true);
-    $("#editarPrecioVenta").prop("readonly",true);
-  
+	$("#nuevoPrecioVenta").prop("readonly",true);
+	$("#editarPrecioVenta").prop("readonly",true);
+
 })
 
+/*=============================================
+SUBIENDO LA FOTO DEL PRODUCTO
+=============================================*/
 
-//subiendo la foto del producto
 $(".nuevaImagen").change(function(){
 
-    var imagen =this.files[0];
-    //console.log("imagen", imagen);
-    
-   // valindado que el formato sea jpg o png
+	var imagen = this.files[0];
+	
+	/*=============================================
+  	VALIDAMOS EL FORMATO DE LA IMAGEN SEA JPG O PNG
+  	=============================================*/
 
-    if(imagen["type"] != "image/jpeg" && imagen["type"] != "image/png" ){
+  	if(imagen["type"] != "image/jpeg" && imagen["type"] != "image/png"){
 
-        $(".nuevaImagen").val("");
+  		$(".nuevaImagen").val("");
 
-            swal({
-                title: "Error al subir la imagen",
-                text:"La imagen debe estar en formato JPG o PNG",
-                type: "error",
-                confirmButtonText:"Cerrar"
-            });
+  		 swal({
+		      title: "Error al subir la imagen",
+		      text: "¡La imagen debe estar en formato JPG o PNG!",
+		      type: "error",
+		      confirmButtonText: "¡Cerrar!"
+		    });
 
-            //si pesa mas de 2mb no se podra subir
-    }else if(imagen["size"] > 2000000){
-        $(".nuevaImagen").val("");
+  	}else if(imagen["size"] > 2000000){
 
-        swal({
-            title: "Error al subir la imagen",
-            text:"La imagen no debe de pesar mas de 2 MB",
-            type: "error",
-            confirmButtonText:"Cerrar"
-        });
+  		$(".nuevaImagen").val("");
 
+  		 swal({
+		      title: "Error al subir la imagen",
+		      text: "¡La imagen no debe pesar más de 2MB!",
+		      type: "error",
+		      confirmButtonText: "¡Cerrar!"
+		    });
 
-    }else{
+  	}else{
 
-        var datosImagen = new FileReader;
-        datosImagen.readAsDataURL(imagen);
+  		var datosImagen = new FileReader;
+  		datosImagen.readAsDataURL(imagen);
 
-        $(datosImagen).on("load", function(event){
+  		$(datosImagen).on("load", function(event){
 
-            var rutaImagen = event.target.result;
-            
-            $(".previsualizar").attr("src", rutaImagen);
-        
-        })
-    }
+  			var rutaImagen = event.target.result;
 
+  			$(".previsualizar").attr("src", rutaImagen);
+
+  		})
+
+  	}
 })
 
-//editar producto
+/*=============================================
+EDITAR PRODUCTO
+=============================================*/
 
 $(".tablaProductos tbody").on("click", "button.btnEditarProducto", function(){
 
-    var idPoroducto = $(this).attr("idProducto");
-    
-    var datos = new FormData();
-    datos.append("idProducto", idPoroducto);
+	var idProducto = $(this).attr("idProducto");
+	
+	var datos = new FormData();
+    datos.append("idProducto", idProducto);
 
-    $.ajax({
+     $.ajax({
 
-        url:"ajax/productos.ajax.php",
-        method: "POST",
-        data: datos,
-        cache: false,
-        contentType: false,
-        processData: false,
-        dataType:"json",
-        success:function(respuesta){
+      url:"ajax/productos.ajax.php",
+      method: "POST",
+      data: datos,
+      cache: false,
+      contentType: false,
+      processData: false,
+      dataType:"json",
+      success:function(respuesta){
+          
+          var datosCategoria = new FormData();
+          datosCategoria.append("idCategoria",respuesta["id_categoria"]);
 
-            var datosCategoria = new FormData();
-            datosCategoria.append("idCategoria", respuesta["id_categoria"]);
+           $.ajax({
 
-            $.ajax({
-                url:"ajax/categorias.ajax.php",
-                method: "POST",
-                data: datosCategoria,
-                cache: false,
-                contentType: false,
-                processData: false,
-                dataType:"json",
-                success:function(respuesta){
+              url:"ajax/categorias.ajax.php",
+              method: "POST",
+              data: datosCategoria,
+              cache: false,
+              contentType: false,
+              processData: false,
+              dataType:"json",
+              success:function(respuesta){
+                  
+                  $("#editarCategoria").val(respuesta["id"]);
+                  $("#editarCategoria").html(respuesta["categoria"]);
 
-                    $("#editarCategoria").val(respuesta["id"]);
-                    $("#editarCategoria").html(respuesta["categoria"]);
+              }
 
-                }
-                
-            })
-            $("#editarCodigo").val(respuesta["codigo"]);
-            $("#editarDescripcion").val(respuesta["descripcion"]);
-            $("#editarStock").val(respuesta["stock"]);
-            $("#editarPrecioCompra").val(respuesta["precio_compra"]);
-            $("#editarPrecioVenta").val(respuesta["precio_venta"]);
-            
-            if(respuesta["imagen"] != ""){
-            
-            $("#imagenActual").val(respuesta["imagen"]);
+          })
 
-            $(".previsualizar").attr("src", respuesta["imagen"]);
-            
-            }
+           $("#editarCodigo").val(respuesta["codigo"]);
 
-        }
-    })
+           $("#editarDescripcion").val(respuesta["descripcion"]);
+
+           $("#editarStock").val(respuesta["stock"]);
+
+           $("#editarPrecioCompra").val(respuesta["precio_compra"]);
+
+           $("#editarPrecioVenta").val(respuesta["precio_venta"]);
+
+           if(respuesta["imagen"] != ""){
+
+           	$("#imagenActual").val(respuesta["imagen"]);
+
+           	$(".previsualizar").attr("src",  respuesta["imagen"]);
+
+           }
+
+      }
+
+  })
+
 })
 
-//eliminar producto
+/*=============================================
+ELIMINAR PRODUCTO
+=============================================*/
+
 $(".tablaProductos tbody").on("click", "button.btnEliminarProducto", function(){
 
-    var idProducto = $(this).attr("idProducto");
-    var codigo = $(this).attr("codigo");
-    var imagen = $(this).attr("imagen");
+	var idProducto = $(this).attr("idProducto");
+	var codigo = $(this).attr("codigo");
+	var imagen = $(this).attr("imagen");
+	
+	swal({
 
-    //console.log("idProducto", idPoroducto);
-    swal({
-        title: "Estas seguro de borrar producto",
-        text:"si no lo estas puedes cancelar la accion",
-        type: "warning",
+		title: '¿Está seguro de borrar el producto?',
+		text: "¡Si no lo está puede cancelar la accíón!",
+		type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         cancelButtonText: 'Cancelar',
         confirmButtonText: 'Si, borrar producto!'
-        }).then(function(result){
-        if(result.value){
-  
-          window.location = "index.php?ruta=productos&idProducto="+idProducto+"&imagen="+imagen+"&codigo="+codigo;
+        }).then(function(result) {
+        if (result.value) {
+
+        	window.location = "index.php?ruta=productos&idProducto="+idProducto+"&imagen="+imagen+"&codigo="+codigo;
+
         }
-    
-      })
+
+
+	})
+
 })
+	

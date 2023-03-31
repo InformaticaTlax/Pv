@@ -1,5 +1,5 @@
 <?php
-//para bloquear los usuarios acceecn a perfiles donde no deberia accesar
+
 if($_SESSION["perfil"] == "Especial"){
 
   echo '<script>
@@ -13,13 +13,13 @@ if($_SESSION["perfil"] == "Especial"){
 }
 
 $xml = ControladorVentas::ctrDescargarXML();
-if ($xml){
 
-  rename($_GET["xml"].".xml", "xml/".$_GET["xml"].".xml"); 
+if($xml){
 
-  echo '<a class="btn btn-block btn-success abrirXML" archivo="xml/'.$_GET["xml"].'.xml" href="ventas">Se ha creado correctamente el archivo xml <span class="fa fa-times pull-right"></span></a>';
-  
-  
+  rename($_GET["xml"].".xml", "xml/".$_GET["xml"].".xml");
+
+  echo '<a class="btn btn-block btn-success abrirXML" archivo="xml/'.$_GET["xml"].'.xml" href="ventas">Se ha creado correctamente el archivo XML <span class="fa fa-times pull-right"></span></a>';
+
 }
 
 ?>
@@ -29,7 +29,7 @@ if ($xml){
     
     <h1>
       
-      Administrar Ventas
+      Administrar ventas
     
     </h1>
 
@@ -51,22 +51,37 @@ if ($xml){
   
         <a href="crear-venta">
 
-          <button class="btn btn-primary" >
+          <button class="btn btn-primary">
             
             Agregar venta
 
           </button>
+
         </a>
 
-           <button type="button" class="btn btn-default pull-right" id="daterange-btn">
+         <button type="button" class="btn btn-default pull-right" id="daterange-btn">
            
             <span>
-              <i class="fa fa-calendar"></i> Rango de Fecha
+              <i class="fa fa-calendar"></i> 
+
+              <?php
+
+                if(isset($_GET["fechaInicial"])){
+
+                  echo $_GET["fechaInicial"]." - ".$_GET["fechaFinal"];
+                
+                }else{
+                 
+                  echo 'Rango de fecha';
+
+                }
+
+              ?>
             </span>
 
             <i class="fa fa-caret-down"></i>
 
-          </button>
+         </button>
 
       </div>
 
@@ -79,13 +94,13 @@ if ($xml){
          <tr>
            
            <th style="width:10px">#</th>
-           <th>Codigo factura</th>
+           <th>Código factura</th>
            <th>Cliente</th>
            <th>Vendedor</th>
-           <th>Forma de Pago</th>
-           <th>neto</th>
-           <th>Total</th>
-           <th>Fecha de Transaccion</th>
+           <th>Forma de pago</th>
+           <th>Neto</th>
+           <th>Total</th> 
+           <th>Fecha</th>
            <th>Acciones</th>
 
          </tr> 
@@ -98,23 +113,21 @@ if ($xml){
 
           if(isset($_GET["fechaInicial"])){
 
-            $fechaInicial =$_GET["fechaInicial"];
-            $fechaFinal =$_GET["fechaFinal"];
+            $fechaInicial = $_GET["fechaInicial"];
+            $fechaFinal = $_GET["fechaFinal"];
 
           }else{
-            
-            $fechaInicial =null;
-            $fechaFinal =null;
+
+            $fechaInicial = null;
+            $fechaFinal = null;
 
           }
 
- 
           $respuesta = ControladorVentas::ctrRangoFechasVentas($fechaInicial, $fechaFinal);
 
-          //var_dump($respuesta);
-          foreach($respuesta as $key => $value){
-
-            echo '<tr>
+          foreach ($respuesta as $key => $value) {
+           
+           echo '<tr>
 
                   <td>'.($key+1).'</td>
 
@@ -147,39 +160,41 @@ if ($xml){
                     <div class="btn-group">
 
                       <a class="btn btn-success" href="index.php?ruta=ventas&xml='.$value["codigo"].'">xml</a>
-                      
                         
-                      <button class="btn btn-info btnImprimirFactura" codigoVenta = "'.$value["codigo"].'">
-                        
+                      <button class="btn btn-info btnImprimirFactura" codigoVenta="'.$value["codigo"].'">
+
                         <i class="fa fa-print"></i>
-                      
+
                       </button>';
-                      
-                      if($_SESSION["perfil"] =="Administrador"){
 
-                        echo '<button class="btn btn-warning btnEditarVenta" idVenta="'.$value["id"].'"><i class="fa fa-pencil"></i></button>
-                        
+                      if($_SESSION["perfil"] == "Administrador"){
 
-                        <button class="btn btn-danger btnEliminarVenta" idVenta="'.$value["id"].'"><i class="fa fa-times"></i></button>';
-                        }
+                      echo '<button class="btn btn-warning btnEditarVenta" idVenta="'.$value["id"].'"><i class="fa fa-pencil"></i></button>
+
+                      <button class="btn btn-danger btnEliminarVenta" idVenta="'.$value["id"].'"><i class="fa fa-times"></i></button>';
+
+                    }
 
                     echo '</div>  
 
                   </td>
 
                 </tr>';
-          }
+            }
+
         ?>
-          
+               
         </tbody>
 
        </table>
-          <?php
 
-            $eliminarVenta = new ControladorVentas();
-            $eliminarVenta  -> ctrEliminarVenta();
+       <?php
 
-          ?>
+      $eliminarVenta = new ControladorVentas();
+      $eliminarVenta -> ctrEliminarVenta();
+
+      ?>
+       
 
       </div>
 
@@ -188,3 +203,7 @@ if ($xml){
   </section>
 
 </div>
+
+
+
+

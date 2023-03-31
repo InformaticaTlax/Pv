@@ -7,22 +7,23 @@ require_once "../../../controladores/clientes.controlador.php";
 require_once "../../../modelos/clientes.modelo.php";
 
 require_once "../../../controladores/usuarios.controlador.php";
-require_once "../../../modelos/usuario.modelo.php";
+require_once "../../../modelos/usuarios.modelo.php";
 
 require_once "../../../controladores/productos.controlador.php";
 require_once "../../../modelos/productos.modelo.php";
+
 class imprimirFactura{
 
 public $codigo;
 
 public function traerImpresionFactura(){
 
-//TRAEMOS LA INFORMACIÓN DEL VENDEDOR
+//TRAEMOS LA INFORMACIÓN DE LA VENTA
 
-$itemVendedor = "codigo";
+$itemVenta = "codigo";
 $valorVenta = $this->codigo;
 
-$respuestaVenta = ControladorVentas::ctrMostrarVentas($itemVendedor, $valorVenta);
+$respuestaVenta = ControladorVentas::ctrMostrarVentas($itemVenta, $valorVenta);
 
 $fecha = substr($respuestaVenta["fecha"],0,-8);
 $productos = json_decode($respuestaVenta["productos"], true);
@@ -44,9 +45,9 @@ $valorVendedor = $respuestaVenta["id_vendedor"];
 
 $respuestaVendedor = ControladorUsuarios::ctrMostrarUsuarios($itemVendedor, $valorVendedor);
 
-//requerimos las clase rcpdf
-require_once('tcpdf_include.php');
+//REQUERIMOS LA CLASE TCPDF
 
+require_once('tcpdf_include.php');
 
 $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
@@ -63,29 +64,20 @@ $bloque1 = <<<EOF
 
 	<tr>
 		
-		<td  style = "width:50px; align:center;"><img src="images/logo-negro-bloque.png"></td>
-		<br>
-
-	</tr>
-	
-	<tr>
-	
-	
-		
-		<td style="width:160px; text-align:center;">
+		<td style="width:160px;">
 	
 			<div>
 			
 				Fecha: $fecha
 
-				<br>
-				Dulceria Duvalin
+				<br><br>
+				Inventory System
 				
 				<br>
 				NIT: 71.759.963-9
 
 				<br>
-				Dirección: Manuel Saldaña Sur #37
+				Dirección: Calle 44B 92-11
 
 				<br>
 				Teléfono: 300 786 52 49
@@ -120,39 +112,40 @@ $pdf->writeHTML($bloque1, false, false, false, false, '');
 foreach ($productos as $key => $item) {
 
 $valorUnitario = number_format($item["precio"], 2);
-	
+
 $precioTotal = number_format($item["total"], 2);
-	
+
 $bloque2 = <<<EOF
-	
+
 <table style="font-size:9px;">
-	
+
 	<tr>
-		
+	
 		<td style="width:160px; text-align:left">
 		$item[descripcion] 
 		</td>
-	
+
 	</tr>
-	
+
 	<tr>
-		
+	
 		<td style="width:160px; text-align:right">
 		$ $valorUnitario Und * $item[cantidad]  = $ $precioTotal
 		<br>
 		</td>
-	
+
 	</tr>
-	
+
 </table>
-	
+
 EOF;
-	
+
 $pdf->writeHTML($bloque2, false, false, false, false, '');
-	
+
 }
-	
+
 // ---------------------------------------------------------
+
 $bloque3 = <<<EOF
 
 <table style="font-size:9px; text-align:right">
@@ -206,7 +199,7 @@ $bloque3 = <<<EOF
 		<td style="width:160px;">
 			<br>
 			<br>
-			Muchas gracias por su compra les agradece Dulceria Duvalin
+			Muchas gracias por su compra
 		</td>
 
 	</tr>
@@ -216,13 +209,17 @@ $bloque3 = <<<EOF
 
 
 EOF;
+
 $pdf->writeHTML($bloque3, false, false, false, false, '');
-	
 
+// ---------------------------------------------------------
+//SALIDA DEL ARCHIVO 
 
-//salida del archivo
-$pdf ->Output('factura.pdf');
+//$pdf->Output('factura.pdf', 'D');
+$pdf->Output('factura.pdf');
+
 }
+
 }
 
 $factura = new imprimirFactura();

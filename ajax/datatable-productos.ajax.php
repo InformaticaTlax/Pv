@@ -6,85 +6,114 @@ require_once "../modelos/productos.modelo.php";
 require_once "../controladores/categorias.controlador.php";
 require_once "../modelos/categorias.modelo.php";
 
-//mostrar la tabla de productos
+
 class TablaProductos{
-    public function mostrarTablaProductos(){
-      
-      $itme = null;
-      $valor= null;
-      $orden = "id";
 
-      $productos= ControladorProductos::ctrMostrarProductos($itme,$valor, $orden);
-    
-       
+ 	/*=============================================
+ 	 MOSTRAR LA TABLA DE PRODUCTOS
+  	=============================================*/ 
 
-      $datosJson = '{
-        "data": [';
+	public function mostrarTablaProductos(){
 
-        for($i=0; $i <count($productos); $i++){
+		$item = null;
+    	$valor = null;
+    	$orden = "id";
 
-          //treamos la imagen
-          $imagen = "<img src= '".$productos[$i]["imagen"]."' width='40px'> ";
-          //Traemos la categoria
+  		$productos = ControladorProductos::ctrMostrarProductos($item, $valor, $orden);	
 
-          $itme = "id";
-          $valor = $productos[$i]["id_categoria"];
+  		if(count($productos) == 0){
 
-          $categoria = ControladorCategorias::ctrMostrarCategorias($itme,$valor);
-          //Stock
-          
-          
-          if($productos[$i]["stock"] <= 10){
-            
-            $stock = "<button class='btn btn-danger'>".$productos[$i]["stock"]."</button>";
+  			echo '{"data": []}';
 
-          }elseif($productos[$i]["stock"] > 11 && $productos[$i]["stock"] <= 15) {
+		  	return;
+  		}
+		
+  		$datosJson = '{
+		  "data": [';
 
-            $stock = "<button class='btn btn-warning'>".$productos[$i]["stock"]."</button>";
+		  for($i = 0; $i < count($productos); $i++){
 
-          }else{
-            $stock = "<button class='btn btn-success'>".$productos[$i]["stock"]."</button>";
-          }
+		  	/*=============================================
+ 	 		TRAEMOS LA IMAGEN
+  			=============================================*/ 
 
-          //Traemos las acciones
+		  	$imagen = "<img src='".$productos[$i]["imagen"]."' width='40px'>";
 
-          if(isset($_GET["perfilOculto"]) && $_GET["perfilOculto"] == "Especial"){
+		  	/*=============================================
+ 	 		TRAEMOS LA CATEGORÍA
+  			=============================================*/ 
 
-            $botones = "<div class='btn-group'><button class='btn btn-warning btnEditarProducto' idProducto='".$productos[$i]["id"]."' data-toggle='modal' data-target='#modalEditarProducto'><i class= 'fa fa-pencil'></i></button> </div>";
+		  	$item = "id";
+		  	$valor = $productos[$i]["id_categoria"];
 
-          }else{
+		  	$categorias = ControladorCategorias::ctrMostrarCategorias($item, $valor);
 
-            $botones = "<div class='btn-group'><button class='btn btn-warning btnEditarProducto' idProducto='".$productos[$i]["id"]."' data-toggle='modal' data-target='#modalEditarProducto'><i class= 'fa fa-pencil'></i></button> <button class='btn btn-danger btnEliminarProducto' idProducto='".$productos[$i]["id"]."' codigo='".$productos[$i]["codigo"]."' imagen='".$productos[$i]["imagen"]."'><i class= 'fa fa-times'></i></button></div>";
+		  	/*=============================================
+ 	 		STOCK
+  			=============================================*/ 
 
-          }
+  			if($productos[$i]["stock"] <= 10){
 
-          $datosJson .= '[
-                  "'.($i+1).'",
-                  "'.$imagen.'",
-                  "'.$productos[$i]["codigo"].'",
-                  "'.$productos[$i]["descripcion"].'",
-                  "'.$categoria["categoria"].'",
-                  "'.$stock.'",
-                  "'.$productos[$i]["precio_compra"].'",
-                  "'.$productos[$i]["precio_venta"].'",
-                  "'.$productos[$i]["fecha"].'",
-                  "'.$botones.'"
-                ],';
-              } 
-              
-              $datosJson = substr($datosJson, 0, -1);
+  				$stock = "<button class='btn btn-danger'>".$productos[$i]["stock"]."</button>";
 
-              $datosJson .= '] 
-            
-            }';
-          echo $datosJson;
-      
+  			}else if($productos[$i]["stock"] > 11 && $productos[$i]["stock"] <= 15){
 
-    }
+  				$stock = "<button class='btn btn-warning'>".$productos[$i]["stock"]."</button>";
+
+  			}else{
+
+  				$stock = "<button class='btn btn-success'>".$productos[$i]["stock"]."</button>";
+
+  			}
+
+		  	/*=============================================
+ 	 		TRAEMOS LAS ACCIONES
+  			=============================================*/ 
+
+  			if(isset($_GET["perfilOculto"]) && $_GET["perfilOculto"] == "Especial"){
+
+  				$botones =  "<div class='btn-group'><button class='btn btn-warning btnEditarProducto' idProducto='".$productos[$i]["id"]."' data-toggle='modal' data-target='#modalEditarProducto'><i class='fa fa-pencil'></i></button></div>"; 
+
+  			}else{
+
+  				 $botones =  "<div class='btn-group'><button class='btn btn-warning btnEditarProducto' idProducto='".$productos[$i]["id"]."' data-toggle='modal' data-target='#modalEditarProducto'><i class='fa fa-pencil'></i></button><button class='btn btn-danger btnEliminarProducto' idProducto='".$productos[$i]["id"]."' codigo='".$productos[$i]["codigo"]."' imagen='".$productos[$i]["imagen"]."'><i class='fa fa-times'></i></button></div>"; 
+
+  			}
+
+		 
+		  	$datosJson .='[
+			      "'.($i+1).'",
+			      "'.$imagen.'",
+			      "'.$productos[$i]["codigo"].'",
+			      "'.$productos[$i]["descripcion"].'",
+			      "'.$categorias["categoria"].'",
+			      "'.$stock.'",
+			      "'.$productos[$i]["precio_compra"].'",
+			      "'.$productos[$i]["precio_venta"].'",
+			      "'.$productos[$i]["fecha"].'",
+			      "'.$botones.'"
+			    ],';
+
+		  }
+
+		  $datosJson = substr($datosJson, 0, -1);
+
+		 $datosJson .=   '] 
+
+		 }';
+		
+		echo $datosJson;
+
+
+	}
+
+
+
 }
 
-//Activar tabla de productos
+/*=============================================
+ACTIVAR TABLA DE PRODUCTOS
+=============================================*/ 
 $activarProductos = new TablaProductos();
 $activarProductos -> mostrarTablaProductos();
 
-                    

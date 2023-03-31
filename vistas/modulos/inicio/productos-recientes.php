@@ -39,7 +39,7 @@ $productos = ControladorProductos::ctrMostrarProductos($item, $valor, $orden);
 
     <?php
 
-    for($i = 0; $i < 5; $i++){
+    for($i = 0; $i < 10; $i++){
 
       echo '<li class="item">
 

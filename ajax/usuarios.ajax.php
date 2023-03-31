@@ -1,7 +1,7 @@
 <?php
 
 require_once "../controladores/usuarios.controlador.php";
-require_once "../modelos/usuario.modelo.php";
+require_once "../modelos/usuarios.modelo.php";
 
 class AjaxUsuarios{
 
@@ -10,7 +10,7 @@ class AjaxUsuarios{
 	=============================================*/	
 
 	public $idUsuario;
-	//si lo pasas a estatico ya en editar no funciona
+
 	public function ajaxEditarUsuario(){
 
 		$item = "id";
@@ -29,7 +29,7 @@ class AjaxUsuarios{
 	public $activarUsuario;
 	public $activarId;
 
-	//si lo pasas a estatico ya  no funciona el metodo
+
 	public function ajaxActivarUsuario(){
 
 		$tabla = "usuarios";
@@ -97,5 +97,3 @@ if(isset( $_POST["validarUsuario"])){
 	$valUsuario -> ajaxValidarUsuario();
 
 }
-
-    

@@ -3,13 +3,16 @@
 require_once "conexion.php";
 
 class ModeloProductos{
-    //mostrar Productos
 
-    static public function mdlMostrarProductos($tabla, $item, $valor, $orden){
+	/*=============================================
+	MOSTRAR PRODUCTOS
+	=============================================*/
 
-        if($item != null){
-         
-            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item ORDER BY id DESC" );
+	static public function mdlMostrarProductos($tabla, $item, $valor, $orden){
+
+		if($item != null){
+
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item ORDER BY id DESC");
 
 			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
 
@@ -17,24 +20,26 @@ class ModeloProductos{
 
 			return $stmt -> fetch();
 
-            
-        }else{
+		}else{
 
-            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY $orden DESC");
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY $orden DESC");
 
 			$stmt -> execute();
 
 			return $stmt -> fetchAll();
 
-        }
+		}
 
-        $stmt -> close();
+		$stmt -> close();
 
 		$stmt = null;
-    }
 
-    //registro de productos
-    static public function mdlIngresarProducto($tabla, $datos){
+	}
+
+	/*=============================================
+	REGISTRO DE PRODUCTO
+	=============================================*/
+	static public function mdlIngresarProducto($tabla, $datos){
 
 		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_categoria, codigo, descripcion, imagen, stock, precio_compra, precio_venta) VALUES (:id_categoria, :codigo, :descripcion, :imagen, :stock, :precio_compra, :precio_venta)");
 
@@ -58,14 +63,15 @@ class ModeloProductos{
 
 		$stmt->close();
 		$stmt = null;
-    }
 
-	//editar de productos
-    static public function mdlEditarProducto($tabla, $datos){
+	}
+
+	/*=============================================
+	EDITAR PRODUCTO
+	=============================================*/
+	static public function mdlEditarProducto($tabla, $datos){
 
 		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET id_categoria = :id_categoria, descripcion = :descripcion, imagen = :imagen, stock = :stock, precio_compra = :precio_compra, precio_venta = :precio_venta WHERE codigo = :codigo");
-
-	
 
 		$stmt->bindParam(":id_categoria", $datos["id_categoria"], PDO::PARAM_INT);
 		$stmt->bindParam(":codigo", $datos["codigo"], PDO::PARAM_STR);
@@ -87,32 +93,37 @@ class ModeloProductos{
 
 		$stmt->close();
 		$stmt = null;
-    }
-	//borrar producot
-	static public function mdlEliminarProducto($tabla, $datos){
-		
-		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id = :id");
-    
-            $stmt -> bindParam(":id", $datos, PDO::PARAM_INT);
-    
-            if($stmt -> execute()){
-    
-                return "ok";
-            
-            }else{
-    
-                return "error";	
-    
-            }
-    
-            $stmt -> close();
-    
-            $stmt = null;
 
 	}
 
 	/*=============================================
-	ACTUALIZAR productos
+	BORRAR PRODUCTO
+	=============================================*/
+
+	static public function mdlEliminarProducto($tabla, $datos){
+
+		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id = :id");
+
+		$stmt -> bindParam(":id", $datos, PDO::PARAM_INT);
+
+		if($stmt -> execute()){
+
+			return "ok";
+		
+		}else{
+
+			return "error";	
+
+		}
+
+		$stmt -> close();
+
+		$stmt = null;
+
+	}
+
+	/*=============================================
+	ACTUALIZAR PRODUCTO
 	=============================================*/
 
 	static public function mdlActualizarProducto($tabla, $item1, $valor1, $valor){
@@ -135,7 +146,9 @@ class ModeloProductos{
 		$stmt -> close();
 
 		$stmt = null;
+
 	}
+
 	/*=============================================
 	MOSTRAR SUMA VENTAS
 	=============================================*/	
@@ -152,5 +165,6 @@ class ModeloProductos{
 
 		$stmt = null;
 	}
+
 
 }

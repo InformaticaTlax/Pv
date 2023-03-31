@@ -1,36 +1,36 @@
-//Editar Categoria
+/*=============================================
+EDITAR CATEGORIA
+=============================================*/
+$(".tablas").on("click", ".btnEditarCategoria", function(){
 
+	var idCategoria = $(this).attr("idCategoria");
 
-$(".btnEditarCategoria").click(function(){
+	var datos = new FormData();
+	datos.append("idCategoria", idCategoria);
 
-    var idCategoria = $(this).attr("idCategoria");
+	$.ajax({
+		url: "ajax/categorias.ajax.php",
+		method: "POST",
+      	data: datos,
+      	cache: false,
+     	contentType: false,
+     	processData: false,
+     	dataType:"json",
+     	success: function(respuesta){
 
-    var datos = new FormData();
-    datos.append("idCategoria", idCategoria);
+     		$("#editarCategoria").val(respuesta["categoria"]);
+     		$("#idCategoria").val(respuesta["id"]);
 
-    $.ajax({
+     	}
 
-            url:"ajax/categorias.ajax.php",
-            method:"POST",
-            data:datos,
-            cache: false,
-            contentType: false,
-            processData: false,
-            dataType:"json",
-            success: function(respuesta){
+	})
 
-                $("#editarCategoria").val(respuesta["categoria"]);
-                $("#idCategoria").val(respuesta["id"]);
-                
-                
-            }
-
-    })
 
 })
 
-//Eliminar categoria
-
+/*=============================================
+ELIMINAR CATEGORIA
+=============================================*/
 $(".tablas").on("click", ".btnEliminarCategoria", function(){
 
 	 var idCategoria = $(this).attr("idCategoria");
@@ -55,4 +55,3 @@ $(".tablas").on("click", ".btnEliminarCategoria", function(){
 	 })
 
 })
-    

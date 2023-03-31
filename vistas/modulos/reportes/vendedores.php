@@ -41,14 +41,19 @@ $noRepetirNombres = array_unique($arrayVendedores);
 ?>
 
 
-<div class="box box-succes">
+<!--=====================================
+VENDEDORES
+======================================-->
 
-    <div class="box-header with-border">
+<div class="box box-success">
+	
+	<div class="box-header with-border">
     
-        <h3 class="box-title">Vendedores</h3>
+    	<h3 class="box-title">Vendedores</h3>
+  
+  	</div>
 
-    </div>
-    <div class="box-body">
+  	<div class="box-body">
   		
 		<div class="chart-responsive">
 			
@@ -57,7 +62,6 @@ $noRepetirNombres = array_unique($arrayVendedores);
 		</div>
 
   	</div>
-
 
 </div>
 

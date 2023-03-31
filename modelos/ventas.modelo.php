@@ -1,9 +1,14 @@
 <?php
+
 require_once "conexion.php";
 
 class ModeloVentas{
-    //Mostrar Ventas
-    static public function mdlMostrarVentas($tabla, $item, $valor){
+
+	/*=============================================
+	MOSTRAR VENTAS
+	=============================================*/
+
+	static public function mdlMostrarVentas($tabla, $item, $valor){
 
 		if($item != null){
 
@@ -30,6 +35,7 @@ class ModeloVentas{
 		$stmt = null;
 
 	}
+
 	/*=============================================
 	REGISTRO DE VENTA
 	=============================================*/
@@ -61,8 +67,9 @@ class ModeloVentas{
 		$stmt = null;
 
 	}
+
 	/*=============================================
-	REGISTRO DE VENTA
+	EDITAR VENTA
 	=============================================*/
 
 	static public function mdlEditarVenta($tabla, $datos){
@@ -118,7 +125,11 @@ class ModeloVentas{
 		$stmt = null;
 
 	}
-	//Rnago de fecha
+
+	/*=============================================
+	RANGO FECHAS
+	=============================================*/	
+
 	static public function mdlRangoFechasVentas($tabla, $fechaInicial, $fechaFinal){
 
 		if($fechaInicial == null){

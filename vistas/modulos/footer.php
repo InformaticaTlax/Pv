@@ -1,7 +1,8 @@
 <footer class="main-footer">
-    <strong>>Copyrigth &copy; 2017 
-        <a href="https://www.duvalin.com.mx" target="blank">
-        </a>.
-    </strong>
-    Todos los Derechos Reservados.
+	
+	<strong>Copyright &copy; 2017 <a href="https://www.tutorialesatualcance.com" target="_blank">Tutoriales a tu Alcance</a>.</strong>
+
+	Todos los derechos reservados.
+
+
 </footer>

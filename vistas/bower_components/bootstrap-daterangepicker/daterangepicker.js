@@ -70,7 +70,7 @@
             applyLabel: 'Aplicar',
             cancelLabel: 'Cancelar',
             weekLabel: 'W',
-            customRangeLabel: 'Rango personalizado',
+            customRangeLabel: 'Rango Personalizado',
             daysOfWeek: moment.weekdaysMin(),
             monthNames: moment.monthsShort(),
             firstDay: moment.localeData().firstDayOfWeek()

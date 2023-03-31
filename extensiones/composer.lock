@@ -1,23 +1,23 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "23a4a975105438af5ec640433c0bbc0c",
+    "content-hash": "8679a847d6e986ada27c09d9f5a298a7",
     "packages": [
         {
             "name": "mike42/escpos-php",
-            "version": "v2.2",
+            "version": "v2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mike42/escpos-php.git",
-                "reference": "e5496cf819b048b11877117bd14a9cea4fb17c03"
+                "reference": "416e340f9cb90fa40611484f1b3c68df06205a84"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mike42/escpos-php/zipball/e5496cf819b048b11877117bd14a9cea4fb17c03",
-                "reference": "e5496cf819b048b11877117bd14a9cea4fb17c03",
+                "url": "https://api.github.com/repos/mike42/escpos-php/zipball/416e340f9cb90fa40611484f1b3c68df06205a84",
+                "reference": "416e340f9cb90fa40611484f1b3c68df06205a84",
                 "shasum": ""
             },
             "require": {
@@ -59,11 +59,7 @@
                 "print",
                 "receipt"
             ],
-            "support": {
-                "issues": "https://github.com/mike42/escpos-php/issues",
-                "source": "https://github.com/mike42/escpos-php/tree/v2.2"
-            },
-            "time": "2019-10-05T05:59:00+00:00"
+            "time": "2018-06-30T03:06:21+00:00"
         }
     ],
     "packages-dev": [],
@@ -73,6 +69,5 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
-    "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "platform-dev": []
 }

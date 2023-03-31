@@ -1,64 +1,50 @@
 <?php
 
 error_reporting(0);
-    
-    if(isset($_GET["fechaInicial"])){
 
-        
+if(isset($_GET["fechaInicial"])){
 
-        $fechaInicial =$_GET["fechaInicial"];
-        $fechaFinal =$_GET["fechaFinal"];
+    $fechaInicial = $_GET["fechaInicial"];
+    $fechaFinal = $_GET["fechaFinal"];
 
-      }else{
-        
-        $fechaInicial =null;
-        $fechaFinal =null;
+}else{
 
-      }
+$fechaInicial = null;
+$fechaFinal = null;
+
+}
+
+$respuesta = ControladorVentas::ctrRangoFechasVentas($fechaInicial, $fechaFinal);
+
+$arrayFechas = array();
+$arrayVentas = array();
+$sumaPagosMes = array();
+
+foreach ($respuesta as $key => $value) {
+
+	#Capturamos sólo el año y el mes
+	$fecha = substr($value["fecha"],0,7);
+
+	#Introducir las fechas en arrayFechas
+	array_push($arrayFechas, $fecha);
+
+	#Capturamos las ventas
+	$arrayVentas = array($fecha => $value["total"]);
+
+	#Sumamos los pagos que ocurrieron el mismo mes
+	foreach ($arrayVentas as $key => $value) {
+		
+		$sumaPagosMes[$key] += $value;
+	}
+
+}
 
 
-      $respuesta = ControladorVentas::ctrRangoFechasVentas($fechaInicial, $fechaFinal);
-
-      $arrayFechas = array();
-      $arrayVentas = array();
-
-      //var_dump($respuesta);
-      foreach($respuesta as $key => $value){
-
-        //var_dump($value);
-        //var_dump($value["fecha"]);
-
-
-        #capturamos solo el año, mes y dia
-        $fecha = substr($value["fecha"],0,7);
-        //var_dump($fecha);
-
-        #introducimos las fechas en el arrayfechas
-        array_push($arrayFechas, $fecha);
-
-        #capturamos las ventas
-        $arrayVentas = array($fecha => $value["total"]);
-
-
-        #introducimos las ventas en al $arrayVentas
-        //array_push($arrayVentas, $ventas);
-        //var_dump($arrayVentas);
-
-        foreach($arrayVentas as $key => $value){
-
-            $sumaPagoMes[$key] += $value; 
-
-        }
-      }
-      //var_dump($sumaPagoMes);
-
-     $noRepetirFechas = array_unique($arrayFechas);
-
-     //var_dump($noRepetirFechas);
-      
+$noRepetirFechas = array_unique($arrayFechas);
 
 
 ?>
+
 <!--=====================================
 GRÁFICO DE VENTAS
 ======================================-->
@@ -90,26 +76,30 @@ GRÁFICO DE VENTAS
     data             : [
 
     <?php
+
     if($noRepetirFechas != null){
 
-        foreach($noRepetirFechas as $key ){
+	    foreach($noRepetirFechas as $key){
 
-            echo "{ y: '".$key."', ventas: ".$sumaPagoMes[$key]." },";
+	    	echo "{ y: '".$key."', ventas: ".$sumaPagosMes[$key]." },";
 
-        }
-        echo "{ y: '".$key."', ventas: ".$sumaPagoMes[$key]." }";
-    
+
+	    }
+
+	    echo "{y: '".$key."', ventas: ".$sumaPagosMes[$key]." }";
+
     }else{
 
-            echo "{ y: '0', ventas: '0' }";
-     
-         }    
+       echo "{ y: '0', ventas: '0' }";
+
+    }
 
     ?>
+
     ],
     xkey             : 'y',
     ykeys            : ['ventas'],
-    labels           : ['Ventas '],
+    labels           : ['ventas'],
     lineColors       : ['#efefef'],
     lineWidth        : 2,
     hideHover        : 'auto',
@@ -119,7 +109,7 @@ GRÁFICO DE VENTAS
     pointStrokeColors: ['#efefef'],
     gridLineColor    : '#efefef',
     gridTextFamily   : 'Open Sans',
-    preUnits         : '$ ',
+    preUnits         : '$',
     gridTextSize     : 10
   });
 

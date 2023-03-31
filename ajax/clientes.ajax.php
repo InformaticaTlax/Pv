@@ -5,25 +5,34 @@ require_once "../modelos/clientes.modelo.php";
 
 class AjaxClientes{
 
-    //editar cliente
+	/*=============================================
+	EDITAR CLIENTE
+	=============================================*/	
 
-    public $idCliente;
+	public $idCliente;
 
-    public function ajaxEditarCliente(){
-        $item = "id";
-        $valor = $this->idCliente;
+	public function ajaxEditarCliente(){
 
-        $respuesta = ControladorClientes::ctrMostrarClientes($item, $valor);
+		$item = "id";
+		$valor = $this->idCliente;
 
-        echo json_encode($respuesta);
+		$respuesta = ControladorClientes::ctrMostrarClientes($item, $valor);
 
-    }
+		echo json_encode($respuesta);
+
+
+	}
 
 }
-//editar cliente
+
+/*=============================================
+EDITAR CLIENTE
+=============================================*/	
 
 if(isset($_POST["idCliente"])){
-    $cliente = new AjaxClientes();
-    $cliente -> idCliente = $_POST["idCliente"];
-    $cliente -> ajaxEditarCliente();
+
+	$cliente = new AjaxClientes();
+	$cliente -> idCliente = $_POST["idCliente"];
+	$cliente -> ajaxEditarCliente();
+
 }

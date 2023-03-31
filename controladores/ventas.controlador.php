@@ -1,6 +1,5 @@
 <?php
 
-//require __DIR__ . '/ticket/autoload.php'; //Nota: si renombraste la carpeta a algo diferente de "ticket" cambia el nombre en esta línea
 use Mike42\Escpos\Printer;
 use Mike42\Escpos\EscposImage;
 use Mike42\Escpos\PrintConnectors\FilePrintConnector;
@@ -34,6 +33,29 @@ class ControladorVentas{
 			ACTUALIZAR LAS COMPRAS DEL CLIENTE Y REDUCIR EL STOCK Y AUMENTAR LAS VENTAS DE LOS PRODUCTOS
 			=============================================*/
 
+			if($_POST["listaProductos"] == ""){
+
+					echo'<script>
+
+				swal({
+					  type: "error",
+					  title: "La venta no se ha ejecuta si no hay productos",
+					  showConfirmButton: true,
+					  confirmButtonText: "Cerrar"
+					  }).then(function(result){
+								if (result.value) {
+
+								window.location = "ventas";
+
+								}
+							})
+
+				</script>';
+
+				return;
+			}
+
+
 			$listaProductos = json_decode($_POST["listaProductos"], true);
 
 			$totalProductosComprados = array();
@@ -46,11 +68,9 @@ class ControladorVentas{
 
 			    $item = "id";
 			    $valor = $value["id"];
-				$orden = "id";
+			    $orden = "id";
 
-			    //$traerProducto = ModeloProductos::mdlMostrarProductos($tablaProductos, $item, $valor);
-				$traerProducto = ModeloProductos::mdlMostrarProductos($tablaProductos, $item, $valor, $orden);
-
+			    $traerProducto = ModeloProductos::mdlMostrarProductos($tablaProductos, $item, $valor, $orden);
 
 				$item1a = "ventas";
 				$valor1a = $value["cantidad"] + $traerProducto["ventas"];
@@ -72,13 +92,14 @@ class ControladorVentas{
 			$traerCliente = ModeloClientes::mdlMostrarClientes($tablaClientes, $item, $valor);
 
 			$item1a = "compras";
+				
 			$valor1a = array_sum($totalProductosComprados) + $traerCliente["compras"];
 
 			$comprasCliente = ModeloClientes::mdlActualizarCliente($tablaClientes, $item1a, $valor1a, $valor);
 
 			$item1b = "ultima_compra";
 
-			date_default_timezone_set('America/Mexico_City');
+			date_default_timezone_set('America/Bogota');
 
 			$fecha = date('Y-m-d');
 			$hora = date('H:i:s');
@@ -105,19 +126,19 @@ class ControladorVentas{
 
 			if($respuesta == "ok"){
 
-				//usar impresora
-				// $impresora = "HP LaserJet Pro MFP M521 PCL 6";
+				// $impresora = "epson20";
 
 				// $conector = new WindowsPrintConnector($impresora);
 
 				// $imprimir = new Printer($conector);
 
-				// $imprimir -> text("hola mundo"."\n");
+				// $imprimir -> text("Hola Mundo"."\n");
 
 				// $imprimir -> cut();
+
 				// $imprimir -> close();
 
-				$impresora = "HP LaserJet Pro MFP M521 PCL 6";
+				$impresora = "epson20";
 
 				$conector = new WindowsPrintConnector($impresora);
 
@@ -129,13 +150,13 @@ class ControladorVentas{
 
 				$printer -> feed(1); //Alimentamos el papel 1 vez*/
 
-				$printer -> text("Dulceria Duvalin"."\n");//Nombre de la empresa
+				$printer -> text("Inventory System"."\n");//Nombre de la empresa
 
-				$printer -> text("NIT: XXXXX"."\n");//Nit de la empresa
+				$printer -> text("NIT: 71.759.963-9"."\n");//Nit de la empresa
 
-				$printer -> text("Dirección: Manuel Saldaña sur 37"."\n");//Dirección de la empresa
+				$printer -> text("Dirección: Calle 44B 92-11"."\n");//Dirección de la empresa
 
-				$printer -> text("Teléfono: 246 xxx xx xx"."\n");//Teléfono de la empresa
+				$printer -> text("Teléfono: 300 786 52 49"."\n");//Teléfono de la empresa
 
 				$printer -> text("FACTURA N.".$_POST["nuevaVenta"]."\n");//Número de factura
 
@@ -164,6 +185,7 @@ class ControladorVentas{
 					$printer->text("$ ".number_format($value["precio"],2)." Und x ".$value["cantidad"]." = $ ".number_format($value["total"],2)."\n");
 
 				}
+
 				$printer -> feed(1); //Alimentamos el papel 1 vez*/			
 				
 				$printer->text("NETO: $ ".number_format($_POST["nuevoPrecioNeto"],2)."\n"); //ahora va el neto
@@ -186,6 +208,7 @@ class ControladorVentas{
 
 				$printer -> close();
 
+	
 				echo'<script>
 
 				localStorage.removeItem("rango");
@@ -195,7 +218,7 @@ class ControladorVentas{
 					  title: "La venta ha sido guardada correctamente",
 					  showConfirmButton: true,
 					  confirmButtonText: "Cerrar"
-					  }).then((result) => {
+					  }).then(function(result){
 								if (result.value) {
 
 								window.location = "ventas";
@@ -261,7 +284,6 @@ class ControladorVentas{
 					$valor = $value["id"];
 					$orden = "id";
 
-					//$traerProducto = ModeloProductos::mdlMostrarProductos($tablaProductos, $item, $valor);
 					$traerProducto = ModeloProductos::mdlMostrarProductos($tablaProductos, $item, $valor, $orden);
 
 					$item1a = "ventas";
@@ -284,7 +306,7 @@ class ControladorVentas{
 				$traerCliente = ModeloClientes::mdlMostrarClientes($tablaClientes, $itemCliente, $valorCliente);
 
 				$item1a = "compras";
-				$valor1a = $traerCliente["compras"] - array_sum($totalProductosComprados);
+				$valor1a = $traerCliente["compras"] - array_sum($totalProductosComprados);		
 
 				$comprasCliente = ModeloClientes::mdlActualizarCliente($tablaClientes, $item1a, $valor1a, $valorCliente);
 
@@ -328,13 +350,14 @@ class ControladorVentas{
 				$traerCliente_2 = ModeloClientes::mdlMostrarClientes($tablaClientes_2, $item_2, $valor_2);
 
 				$item1a_2 = "compras";
+
 				$valor1a_2 = array_sum($totalProductosComprados_2) + $traerCliente_2["compras"];
 
 				$comprasCliente_2 = ModeloClientes::mdlActualizarCliente($tablaClientes_2, $item1a_2, $valor1a_2, $valor_2);
 
 				$item1b_2 = "ultima_compra";
 
-				date_default_timezone_set('America/Mexico_City');
+				date_default_timezone_set('America/Bogota');
 
 				$fecha = date('Y-m-d');
 				$hora = date('H:i:s');
@@ -387,6 +410,7 @@ class ControladorVentas{
 
 	}
 
+
 	/*=============================================
 	ELIMINAR VENTA
 	=============================================*/
@@ -424,6 +448,7 @@ class ControladorVentas{
 				}
 
 			}
+
 			if(count($guardarFechas) > 1){
 
 				if($traerVenta["fecha"] > $guardarFechas[count($guardarFechas)-2]){
@@ -513,9 +538,8 @@ class ControladorVentas{
 					  type: "success",
 					  title: "La venta ha sido borrada correctamente",
 					  showConfirmButton: true,
-					  confirmButtonText: "Cerrar",
-					  closeOnConfirm: false
-					  }).then((result) => {
+					  confirmButtonText: "Cerrar"
+					  }).then(function(result){
 								if (result.value) {
 
 								window.location = "ventas";
@@ -529,7 +553,11 @@ class ControladorVentas{
 		}
 
 	}
-	//Rango de Fechas
+
+	/*=============================================
+	RANGO FECHAS
+	=============================================*/	
+
 	static public function ctrRangoFechasVentas($fechaInicial, $fechaFinal){
 
 		$tabla = "ventas";
@@ -540,9 +568,12 @@ class ControladorVentas{
 		
 	}
 
-	//descargar  excel
+	/*=============================================
+	DESCARGAR EXCEL
+	=============================================*/
 
 	public function ctrDescargarReporte(){
+
 		if(isset($_GET["reporte"])){
 
 			$tabla = "ventas";
@@ -560,7 +591,10 @@ class ControladorVentas{
 
 			}
 
-			//creamos el archivo de excel
+
+			/*=============================================
+			CREAMOS EL ARCHIVO DE EXCEL
+			=============================================*/
 
 			$Name = $_GET["reporte"].'.xls';
 
@@ -573,7 +607,7 @@ class ControladorVentas{
 			header("Pragma: public"); 
 			header('Content-Disposition:; filename="'.$Name.'"');
 			header("Content-Transfer-Encoding: binary");
-
+		
 			echo utf8_decode("<table border='0'> 
 
 					<tr> 
@@ -625,6 +659,8 @@ class ControladorVentas{
 
 
 			}
+
+
 			echo "</table>";
 
 		}
@@ -636,7 +672,7 @@ class ControladorVentas{
 	SUMA TOTAL VENTAS
 	=============================================*/
 
-	static public function ctrSumaTotalVentas(){
+	public function ctrSumaTotalVentas(){
 
 		$tabla = "ventas";
 
@@ -646,10 +682,14 @@ class ControladorVentas{
 
 	}
 
-	//descagar xml
+	/*=============================================
+	DESCARGAR XML
+	=============================================*/
 
 	static public function ctrDescargarXML(){
+
 		if(isset($_GET["xml"])){
+
 
 			$tabla = "ventas";
 			$item = "codigo";
@@ -677,7 +717,6 @@ class ControladorVentas{
 
 			$traerVendedor = ModeloUsuarios::mdlMostrarUsuarios($tablaVendedor, $item, $valor);
 
-
 			//http://php.net/manual/es/book.xmlwriter.php
 
 			$objetoXML = new XMLWriter();
@@ -692,43 +731,40 @@ class ControladorVentas{
 			
 			// $objetoXML->startElement("etiquetaPrincipal");// Inicio del nodo raíz
 
-			// 	$objetoXML->writeAttribute("atributoEtiquetaPPal", "valor atributo etiqueta PPal"); // Atributo etiqueta principal
+			// $objetoXML->writeAttribute("atributoEtiquetaPPal", "valor atributo etiqueta PPal"); // Atributo etiqueta principal
 
-			// 		$objetoXML->startElement("etiquetaInterna");// Inicio del nodo hijo
+			// 	$objetoXML->startElement("etiquetaInterna");// Inicio del nodo hijo
 
-			// 			$objetoXML->writeAttribute("atributoEtiquetaInterna", "valor atributo etiqueta Interna"); // Atributo etiqueta interna
+			// 		$objetoXML->writeAttribute("atributoEtiquetaInterna", "valor atributo etiqueta Interna"); // Atributo etiqueta interna
 
-			// 			$objetoXML->text("Texto interno");// Inicio del nodo hijo
-				
+			// 		$objetoXML->text("Texto interno");// Inicio del nodo hijo
+			
 			// 	$objetoXML->endElement(); // Final del nodo hijo
 			
 			// $objetoXML->endElement(); // Final del nodo raíz
+
+
 			$objetoXML->writeRaw('<fe:Invoice xmlns:fe="http://www.dian.gov.co/contratos/facturaelectronica/v1" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:clm54217="urn:un:unece:uncefact:codelist:specification:54217:2001" xmlns:clm66411="urn:un:unece:uncefact:codelist:specification:66411:2001" xmlns:clmIANAMIMEMediaType="urn:un:unece:uncefact:codelist:specification:IANAMIMEMediaType:2003" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns:qdt="urn:oasis:names:specification:ubl:schema:xsd:QualifiedDatatypes-2" xmlns:sts="http://www.dian.gov.co/contratos/facturaelectronica/v1/Structures" xmlns:udt="urn:un:unece:uncefact:data:specification:UnqualifiedDataTypesSchemaModule:2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.dian.gov.co/contratos/facturaelectronica/v1 ../xsd/DIAN_UBL.xsd urn:un:unece:uncefact:data:specification:UnqualifiedDataTypesSchemaModule:2 ../../ubl2/common/UnqualifiedDataTypeSchemaModule-2.0.xsd urn:oasis:names:specification:ubl:schema:xsd:QualifiedDatatypes-2 ../../ubl2/common/UBL-QualifiedDatatypes-2.0.xsd">');
 
 			$objetoXML->writeRaw('<ext:UBLExtensions>');
+
+			foreach ($listaProductos as $key => $value) {
+				
+				$objetoXML->text($value["descripcion"].", ");
 			
-			//$objetoXML->text($traerCliente["nombre"]);
+			}
 
-			//$objetoXML->text("texto Interno");
+			
 
-				foreach ($listaProductos as $key => $value) {
-					
-					$objetoXML->text($value["descripcion"].", ");
-				
-				}
-				
-	
 			$objetoXML->writeRaw('</ext:UBLExtensions>');
 
-			$objetoXML->text("texto Interno");
-						
-			$objetoXML->writeRaw('</fe:Invoice>');				
-			
-			$objetoXML->endDocument();//fin del documento
+			$objetoXML->writeRaw('</fe:Invoice>');
 
-			return true;
+			$objetoXML->endDocument(); // Final del documento
+
+			return true;	
 		}
-		
+
 	}
 
 }

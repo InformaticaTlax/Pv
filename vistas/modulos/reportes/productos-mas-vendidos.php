@@ -5,90 +5,102 @@ $valor = null;
 $orden = "ventas";
 
 $productos = ControladorProductos::ctrMostrarProductos($item, $valor, $orden);
-//var_dump($productos);
 
 $colores = array("red","green","yellow","aqua","purple","blue","cyan","magenta","orange","gold");
 
 $totalVentas = ControladorProductos::ctrMostrarSumaVentas();
 
+
 ?>
 
+<!--=====================================
+PRODUCTOS MÁS VENDIDOS
+======================================-->
+
 <div class="box box-default">
+	
+	<div class="box-header with-border">
+  
+      <h3 class="box-title">Productos más vendidos</h3>
 
-            <div class="box-header with-border">
+    </div>
 
-              <h3 class="box-title">Productos mas Vendidos</h3>
+	<div class="box-body">
+    
+      	<div class="row">
 
-            </div>
+	        <div class="col-md-7">
 
-            <!-- /.box-header -->
-            <div class="box-body">
+	 			<div class="chart-responsive">
+	            
+	            	<canvas id="pieChart" height="150"></canvas>
+	          
+	          	</div>
 
-              <div class="row">
+	        </div>
 
-                <div class="col-md-7">
+		    <div class="col-md-5">
+		      	
+		  	 	<ul class="chart-legend clearfix">
 
-                  <div class="chart-responsive">
+		  	 	<?php
 
-                    <canvas id="pieChart" height="150"></canvas>
+					for($i = 0; $i < 10; $i++){
 
-                  </div>
-                  <!-- ./chart-responsive -->
-                </div>
+					echo ' <li><i class="fa fa-circle-o text-'.$colores[$i].'"></i> '.$productos[$i]["descripcion"].'</li>';
+
+					}
 
 
-                <!-- /.col -->
-                <div class="col-md-5">
-                  <ul class="chart-legend clearfix">
-                    <?php
+		  	 	?>
 
-                      for($i = 0; $i < 10; $i++){
-                        
-                        echo ' <li><i class="fa fa-circle-o text-'.$colores[$i].'"></i>   '.$productos[$i]["descripcion"].'</li>';
 
-                      }
-                    
-                    ?>
-                    
-                  </ul>
-                </div>
+		  	 	</ul>
 
-                <!-- /.col -->
-              </div>
+		    </div>
 
-              <!-- /.row -->
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer no-padding">
-              <ul class="nav nav-pills nav-stacked">
-              
-              <?php
-              
-              for($i = 0; $i < 5; $i++){
+		</div>
 
-                echo '<li>
-                  <a href="#">
-                    
-                  '.$productos[$i]["descripcion"].'
-                    
-                      <span class="pull-right text-'.$colores[$i].'"><i class="fa fa-angle-down"></i> '.ceil($productos[$i]["ventas"]*100/$totalVentas["total"]).'%</span>
-                      </a>
-                      </li>';
-                
+    </div>
 
-              }
-            
-              ?>
-              
-              </ul>
-            </div>
+    <div class="box-footer no-padding">
+    	
+		<ul class="nav nav-pills nav-stacked">
+			
+			 <?php
 
-            <!-- /.footer -->
+          	for($i = 0; $i <5; $i++){
+			
+          		echo '<li>
+						 
+						 <a>
+
+						 <img src="'.$productos[$i]["imagen"].'" class="img-thumbnail" width="60px" style="margin-right:10px"> 
+						 '.$productos[$i]["descripcion"].'
+
+						 <span class="pull-right text-'.$colores[$i].'">   
+						 '.ceil($productos[$i]["ventas"]*100/$totalVentas["total"]).'%
+						 </span>
+							
+						 </a>
+
+      				</li>';
+
+			}
+
+			?>
+
+
+		</ul>
+
+    </div>
+
 </div>
 
 <script>
+	
 
-    // -------------
+  // -------------
   // - PIE CHART -
   // -------------
   // Get context with jQuery - using jQuery's .get() method.
@@ -96,11 +108,11 @@ $totalVentas = ControladorProductos::ctrMostrarSumaVentas();
   var pieChart       = new Chart(pieChartCanvas);
   var PieData        = [
 
-<?php
+  <?php
 
   for($i = 0; $i < 10; $i++){
 
-    echo "{
+  	echo "{
       value    : ".$productos[$i]["ventas"].",
       color    : '".$colores[$i]."',
       highlight: '".$colores[$i]."',
@@ -108,9 +120,9 @@ $totalVentas = ControladorProductos::ctrMostrarSumaVentas();
     },";
 
   }
-  
- ?>
-];
+    
+   ?>
+  ];
   var pieOptions     = {
     // Boolean - Whether we should show a stroke on each segment
     segmentShowStroke    : true,
@@ -143,5 +155,6 @@ $totalVentas = ControladorProductos::ctrMostrarSumaVentas();
   // -----------------
   // - END PIE CHART -
   // -----------------
+
 
 </script>
