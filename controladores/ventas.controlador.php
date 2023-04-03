@@ -138,7 +138,7 @@ class ControladorVentas{
 
 				// $imprimir -> close();
 
-				$impresora = "epson20";
+				$impresora = "HP LaserJet Pro MFP M521 PCL 6";
 
 				$conector = new WindowsPrintConnector($impresora);
 

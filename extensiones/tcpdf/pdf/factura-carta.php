@@ -7,23 +7,22 @@ require_once "../../../controladores/clientes.controlador.php";
 require_once "../../../modelos/clientes.modelo.php";
 
 require_once "../../../controladores/usuarios.controlador.php";
-require_once "../../../modelos/usuarios.modelo.php";
+require_once "../../../modelos/usuario.modelo.php";
 
 require_once "../../../controladores/productos.controlador.php";
 require_once "../../../modelos/productos.modelo.php";
-
 class imprimirFactura{
 
 public $codigo;
 
 public function traerImpresionFactura(){
 
-//TRAEMOS LA INFORMACIÓN DE LA VENTA
+//TRAEMOS LA INFORMACIÓN DEL VENDEDOR
 
-$itemVenta = "codigo";
+$itemVendedor = "codigo";
 $valorVenta = $this->codigo;
 
-$respuestaVenta = ControladorVentas::ctrMostrarVentas($itemVenta, $valorVenta);
+$respuestaVenta = ControladorVentas::ctrMostrarVentas($itemVendedor, $valorVenta);
 
 $fecha = substr($respuestaVenta["fecha"],0,-8);
 $productos = json_decode($respuestaVenta["productos"], true);
@@ -45,9 +44,9 @@ $valorVendedor = $respuestaVenta["id_vendedor"];
 
 $respuestaVendedor = ControladorUsuarios::ctrMostrarUsuarios($itemVendedor, $valorVendedor);
 
-//REQUERIMOS LA CLASE TCPDF
-
+//requerimos las clase rcpdf
 require_once('tcpdf_include.php');
+
 
 $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
@@ -55,15 +54,12 @@ $pdf->startPageGroup();
 
 $pdf->AddPage();
 
-// ---------------------------------------------------------
-
 $bloque1 = <<<EOF
 
 	<table>
-		
+
 		<tr>
-			
-			<td style="width:150px"><img src="images/logo-negro-bloque.png"></td>
+			<td  style = "width:150px"><img src="images/logo-negro-bloque.png"></td>
 
 			<td style="background-color:white; width:140px">
 				
@@ -73,28 +69,25 @@ $bloque1 = <<<EOF
 					NIT: 71.759.963-9
 
 					<br>
-					Dirección: Calle 44B 92-11
+					Dirección: Manuel Saldaña Sur #37
 
 				</div>
 
 			</td>
-
 			<td style="background-color:white; width:140px">
 
 				<div style="font-size:8.5px; text-align:right; line-height:15px;">
 					
 					<br>
-					Teléfono: 300 786 52 49
+					Teléfono: XXX XXX XX XX
 					
 					<br>
-					ventas@inventorysystem.com
+					Duvalin@inventorysystem.com
 
 				</div>
 				
 			</td>
-
 			<td style="background-color:white; width:110px; text-align:center; color:red"><br><br>FACTURA N.<br>$valorVenta</td>
-
 		</tr>
 
 	</table>
@@ -102,11 +95,8 @@ $bloque1 = <<<EOF
 EOF;
 
 $pdf->writeHTML($bloque1, false, false, false, false, '');
-
-// ---------------------------------------------------------
-
+// ----------------
 $bloque2 = <<<EOF
-
 	<table>
 		
 		<tr>
@@ -117,11 +107,12 @@ $bloque2 = <<<EOF
 
 	</table>
 
+
 	<table style="font-size:10px; padding:5px 10px;">
-	
+
 		<tr>
-		
-			<td style="border: 1px solid #666; background-color:white; width:390px">
+
+				<td style="border: 1px solid #666; background-color:white; width:390px">
 
 				Cliente: $respuestaCliente[nombre]
 
@@ -146,13 +137,15 @@ $bloque2 = <<<EOF
 		<td style="border-bottom: 1px solid #666; background-color:white; width:540px"></td>
 
 		</tr>
+		
 
 	</table>
 
-EOF;
 
+EOF;
 $pdf->writeHTML($bloque2, false, false, false, false, '');
 
+//------------------
 // ---------------------------------------------------------
 
 $bloque3 = <<<EOF
@@ -174,19 +167,20 @@ EOF;
 
 $pdf->writeHTML($bloque3, false, false, false, false, '');
 
-// ---------------------------------------------------------
+//**** */
 
 foreach ($productos as $key => $item) {
 
-$itemProducto = "descripcion";
-$valorProducto = $item["descripcion"];
-$orden = null;
-
-$respuestaProducto = ControladorProductos::ctrMostrarProductos($itemProducto, $valorProducto, $orden);
-
-$valorUnitario = number_format($respuestaProducto["precio_venta"], 2);
-
-$precioTotal = number_format($item["total"], 2);
+	$itemProducto = "descripcion";
+	$valorProducto = $item["descripcion"];
+	$orden = null;
+	
+	$respuestaProducto = ControladorProductos::ctrMostrarProductos($itemProducto, $valorProducto, $orden);
+	
+	$valorUnitario = number_format($respuestaProducto["precio_venta"], 2);
+	
+	$precioTotal = number_format($item["total"], 2);
+	
 
 $bloque4 = <<<EOF
 
@@ -219,11 +213,9 @@ $bloque4 = <<<EOF
 EOF;
 
 $pdf->writeHTML($bloque4, false, false, false, false, '');
-
 }
 
-// ---------------------------------------------------------
-
+//---
 $bloque5 = <<<EOF
 
 	<table style="font-size:10px; padding:5px 10px;">
@@ -289,14 +281,9 @@ $pdf->writeHTML($bloque5, false, false, false, false, '');
 
 
 
-// ---------------------------------------------------------
-//SALIDA DEL ARCHIVO 
-
-//$pdf->Output('factura.pdf', 'D');
-$pdf->Output('factura.pdf');
-
+//salida del archivo
+$pdf ->Output('factura.pdf');
 }
-
 }
 
 $factura = new imprimirFactura();
