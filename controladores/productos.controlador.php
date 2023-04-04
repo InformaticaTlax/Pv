@@ -2,284 +2,242 @@
 
 class ControladorProductos{
 
-	/*=============================================
-	MOSTRAR PRODUCTOS
-	=============================================*/
+    //mostrar productos
 
-	static public function ctrMostrarProductos($item, $valor, $orden){
+    static public function ctrMostrarProductos($item, $valor, $orden){
 
-		$tabla = "productos";
+        $tabla = "productos";
 
-		$respuesta = ModeloProductos::mdlMostrarProductos($tabla, $item, $valor, $orden);
+        $respuesta = ModeloProductos::mdlMostrarProductos($tabla, $item, $valor, $orden);
+        
+        return $respuesta;
 
-		return $respuesta;
 
-	}
+    }
 
-	/*=============================================
-	CREAR PRODUCTO
-	=============================================*/
+        ///crear producto
+        static public function ctrCrearProducto(){
+            if(isset($_POST["nuevaDescripcion"])){
 
-	static public function ctrCrearProducto(){
+            if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevaDescripcion"]) &&
+                preg_match('/^[-200-9]+$/', $_POST["nuevoStock"]) &&	
+                preg_match('/^[0-9.]+$/', $_POST["nuevoPrecioCompra"]) &&
+                preg_match('/^[0-9.]+$/', $_POST["nuevoPrecioVenta"])){
+                    
+                    $ruta = "vistas/img/productos/default/anonymous.png";
 
-		if(isset($_POST["nuevaDescripcion"])){
+                    //Validar imagen
+                    if(isset($_FILES["nuevaImagen"]["tmp_name"])){
+						//var_dump(getimagesize($_FILES["nuevaImagen"]["tmp_name"]));
 
-			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevaDescripcion"]) &&
-			   preg_match('/^[0-9]+$/', $_POST["nuevoStock"]) &&	
-			   preg_match('/^[0-9.]+$/', $_POST["nuevoPrecioCompra"]) &&
-			   preg_match('/^[0-9.]+$/', $_POST["nuevoPrecioVenta"])){
+						list($ancho,$alto) =getimagesize($_FILES["nuevaImagen"]["tmp_name"]);
 
-		   		/*=============================================
-				VALIDAR IMAGEN
-				=============================================*/
+						$nuevoAncho = 500;
+						$nuevoAlto = 500;
 
-			   	$ruta = "vistas/img/productos/default/anonymous.png";
+						//crear directorio para guardar la foto del usuario
 
-			   	if(isset($_FILES["nuevaImagen"]["tmp_name"])){
+						$directorio = "vistas/img/productos/".$_POST["nuevoCodigo"];
+						mkdir($directorio, 0755);
+						
+						//de acuerdo al tipo de imagen aplicamos funcions por defecto de php
 
-					list($ancho, $alto) = getimagesize($_FILES["nuevaImagen"]["tmp_name"]);
+						
+						if($_FILES["nuevaImagen"]["type"] == "image/jpeg"){
+							//Guardar imagen en el directorio
 
-					$nuevoAncho = 500;
-					$nuevoAlto = 500;
+							$aleatorio = mt_rand(100,999);
 
-					/*=============================================
-					CREAMOS EL DIRECTORIO DONDE VAMOS A GUARDAR LA FOTO DEL USUARIO
-					=============================================*/
+							$ruta = "vistas/img/productos/".$_POST["nuevoCodigo"]."/".$aleatorio.".jpg";
+							$origen = imagecreatefromjpeg($_FILES["nuevaImagen"]["tmp_name"]);
 
-					$directorio = "vistas/img/productos/".$_POST["nuevoCodigo"];
+							$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
 
-					mkdir($directorio, 0755);
+							imagecopyresized($destino,$origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
 
-					/*=============================================
-					DE ACUERDO AL TIPO DE IMAGEN APLICAMOS LAS FUNCIONES POR DEFECTO DE PHP
-					=============================================*/
+							imagejpeg($destino,$ruta);
+						}
+						
+						if($_FILES["nuevaImagen"]["type"] == "image/png"){
+							//Guardar imagen en el directorio
 
-					if($_FILES["nuevaImagen"]["type"] == "image/jpeg"){
+							$aleatorio = mt_rand(100,999);
 
-						/*=============================================
-						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-						=============================================*/
+							$ruta = "vistas/img/productos/".$_POST["nuevoCodigo"]."/".$aleatorio.".png";
+							$origen = imagecreatefrompng($_FILES["nuevaImagen"]["tmp_name"]);
 
-						$aleatorio = mt_rand(100,999);
+							$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
 
-						$ruta = "vistas/img/productos/".$_POST["nuevoCodigo"]."/".$aleatorio.".jpg";
+							imagecopyresized($destino,$origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
 
-						$origen = imagecreatefromjpeg($_FILES["nuevaImagen"]["tmp_name"]);						
-
-						$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-
-						imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-
-						imagejpeg($destino, $ruta);
-
+							imagepng($destino,$ruta);
+						}
 					}
+                }
+                    
+                
+                    $tabla = "productos";
 
-					if($_FILES["nuevaImagen"]["type"] == "image/png"){
+                    $datos = array("id_categoria" => $_POST["nuevaCategoria"],
+                                "codigo" => $_POST["nuevoCodigo"],
+                                "descripcion" => $_POST["nuevaDescripcion"],
+                                "stock" => $_POST["nuevoStock"],
+                                "precio_compra" => $_POST["nuevoPrecioCompra"],
+                                "precio_venta" => $_POST["nuevoPrecioVenta"],
+                                "imagen" => $ruta);
 
-						/*=============================================
-						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-						=============================================*/
+                    $respuesta = ModeloProductos::mdlIngresarProducto($tabla, $datos);
 
-						$aleatorio = mt_rand(100,999);
+                    if($respuesta == "ok"){
 
-						$ruta = "vistas/img/productos/".$_POST["nuevoCodigo"]."/".$aleatorio.".png";
+                        echo'<script>
+                            swal({
+                                type: "success",
+                                title: "El producto ha sido guardado correctamente",
+                                showConfirmButton: true,
+                                confirmButtonText: "Cerrar"
+                                }).then(function(result){
+                                            if (result.value) {
+                                            window.location = "productos";
+                                            }
+                                        })
+                            </script>';
 
-						$origen = imagecreatefrompng($_FILES["nuevaImagen"]["tmp_name"]);						
-
-						$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-
-						imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-
-						imagepng($destino, $ruta);
-
-					}
-
-				}
-
-				$tabla = "productos";
-
-				$datos = array("id_categoria" => $_POST["nuevaCategoria"],
-							   "codigo" => $_POST["nuevoCodigo"],
-							   "descripcion" => $_POST["nuevaDescripcion"],
-							   "stock" => $_POST["nuevoStock"],
-							   "precio_compra" => $_POST["nuevoPrecioCompra"],
-							   "precio_venta" => $_POST["nuevoPrecioVenta"],
-							   "imagen" => $ruta);
-
-				$respuesta = ModeloProductos::mdlIngresarProducto($tabla, $datos);
-
-				if($respuesta == "ok"){
-
-					echo'<script>
-
-						swal({
-							  type: "success",
-							  title: "El producto ha sido guardado correctamente",
-							  showConfirmButton: true,
-							  confirmButtonText: "Cerrar"
-							  }).then(function(result){
-										if (result.value) {
-
-										window.location = "productos";
-
-										}
-									})
-
-						</script>';
-
-				}
-
-
-			}else{
-
-				echo'<script>
-
+                }else{
+                    echo'<script>
 					swal({
 						  type: "error",
-						  title: "¡El producto no puede ir con los campos vacíos o llevar caracteres especiales!",
+						  title: "¡El producto no puede ir vacio o llevar caracters especiales!",
 						  showConfirmButton: true,
 						  confirmButtonText: "Cerrar"
 						  }).then(function(result){
 							if (result.value) {
-
 							window.location = "productos";
-
 							}
 						})
-
 			  	</script>';
-			}
-		}
+                }
+            }
+    
+    
+        }    
 
-	}
+        //editar producto
+         static public function ctrEditarProducto(){
+            if(isset($_POST["editarDescripcion"])){
 
-	//editar producto
-	static public function ctrEditarProducto(){
-		if(isset($_POST["editarDescripcion"])){
+            if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarDescripcion"]) &&
+                preg_match('/^[-200-9]+$/', $_POST["editarStock"]) &&	
+                preg_match('/^[0-9.]+$/', $_POST["editarPrecioCompra"]) &&
+                preg_match('/^[0-9.]+$/', $_POST["editarPrecioVenta"])){
+                    
+                    $ruta = $_POST["imagenActual"];
 
-		if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ_ ]+$/', $_POST["editarDescripcion"]) &&
-			preg_match('/^[0-9.]+$/', $_POST["editarStock"]) &&	
-			preg_match('/^[0-9.]+$/', $_POST["editarPrecioCompra"]) &&
-			preg_match('/^[0-9.]+$/', $_POST["editarPrecioVenta"])){
-				
-				$ruta = $_POST["imagenActual"];
+                    //Validar imagen
+                    if(isset($_FILES["editarImagen"]["tmp_name"]) && !empty($_FILES["editarImagen"]["tmp_name"])){
+						//var_dump(getimagesize($_FILES["nuevaImagen"]["tmp_name"]));
 
-				//Validar imagen
-				if(isset($_FILES["editarImagen"]["tmp_name"]) && !empty($_FILES["editarImagen"]["tmp_name"])){
-					//var_dump(getimagesize($_FILES["nuevaImagen"]["tmp_name"]));
+						list($ancho,$alto) =getimagesize($_FILES["editarImagen"]["tmp_name"]);
 
-					list($ancho, $alto) = getimagesize($_FILES["editarImagen"]["tmp_name"]);
+						$nuevoAncho = 500;
+						$nuevoAlto = 500;
 
-					$nuevoAncho = 500;
-					$nuevoAlto = 500;
-				
+						//crear directorio para guardar la foto del usuario
 
-					//crear directorio para guardar la foto del usuario
+						$directorio = "vistas/img/productos/".$_POST["editarCodigo"];
+                        //priemto preguntar si existe una imagen en la base de datos
+                        if(!empty($_POST["imagenActual"]) && $_POST["imagenActual"] != "vistas/img/producto/default/anonymous.png"){
 
-					$directorio = "vistas/img/productos/".$_POST["editarCodigo"];
-					//priemto preguntar si existe una imagen en la base de datos
-					if(!empty($_POST["imagenActual"]) && $_POST["imagenActual"] != "vistas/img/productos/default/anonymous.png"){
+                            unlink($_POST["imagenActual"]);
 
-						unlink($_POST["imagenActual"]);
-
-					}else{
-						//Creer la carpeta
-						mkdir($directorio, 0755);
-					}
-					
-					//de acuerdo al tipo de imagen aplicamos funcions por defecto de php
-
-					
-					if($_FILES["editarImagen"]["type"] == "image/jpeg"){
-						//Guardar imagen en el directorio
-
-						$aleatorio = mt_rand(100,999);
-
-						$ruta = "vistas/img/productos/".$_POST["editarCodigo"]."/".$aleatorio.".jpg";
-						$origen = imagecreatefromjpeg($_FILES["editarImagen"]["tmp_name"]);
-
-						$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-
-						imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-
-						imagejpeg($destino, $ruta);
+                        }else{
+                            //Creer la carpeta
+                            mkdir($directorio, 0755);
+                        }
 						
-					}
-					
-					if($_FILES["editarImagen"]["type"] == "image/png"){
-					
-						//Guardar imagen en el directorio
+						//de acuerdo al tipo de imagen aplicamos funcions por defecto de php
 
-						$aleatorio = mt_rand(100,999);
+						
+						if($_FILES["editarImagen"]["type"] == "image/jpeg"){
+							//Guardar imagen en el directorio
 
-						$ruta = "vistas/img/productos/".$_POST["editarCodigo"]."/".$aleatorio.".png";
-						$origen = imagecreatefrompng($_FILES["editarImagen"]["tmp_name"]);
+							$aleatorio = mt_rand(100,999);
 
-						$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+							$ruta = "vistas/img/productos/".$_POST["editarCodigo"]."/".$aleatorio.".jpg";
+							$origen = imagecreatefromjpeg($_FILES["editarImagen"]["tmp_name"]);
 
-						imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+							$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
 
-						imagepng($destino, $ruta);
+							imagecopyresized($destino,$origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
 
-					}
-				}
-			
-				
-			
-				$tabla = "productos";
-
-				$datos = array("id_categoria" => $_POST["editarCategoria"],
-							"codigo" => $_POST["editarCodigo"],
-							"descripcion" => $_POST["editarDescripcion"],
-							"stock" => $_POST["editarStock"],
-							"precio_compra" => $_POST["editarPrecioCompra"],
-							"precio_venta" => $_POST["editarPrecioVenta"],
-							"imagen" => $ruta);
-			
-
-				$respuesta = ModeloProductos::mdlEditarProducto($tabla, $datos);
-				
-				if($respuesta == "ok"){
-
-					echo'<script>
-
-						swal({
-							  type: "success",
-							  title: "El producto ha sido editado correctamente",
-							  showConfirmButton: true,
-							  confirmButtonText: "Cerrar"
-							  }).then(function(result){
-										if (result.value) {
-
-										window.location = "productos";
-
-										}
-									})
-
-						</script>';
-
-				}
-
-			}else{
-				echo'<script>
-				swal({
-					  type: "error",
-					  title: "¡El producto no puede ir vacio o llevar caracters especiales!",
-					  showConfirmButton: true,
-					  confirmButtonText: "Cerrar"
-					  }).then(function(result){
-						if (result.value) {
-						window.location = "productos";
+							imagejpeg($destino,$ruta);
 						}
-					})
-			  </script>';
-			}
-		}
+						
+						if($_FILES["editarImagen"]["type"] == "image/png"){
+							//Guardar imagen en el directorio
 
+							$aleatorio = mt_rand(100,999);
 
-	}
+							$ruta = "vistas/img/productos/".$_POST["editarCodigo"]."/".$aleatorio.".png";
+							$origen = imagecreatefrompng($_FILES["editarImagen"]["tmp_name"]);
 
-	/*=============================================
+							$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+
+							imagecopyresized($destino,$origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+
+							imagepng($destino,$ruta);
+						}
+					}
+                }
+                    
+                
+                    $tabla = "productos";
+
+                    $datos = array("id_categoria" => $_POST["editarCategoria"],
+                                "codigo" => $_POST["editarCodigo"],
+                                "descripcion" => $_POST["editarDescripcion"],
+                                "stock" => $_POST["editarStock"],
+                                "precio_compra" => $_POST["editarPrecioCompra"],
+                                "precio_venta" => $_POST["editarPrecioVenta"],
+                                "imagen" => $ruta);
+
+                    $respuesta = ModeloProductos::mdlEditarProducto($tabla, $datos);
+
+                    if($respuesta == "ok"){
+
+                        echo'<script>
+                            swal({
+                                type: "success",
+                                title: "El producto ha sido editado correctamente",
+                                showConfirmButton: true,
+                                confirmButtonText: "Cerrar"
+                                }).then(function(result){
+                                            if (result.value) {
+                                            window.location = "productos";
+                                            }
+                                        })
+                            </script>';
+
+                }else{
+                    echo'<script>
+					swal({
+						  type: "error",
+						  title: "¡El producto no puede ir vacio o llevar caracters especiales!",
+						  showConfirmButton: true,
+						  confirmButtonText: "Cerrar"
+						  }).then(function(result){
+							if (result.value) {
+							window.location = "productos";
+							}
+						})
+			  	</script>';
+                }
+            }
+    
+    
+        }    
+
+        /*=============================================
 	BORRAR PRODUCTO
 	=============================================*/
 	static public function ctrEliminarProducto(){
@@ -301,7 +259,6 @@ class ControladorProductos{
 			if($respuesta == "ok"){
 
 				echo'<script>
-
 				swal({
 					  type: "success",
 					  title: "El producto ha sido borrado correctamente",
@@ -309,12 +266,9 @@ class ControladorProductos{
 					  confirmButtonText: "Cerrar"
 					  }).then(function(result){
 								if (result.value) {
-
 								window.location = "productos";
-
 								}
 							})
-
 				</script>';
 
 			}		
